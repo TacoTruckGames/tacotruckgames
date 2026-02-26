@@ -8,41 +8,134 @@
   <meta name="robots" content="noindex, follow">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
+      color: #f0f0f0;
+      background: #1a1a2e;
     }
+
+    /* ── Header ── */
+    .page-header {
+      position: relative;
+      text-align: center;
+      padding: 40px 20px 30px;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background.png") center / cover no-repeat;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    .page-header > * { position: relative; z-index: 1; }
+
+    .page-header img {
+      max-width: 160px;
+      width: 50%;
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    }
+
+    .page-header h1 {
+      font-size: 1.5em;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .header-subtitle {
+      color: #aaa;
+      font-size: 0.95em;
+    }
+
+    /* ── Content ── */
     .container {
       max-width: 800px;
-      margin: 30px auto;
-      padding: 30px 40px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      margin: 0 auto;
+      padding: 30px 40px 50px;
     }
-    h1 { font-size: 1.6em; margin-bottom: 0.4em; color: #222; }
-    h2 { font-size: 1.3em; margin-top: 1.8em; margin-bottom: 0.6em; color: #222; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
-    h3 { font-size: 1.1em; margin-top: 1.2em; margin-bottom: 0.4em; color: #444; }
-    h4 { font-size: 1em; margin-top: 1em; margin-bottom: 0.3em; color: #555; }
-    p { margin-bottom: 0.8em; }
+
+    h2 {
+      font-size: 1.3em;
+      color: #f5a623;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 1.1em;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: #ddd;
+    }
+
+    h4 {
+      font-size: 1em;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      color: #ccc;
+    }
+
+    p { margin-bottom: 0.8em; color: #ccc; }
     ul { margin-left: 1.5em; margin-bottom: 0.8em; }
-    li { margin-bottom: 0.3em; }
-    a { color: #1a73e8; }
-    .header-subtitle { color: #666; font-size: 0.95em; }
-    .footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee; color: #888; font-size: 0.9em; }
-    .service-box { background: #f5f7fa; border: 1px solid #e8ebee; border-radius: 4px; padding: 15px 20px; margin-bottom: 12px; }
-    .service-box h4 { margin-top: 0; }
-    .data-collected { font-size: 0.92em; color: #555; }
+    li { margin-bottom: 0.3em; color: #ccc; }
+    a { color: #6ba3e8; }
+
+    .service-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 12px;
+    }
+
+    .service-box h4 { margin-top: 0; color: #f5a623; }
+    .data-collected { font-size: 0.92em; color: #999; }
+
+    hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.5em 0; }
+
+    /* ── Footer ── */
+    .page-footer-note {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #888;
+      font-size: 0.9em;
+    }
+
+    .footer a { color: #6ba3e8; margin: 0 10px; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 20px 40px; }
+      .page-header img { max-width: 120px; }
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
+  <header class="page-header">
+    <a href="index.html"><img src="images/logo.png" alt="Crystal Dig: Gem Miner"></a>
+    <h1>Privacy Policy</h1>
+    <p class="header-subtitle">This Application collects some Personal Data from its Users.</p>
+  </header>
 
-  <h1>Privacy Policy of <strong>Crystal Dig: Gem Miner</strong></h1>
-  <p class="header-subtitle">This Application collects some Personal Data from its Users.</p>
+<div class="container">
 
   <!-- ============================================================ -->
   <h2>Owner and Data Controller</h2>
@@ -404,18 +497,27 @@
   <h4>Cookies</h4>
   <p>Small sets of data stored in the User's device.</p>
 
-  <hr style="margin: 1.5em 0;">
+  <hr>
 
   <h4>Legal Information</h4>
   <p>This privacy statement has been prepared based on provisions of multiple legislations, including Art. 13/14 of Regulation (EU) 2016/679 (General Data Protection Regulation) and the California Consumer Privacy Act of 2018, as amended by the California Privacy Rights Act of 2020.</p>
   <p>This privacy policy relates solely to this Application, if not stated otherwise within this document.</p>
 
   <!-- ============================================================ -->
-  <div class="footer">
+  <div class="page-footer-note">
     <p>Latest update: February 22, 2026</p>
   </div>
 
 </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <div>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
 
 </body>
 </html>

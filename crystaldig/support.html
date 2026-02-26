@@ -7,36 +7,106 @@
   <meta name="description" content="Support and contact information for Crystal Dig: Gem Miner.">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
+      color: #f0f0f0;
+      background: #1a1a2e;
     }
+
+    /* ── Header ── */
+    .page-header {
+      position: relative;
+      text-align: center;
+      padding: 40px 20px 30px;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background.png") center / cover no-repeat;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    .page-header > * { position: relative; z-index: 1; }
+
+    .page-header img {
+      max-width: 160px;
+      width: 50%;
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    }
+
+    .page-header h1 {
+      font-size: 1.5em;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .header-subtitle {
+      color: #aaa;
+      font-size: 0.95em;
+    }
+
+    /* ── Content ── */
     .container {
       max-width: 800px;
-      margin: 30px auto;
-      padding: 30px 40px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      margin: 0 auto;
+      padding: 30px 40px 50px;
     }
-    h1 { font-size: 1.6em; margin-bottom: 0.4em; color: #222; }
-    h2 { font-size: 1.3em; margin-top: 1.8em; margin-bottom: 0.6em; color: #222; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
-    p { margin-bottom: 0.8em; }
+
+    h2 {
+      font-size: 1.3em;
+      color: #f5a623;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 1.1em;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: #ddd;
+    }
+
+    p { margin-bottom: 0.8em; color: #ccc; }
     ul { margin-left: 1.5em; margin-bottom: 0.8em; }
-    li { margin-bottom: 0.3em; }
-    a { color: #1a73e8; }
-    .header-subtitle { color: #666; font-size: 0.95em; }
-    .footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee; color: #888; font-size: 0.9em; }
+    li { margin-bottom: 0.3em; color: #ccc; }
+    a { color: #6ba3e8; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #888;
+      font-size: 0.9em;
+    }
+
+    .footer a { color: #6ba3e8; margin: 0 10px; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 20px 40px; }
+      .page-header img { max-width: 120px; }
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
+  <header class="page-header">
+    <a href="index.html"><img src="images/logo.png" alt="Crystal Dig: Gem Miner"></a>
+    <h1>Support</h1>
+    <p class="header-subtitle">We're here to help! Find answers to common questions below or contact us directly.</p>
+  </header>
 
-  <h1>Support for <strong>Crystal Dig: Gem Miner</strong></h1>
-  <p class="header-subtitle">We're here to help! Find answers to common questions below or contact us directly.</p>
+<div class="container">
 
   <h2>Contact Us</h2>
   <p>If you're experiencing an issue or have a question, please email us at:</p>
@@ -64,12 +134,16 @@
   </ul>
   <p>If the issue persists, please contact us with details about your device and the problem.</p>
 
-  <div class="footer">
-    <p>Taco Truck Games, LLC &mdash; Seattle, WA</p>
-    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="tos.html">Terms of Service</a></p>
-  </div>
-
 </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <div>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
 
 </body>
 </html>
