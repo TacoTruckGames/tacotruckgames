@@ -1,9 +1,273 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0;url=https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taco Truck Games</title>
+  <meta name="description" content="Taco Truck Games is an independent game studio based in Seattle, WA focused on fun, quick-to-play games.">
+  <meta name="keywords" content="taco truck games, indie, game, studio, seattle, crystal dig, meow wars, stop santa">
+  <meta name="author" content="Taco Truck Games, LLC">
+  <meta property="og:title" content="Taco Truck Games">
+  <meta property="og:description" content="Independent game studio based in Seattle, WA">
+  <meta property="og:image" content="https://tacotruckgames.com/images/ttg-logo.png">
+  <meta property="og:url" content="https://tacotruckgames.com/">
+  <link rel="icon" href="images/ttg-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #f0f0f0;
+      background: #111;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px 20px;
+      background: #111;
+    }
+
+    .hero-logo {
+      max-width: 320px;
+      width: 60%;
+      height: auto;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 2px 12px rgba(255,255,255,0.08));
+    }
+
+    .hero-tagline {
+      font-size: 1.3em;
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* ── About ── */
+    .about {
+      padding: 50px 20px;
+      text-align: center;
+      background: #161616;
+    }
+
+    .about h2 {
+      font-size: 1.6em;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: 0 auto 12px;
+      color: #bbb;
+      font-size: 1.05em;
+    }
+
+    /* ── Games ── */
+    .games {
+      padding: 30px 20px 60px;
+    }
+
+    .games h2 {
+      font-size: 1.8em;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+
+    .games-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Featured game card */
+    .game-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+
+    .game-card-image {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      object-position: center 29.5%;
+      display: block;
+    }
+
+    .game-card-body {
+      padding: 28px 32px;
+    }
+
+    .game-card-badge {
+      display: inline-block;
+      background: #e8573a;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .game-card-badge.green { background: #4caf50; }
+
+    .game-card h3 {
+      font-size: 1.5em;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .game-card-sub {
+      font-size: 0.9em;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .game-card p {
+      color: #bbb;
+      font-size: 0.95em;
+      margin-bottom: 0;
+    }
+
+    /* Smaller game cards side by side */
+    .games-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .games-row .game-card-image {
+      height: 220px;
+    }
+
+    .games-row .game-card-body {
+      padding: 22px 24px;
+    }
+
+    .games-row .game-card h3 {
+      font-size: 1.25em;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: #111;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .footer a { color: #6ba3e8; }
+    .footer-links { margin-top: 8px; }
+    .footer-links a { margin: 0 12px; }
+    .footer-contact { margin-top: 12px; color: #555; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .hero { padding: 60px 20px 40px; }
+      .hero-logo { max-width: 240px; width: 55%; }
+      .hero-tagline { font-size: 1.1em; }
+      .games-row {
+        grid-template-columns: 1fr;
+      }
+      .game-card-image { height: 240px; }
+      .games-row .game-card-image { height: 220px; }
+      .game-card-body { padding: 22px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 50px 16px 30px; }
+      .hero-logo { max-width: 200px; }
+      .game-card-image { height: 200px; }
+      .games-row .game-card-image { height: 180px; }
+      .game-card h3 { font-size: 1.2em; }
+      .games-row .game-card h3 { font-size: 1.1em; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting...</p>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="images/ttg-logo-white.png" alt="Taco Truck Games" class="hero-logo">
+    <p class="hero-tagline">Independent game studio based in Seattle, WA</p>
+  </section>
+
+  <!-- Games -->
+  <section class="games">
+    <h2>Our Games</h2>
+    <div class="games-grid">
+
+      <!-- Featured: Crystal Dig -->
+      <a class="game-card" href="crystaldig/index.html">
+        <img src="crystaldig/images/screenshot-01-mainmenu.png" alt="Crystal Dig: Gem Miner" class="game-card-image">
+        <div class="game-card-body">
+          <span class="game-card-badge green">Latest Release</span>
+          <h3>Crystal Dig: Gem Miner</h3>
+          <p class="game-card-sub">Block Puzzle Adventure &mdash; iOS</p>
+          <p>A block puzzle adventure where you mine gems, battle bosses, and dig your way through beautiful crystal caverns. Classic mode for endless puzzle fun, plus a full Adventure mode with 5 epic boss battles across unique zones.</p>
+        </div>
+      </a>
+
+      <!-- Row: Meow Wars + Stop Santa -->
+      <div class="games-row">
+
+        <a class="game-card" href="MeowWars/index.html">
+          <img src="images/meowwars-header.png" alt="Meow Wars: Card Battle" class="game-card-image">
+          <div class="game-card-body">
+            <h3>Meow Wars: Card Battle</h3>
+            <p class="game-card-sub">Card Battle &mdash; Steam, iOS, Android</p>
+            <p>A cat-themed card battle game with charming hand-drawn characters. Battle through challengers, challenge friends to PVP duels, and free Claw Mountain from Commander Catrat's grip.</p>
+          </div>
+        </a>
+
+        <a class="game-card" href="StopSanta/index.html">
+          <img src="images/stopsanta-header.png" alt="Stop Santa: Tower Defense" class="game-card-image">
+          <div class="game-card-body">
+            <h3>Stop Santa</h3>
+            <p class="game-card-sub">Tower Defense &mdash; Steam, iOS, Android, MS Store</p>
+            <p>Santa has gone crazy and enlisted an army of evil elves, zombie Santas, and sadistic penguins. It's up to you and the remaining elves to stop him in this holiday-themed tower defense game!</p>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h2>About Us</h2>
+    <p>Indie studio. Big-studio experience. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games with indie heart. Latest release: Crystal Dig: Gem Miner.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+<p class="footer-contact"><a href="mailto:Adrian@TacoTruckGames.com">Adrian@TacoTruckGames.com</a></p>
+  </footer>
+
 </body>
 </html>
