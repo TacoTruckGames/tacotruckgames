@@ -1,9 +1,676 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0;url=https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crystal Dig: Gem Miner - A Block Puzzle Adventure</title>
+  <meta name="description" content="Dig deep into a sparkling puzzle adventure! Crystal Dig: Gem Miner combines classic block puzzle gameplay with an exciting underground mining expedition.">
+  <meta property="og:title" content="Crystal Dig: Gem Miner">
+  <meta property="og:description" content="A block puzzle adventure. Dig deep, collect gems, and battle bosses!">
+  <meta property="og:image" content="https://tacotruckgames.com/crystaldig/images/icon.png">
+  <meta property="og:url" content="https://tacotruckgames.com/crystaldig/">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #f0f0f0;
+      background: #1a1a2e;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 40px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background.png") center / cover no-repeat;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-logo {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+    }
+
+    .hero-subtitle {
+      font-size: 1.1em;
+      color: #aaa;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      font-size: 1.25em;
+      color: #ddd;
+      margin-bottom: 28px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .app-store-badge {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .app-store-badge:hover { transform: scale(1.05); }
+
+    .app-store-badge img {
+      height: 54px;
+      width: auto;
+    }
+
+    /* ── Screenshots carousel ── */
+    .screenshots {
+      padding: 50px 0;
+      background: #16213e;
+    }
+
+    .screenshots h2 {
+      font-size: 1.8em;
+      margin-bottom: 24px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 40px 20px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 200px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      scroll-snap-align: center;
+      transition: transform 0.2s;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    .carousel img:hover { transform: scale(1.03); }
+
+    .carousel.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+    .carousel.dragging img { pointer-events: none; }
+
+    /* ── Game Modes ── */
+    .game-modes {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .game-modes h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .mode-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .mode-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      z-index: 0;
+      border-radius: 16px;
+    }
+
+    .mode-card.classic::before {
+      background: linear-gradient(135deg, #2d5a27 0%, #1a3a15 100%);
+      opacity: 0.3;
+    }
+
+    .mode-card.adventure::before {
+      background: linear-gradient(135deg, #4a2060 0%, #2a1040 100%);
+      opacity: 0.3;
+    }
+
+    .mode-card > * { position: relative; z-index: 1; }
+
+    .mode-card-gem {
+      flex-shrink: 0;
+      width: 56px;
+      height: auto;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    }
+
+    .mode-card-text h3 {
+      font-size: 1.3em;
+      color: #f5a623;
+      margin-bottom: 8px;
+    }
+
+    .mode-card-text p {
+      color: #bbb;
+      font-size: 1em;
+    }
+
+    /* ── Boss Battles ── */
+    .bosses {
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bosses::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/bg-magma.png") center / cover no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .bosses > * { position: relative; z-index: 1; }
+
+    .bosses h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .bosses > p {
+      text-align: center;
+      color: #bbb;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      font-size: 1.05em;
+    }
+
+    .boss-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .boss-card {
+      width: 140px;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 16px 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .boss-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .boss-card img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    }
+
+    .boss-card .boss-name {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #f5a623;
+    }
+
+    .boss-card .boss-zone {
+      font-size: 0.8em;
+      color: #888;
+    }
+
+    /* ── Gems Collection ── */
+    .gems-section {
+      padding: 60px 20px;
+      background: #16213e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gems-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/bg-crystal.png") center / cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .gems-section > * { position: relative; z-index: 1; }
+
+    .gems-section h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .gems-section > p {
+      text-align: center;
+      color: #bbb;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      font-size: 1.05em;
+    }
+
+    .gem-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gem-item {
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .gem-item:hover { transform: scale(1.1) rotate(-5deg); }
+
+    .gem-item img {
+      width: 72px;
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+      margin-bottom: 6px;
+    }
+
+    .gem-item span {
+      display: block;
+      font-size: 0.85em;
+      color: #aaa;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 60px 20px;
+    }
+
+    .features h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #fff;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .feature-card img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-card .feature-text h3 {
+      font-size: 1em;
+      color: #f5a623;
+      margin-bottom: 4px;
+    }
+
+    .feature-card .feature-text p {
+      font-size: 0.9em;
+      color: #bbb;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background.png") center / cover no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .cta > * { position: relative; z-index: 1; }
+
+    .cta p {
+      font-size: 1.3em;
+      color: #ddd;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #888;
+      font-size: 0.9em;
+    }
+
+    .footer a { color: #6ba3e8; }
+    .footer-links { margin-top: 8px; }
+    .footer-links a { margin: 0 10px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .mode-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .mode-card-gem { width: 44px; }
+      .mode-card-gem:last-child { display: none; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .boss-card { width: 120px; }
+      .boss-card img { width: 70px; height: 70px; }
+      .gem-item img { width: 56px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px 30px; }
+      .carousel { padding: 0 20px 16px; gap: 14px; }
+      .carousel img { width: 160px; }
+      .boss-card { width: 100px; padding: 12px 8px; }
+      .boss-card img { width: 60px; height: 60px; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting...</p>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="images/logo.png" alt="Crystal Dig: Gem Miner" class="hero-logo">
+    <p class="hero-subtitle">A Block Puzzle Adventure</p>
+    <p class="hero-tagline">Dig deep into a sparkling puzzle adventure! Classic block puzzle gameplay meets an exciting underground mining expedition.</p>
+    <a class="app-store-badge" href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744">
+      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+    </a>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <h2>Screenshots</h2>
+    <div class="carousel">
+      <img src="images/screenshot-09-magma.png" alt="Magma Boss - Magma Core">
+      <img src="images/screenshot-08-golem.png" alt="Mirror Golem Boss - Crystal Caverns">
+      <img src="images/screenshot-02-classic.png" alt="Classic Mode">
+      <img src="images/screenshot-01-mainmenu.png" alt="Main Menu">
+      <img src="images/screenshot-04-adventure.png" alt="Adventure Mode">
+      <img src="images/screenshot-03-gameover.png" alt="Game Over - Score Summary">
+      <img src="images/screenshot-07-fossil.png" alt="Fossil Boss - Stone">
+      <img src="images/screenshot-05-geode.png" alt="Geode Boss - Surface">
+      <img src="images/screenshot-06-snake.png" alt="Snake Boss - Soil">
+    </div>
+  </section>
+
+  <!-- Game Modes -->
+  <section class="game-modes">
+    <h2>Two Ways to Play</h2>
+
+    <div class="mode-card classic">
+      <img src="images/gem-emerald.png" alt="Emerald" class="mode-card-gem">
+      <div class="mode-card-text">
+        <h3>Classic Mode</h3>
+        <p>Place blocks, clear lines, and chase your highest score. Simple to learn, endlessly challenging. Compete on the Game Center leaderboard!</p>
+      </div>
+      <img src="images/gem-sapphire.png" alt="Sapphire" class="mode-card-gem">
+    </div>
+
+    <div class="mode-card adventure">
+      <img src="images/gem-ruby.png" alt="Ruby" class="mode-card-gem">
+      <div class="mode-card-text">
+        <h3>Adventure Mode</h3>
+        <p>Journey through 50 handcrafted levels across 5 underground layers &mdash; from the Surface down to the Magma Core. Each zone introduces new challenges and culminates in an epic boss battle.</p>
+      </div>
+      <img src="images/gem-amethyst.png" alt="Amethyst" class="mode-card-gem">
+    </div>
+  </section>
+
+  <!-- Boss Battles -->
+  <section class="bosses">
+    <h2>Epic Boss Battles</h2>
+    <p>Face off against five geological guardians as you dig deeper underground.</p>
+    <div class="boss-grid">
+      <div class="boss-card">
+        <img src="images/boss-geode.png" alt="Geode Boss">
+        <div class="boss-name">Geode</div>
+        <div class="boss-zone">Surface</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-snake.png" alt="Snake Boss">
+        <div class="boss-name">Snake</div>
+        <div class="boss-zone">Soil</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-fossil.png" alt="Fossil Boss">
+        <div class="boss-name">Fossil</div>
+        <div class="boss-zone">Stone</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-golem.png" alt="Golem Boss">
+        <div class="boss-name">Golem</div>
+        <div class="boss-zone">Crystal Caverns</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-lava.png" alt="Lava Boss">
+        <div class="boss-name">Lava Heart</div>
+        <div class="boss-zone">Magma Core</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gems Collection -->
+  <section class="gems-section">
+    <h2>Collect Rare Gems</h2>
+    <p>Discover and collect gems as you dig deeper underground. Track your rarity collection!</p>
+    <div class="gem-row">
+      <div class="gem-item">
+        <img src="images/gem-emerald.png" alt="Emerald">
+        <span>Emerald</span>
+      </div>
+      <div class="gem-item">
+        <img src="images/gem-sapphire.png" alt="Sapphire">
+        <span>Sapphire</span>
+      </div>
+      <div class="gem-item">
+        <img src="images/gem-ruby.png" alt="Ruby">
+        <span>Ruby</span>
+      </div>
+      <div class="gem-item">
+        <img src="images/gem-amethyst.png" alt="Amethyst">
+        <span>Amethyst</span>
+      </div>
+      <div class="gem-item">
+        <img src="images/gem-diamond.png" alt="Diamond">
+        <span>Diamond</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <img src="images/icon-shuffle.png" alt="Puzzle">
+        <div class="feature-text">
+          <h3>50 Levels</h3>
+          <p>Handcrafted adventure levels across 5 unique underground zones.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="images/icon-trophy.png" alt="Achievements">
+        <div class="feature-text">
+          <h3>21 Achievements</h3>
+          <p>Unlock Game Center achievements as you master the depths.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="images/icon-star.png" alt="Power-ups">
+        <div class="feature-text">
+          <h3>Power-ups</h3>
+          <p>Pickaxe, Shuffle, and Undo to help you through tough spots.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="images/gem-diamond.png" alt="Languages">
+        <div class="feature-text">
+          <h3>7 Languages</h3>
+          <p>Fully localized in English, Spanish, French, German, Japanese, Simplified Chinese, and Korean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <p>Mine gems, clear lines, defeat bosses, and become the ultimate Crystal Tycoon!</p>
+    <a class="app-store-badge" href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744">
+      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+
+      // --- Auto-scroll ---
+      var scrollSpeed = 0.5;
+      var autoScrollId;
+      var paused = false;
+
+      function autoScroll() {
+        if (!paused) {
+          carousel.scrollLeft += scrollSpeed;
+          if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+            carousel.scrollLeft = 0;
+          }
+        }
+        autoScrollId = requestAnimationFrame(autoScroll);
+      }
+
+      autoScrollId = requestAnimationFrame(autoScroll);
+
+      var resumeTimer;
+      function pauseAutoScroll() {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, 3000);
+      }
+
+      carousel.addEventListener('wheel', pauseAutoScroll);
+      carousel.addEventListener('touchstart', pauseAutoScroll);
+
+      // --- Click and drag ---
+      var isDragging = false;
+      var startX, scrollStart;
+
+      carousel.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollStart = carousel.scrollLeft;
+        carousel.classList.add('dragging');
+        pauseAutoScroll();
+      });
+
+      carousel.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        var x = e.pageX - carousel.offsetLeft;
+        carousel.scrollLeft = scrollStart - (x - startX);
+      });
+
+      carousel.addEventListener('mouseup', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+
+      carousel.addEventListener('mouseleave', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+    })();
+  </script>
+
 </body>
 </html>
