@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Santa - Tower Defense | A Holiday Misfortune Game</title>
+  <meta name="description" content="Stop Santa - A holiday misfortune tower defense game. Build towers, stop the elves, and save the holidays!">
+  <meta name="keywords" content="stop santa, tower defense, holiday game, strategy, casual, indie game">
+  <meta name="author" content="Taco Truck Games, LLC">
+  <meta property="og:title" content="Stop Santa: Tower Defense">
+  <meta property="og:description" content="A holiday misfortune tower defense game">
+  <meta property="og:image" content="https://tacotruckgames.com/StopSanta/images/image_metadata_tag.jpg">
+  <meta property="og:url" content="https://tacotruckgames.com/StopSanta/">
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #f0f0f0;
+      background: #0f1a2e;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 0 20px 40px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background_xmas.gif") repeat;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15,26,46,0.3) 0%, rgba(15,26,46,0.85) 100%);
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-logo {
+      max-width: 532px;
+      width: 90%;
+      height: auto;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+    }
+
+    .hero-tagline {
+      font-size: 1.25em;
+      color: #ccd6e6;
+      margin-bottom: 28px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+    }
+
+    .store-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .store-badge {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .store-badge:hover { transform: scale(1.05); }
+
+    .store-badge img {
+      height: 54px;
+      width: auto;
+    }
+
+    /* ── Trailer ── */
+    .trailer {
+      padding: 50px 20px;
+      background: #0c1524;
+    }
+
+    .trailer h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .trailer h2 span { color: #c41e3a; }
+
+    .video-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ── Screenshots carousel ── */
+    .screenshots {
+      padding: 50px 0;
+      background: #0f1a2e;
+    }
+
+    .screenshots h2 {
+      font-size: 1.8em;
+      margin-bottom: 24px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .screenshots h2 span { color: #c41e3a; }
+
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 40px 20px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 400px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      scroll-snap-align: center;
+      transition: transform 0.2s;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    .carousel img:hover { transform: scale(1.03); }
+
+    .carousel.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+    .carousel.dragging img { pointer-events: none; }
+
+    /* ── About ── */
+    .about {
+      padding: 60px 20px;
+      background: #0c1524;
+    }
+
+    .about h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .about h2 span { color: #c41e3a; }
+
+    .about > p {
+      text-align: center;
+      color: #bcc8db;
+      max-width: 650px;
+      margin: 0 auto 40px;
+      font-size: 1.05em;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .about-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .about-icon {
+      font-size: 1.8em;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+    }
+
+    .about-card h3 {
+      font-size: 1em;
+      color: #c41e3a;
+      margin-bottom: 4px;
+    }
+
+    .about-card p {
+      font-size: 0.9em;
+      color: #bbb;
+    }
+
+    /* ── Towers Section ── */
+    .towers {
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .towers::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0f2a1a 0%, #0f1a2e 50%, #1a0a1e 100%);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .towers > * { position: relative; z-index: 1; }
+
+    .towers h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .towers h2 span { color: #2d8a4e; }
+
+    .towers > p {
+      text-align: center;
+      color: #bcc8db;
+      max-width: 550px;
+      margin: 0 auto 36px;
+      font-size: 1.05em;
+    }
+
+    .tower-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .tower-card {
+      width: 140px;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 20px 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .tower-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .tower-icon {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .tower-card .tower-name {
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #2d8a4e;
+    }
+
+    .tower-card .tower-desc {
+      font-size: 0.8em;
+      color: #889;
+      margin-top: 4px;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 60px 20px;
+      background: #0c1524;
+    }
+
+    .features h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #fff;
+    }
+
+    .features h2 span { color: #c41e3a; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .feature-icon {
+      font-size: 2em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1em;
+      color: #c41e3a;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 0.85em;
+      color: #bbb;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #1a2744 0%, #0f1a2e 100%);
+      z-index: 0;
+    }
+
+    .cta > * { position: relative; z-index: 1; }
+
+    .cta p {
+      font-size: 1.3em;
+      color: #ccd6e6;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #667;
+      font-size: 0.9em;
+    }
+
+    .footer a { color: #6ba3e8; }
+    .footer-links { margin-top: 8px; }
+    .footer-links a { margin: 0 10px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .tower-card { width: 120px; }
+      .carousel img { width: 300px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 0 16px 30px; }
+      .carousel { padding: 0 20px 16px; gap: 14px; }
+      .carousel img { width: 260px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .tower-card { width: 100px; padding: 14px 8px; }
+      .store-badges { gap: 10px; }
+      .store-badge img { height: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="images/StopSanta_Logo.png" alt="Stop Santa: Tower Defense" class="hero-logo">
+    <p class="hero-tagline">A holiday misfortune tower defense game. Build towers, stop the elves, and save the holidays!</p>
+    <div class="store-badges">
+      <a class="store-badge" href="http://store.steampowered.com/app/746410/Stop_Santa__Tower_Defense/">
+        <img src="images/badge_steam.png" alt="Get it on Steam">
+      </a>
+      <a class="store-badge" href="https://itunes.apple.com/us/app/stop-santa-tower-defense/id1323572895?ls=1&mt=8">
+        <img src="images/badge_apple.png" alt="Download on the App Store">
+      </a>
+      <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta">
+        <img src="images/badge_google.png" alt="Get it on Google Play">
+      </a>
+    </div>
+  </section>
+
+  <!-- Trailer -->
+  <section class="trailer">
+    <h2>Watch the <span>Trailer</span></h2>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/9JKWRtq7dec?VQ=HD720" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" title="Stop Santa - Tower Defense Trailer"></iframe>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <h2><span>Screenshots</span></h2>
+    <div class="carousel">
+      <img src="images/screenshots/StopSanta_Screen_1.jpg" alt="Main Menu" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_3.jpg" alt="World Map" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_4.jpg" alt="Tower Placement and Upgrades" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_2.jpg" alt="Boss Battle" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_6.jpg" alt="Tower Defense Gameplay" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_7.jpg" alt="Elf Wave Attack" loading="lazy">
+      <img src="images/screenshots/StopSanta_Screen_5.jpg" alt="Victory Screen" loading="lazy">
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h2>What is <span>Stop Santa</span>?</h2>
+    <p>Santa has gone rogue and his elf army is marching across the frozen tundra! Build an arsenal of holiday-themed towers to defend the North Pole and stop Santa's chaotic rampage.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">&#127876;</div>
+        <div>
+          <h3>Holiday Chaos</h3>
+          <p>A hilarious twist on the holidays. Santa's lost it, and only you can stop his elf invasion!</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">&#9968;</div>
+        <div>
+          <h3>Strategic Depth</h3>
+          <p>Place and upgrade towers across snowy battlefields. Every placement counts against the elf horde.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">&#127775;</div>
+        <div>
+          <h3>Star Ratings</h3>
+          <p>Earn up to 5 stars on each level. Perfect your strategy to achieve the highest scores.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">&#128506;</div>
+        <div>
+          <h3>World Map</h3>
+          <p>Journey across a frozen landscape with multiple regions leading to the North Pole.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Towers -->
+  <section class="towers">
+    <h2>Build Your <span>Defenses</span></h2>
+    <p>Deploy an arsenal of holiday-themed towers to stop the elf invasion!</p>
+    <div class="tower-grid">
+      <div class="tower-card">
+        <span class="tower-icon">&#9924;</span>
+        <div class="tower-name">Snowman</div>
+        <div class="tower-desc">Freezing attacks</div>
+      </div>
+      <div class="tower-card">
+        <span class="tower-icon">&#127917;</span>
+        <div class="tower-name">Candy Cane</div>
+        <div class="tower-desc">Sweet strikes</div>
+      </div>
+      <div class="tower-card">
+        <span class="tower-icon">&#127876;</span>
+        <div class="tower-name">Christmas Tree</div>
+        <div class="tower-desc">Area defense</div>
+      </div>
+      <div class="tower-card">
+        <span class="tower-icon">&#129420;</span>
+        <div class="tower-name">Reindeer</div>
+        <div class="tower-desc">Ranged catapult</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Game <span>Features</span></h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#128663;</span>
+        <h3>Multiple Levels</h3>
+        <p>Battle across a frozen world map with unique tower defense challenges.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128123;</span>
+        <h3>Boss Battles</h3>
+        <p>Face off against giant rampaging Santas at the end of each region.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128176;</span>
+        <h3>Upgrades</h3>
+        <p>Upgrade your towers to unlock powerful new abilities and attacks.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127918;</span>
+        <h3>Multi-Platform</h3>
+        <p>Available on Steam, iOS, and Google Play.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127775;</span>
+        <h3>Score Chase</h3>
+        <p>Earn stars and compete for the highest scores on every level.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127877;</span>
+        <h3>Holiday Fun</h3>
+        <p>Charming hand-drawn art and a whimsical holiday soundtrack.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <p>Can you stop Santa before it's too late? Build your towers and defend the holidays!</p>
+    <div class="store-badges">
+      <a class="store-badge" href="http://store.steampowered.com/app/746410/Stop_Santa__Tower_Defense/">
+        <img src="images/badge_steam.png" alt="Get it on Steam">
+      </a>
+      <a class="store-badge" href="https://itunes.apple.com/us/app/stop-santa-tower-defense/id1323572895?ls=1&mt=8">
+        <img src="images/badge_apple.png" alt="Download on the App Store">
+      </a>
+      <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta">
+        <img src="images/badge_google.png" alt="Get it on Google Play">
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+
+      // --- Auto-scroll ---
+      var scrollSpeed = 0.5;
+      var autoScrollId;
+      var paused = false;
+
+      function autoScroll() {
+        if (!paused) {
+          carousel.scrollLeft += scrollSpeed;
+          if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+            carousel.scrollLeft = 0;
+          }
+        }
+        autoScrollId = requestAnimationFrame(autoScroll);
+      }
+
+      autoScrollId = requestAnimationFrame(autoScroll);
+
+      var resumeTimer;
+      function pauseAutoScroll() {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, 3000);
+      }
+
+      carousel.addEventListener('wheel', pauseAutoScroll);
+      carousel.addEventListener('touchstart', pauseAutoScroll);
+
+      // --- Click and drag ---
+      var isDragging = false;
+      var startX, scrollStart;
+
+      carousel.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollStart = carousel.scrollLeft;
+        carousel.classList.add('dragging');
+        pauseAutoScroll();
+      });
+
+      carousel.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        var x = e.pageX - carousel.offsetLeft;
+        carousel.scrollLeft = scrollStart - (x - startX);
+      });
+
+      carousel.addEventListener('mouseup', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+
+      carousel.addEventListener('mouseleave', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+    })();
+  </script>
+
+</body>
+</html>
