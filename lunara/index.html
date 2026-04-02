@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunara: Daily Horoscope & Chart</title>
+  <meta name="description" content="Your daily cosmic companion. Grounded astrology powered by real planetary data.">
+  <meta name="author" content="Taco Truck Games, LLC">
+  <meta property="og:title" content="Lunara: Daily Horoscope & Chart">
+  <meta property="og:description" content="Your daily cosmic companion. Grounded astrology powered by real planetary data.">
+  <meta property="og:image" content="https://tacotruckgames.com/lunara/images/icon.png">
+  <meta property="og:url" content="https://tacotruckgames.com/lunara/">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="icon" href="images/icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #F5F0E8;
+      background: #08060F;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 50px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.25);
+      margin-bottom: 24px;
+    }
+
+    .hero-wordmark {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 4em;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #C9A84C, #F0D080);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3em;
+      font-weight: 500;
+      color: #C4B8A0;
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-tagline {
+      font-size: 1.1em;
+      color: #8E8494;
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .store-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .store-badge {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .store-badge:hover { transform: scale(1.05); }
+
+    .store-badge img {
+      height: 54px;
+      width: auto;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 70px 20px;
+      background: #0D0A1A;
+    }
+
+    .features h2 {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #F5F0E8;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .feature-icon {
+      font-size: 1.8em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2em;
+      color: #C9A84C;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      font-size: 0.92em;
+      color: #C4B8A0;
+      line-height: 1.6;
+    }
+
+    /* ── Substance ── */
+    .substance {
+      padding: 70px 20px;
+    }
+
+    .substance-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .substance h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #C9A84C, #F0D080);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .substance p {
+      font-size: 1.08em;
+      color: #C4B8A0;
+      line-height: 1.8;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: 70px 20px;
+      background: #0D0A1A;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .cta > * { position: relative; z-index: 1; }
+
+    .cta h2 {
+      font-size: 2.2em;
+      color: #F5F0E8;
+      margin-bottom: 12px;
+    }
+
+    .cta .cta-sub {
+      font-size: 1.1em;
+      color: #8E8494;
+      margin-bottom: 28px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #8E8494;
+      font-size: 0.9em;
+    }
+
+    .footer a {
+      color: #C9A84C;
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    .footer-links { margin-top: 8px; }
+    .footer-links a { margin: 0 10px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-wordmark { font-size: 3em; }
+      .hero-icon { width: 100px; height: 100px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px 36px; }
+      .hero-wordmark { font-size: 2.5em; }
+      .hero-icon { width: 88px; height: 88px; border-radius: 20px; }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .features { padding: 50px 16px; }
+      .substance { padding: 50px 16px; }
+      .cta { padding: 50px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="images/icon.png" alt="Lunara App Icon" class="hero-icon">
+    <h1 class="hero-wordmark">Lunara</h1>
+    <p class="hero-subtitle">Daily Horoscope &amp; Chart</p>
+    <p class="hero-tagline">Your daily cosmic companion &mdash; grounded astrology powered by real planetary data.</p>
+    <div class="store-badges">
+      <a class="store-badge" href="#" target="_blank" rel="noopener">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+      </a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#9800;</span>
+        <h3>Daily Horoscopes</h3>
+        <p>Fresh readings every day based on real planetary positions. Each horoscope references actual transits, aspects, and moon phases &mdash; not generic copy.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#128197;</span>
+        <h3>Weekly Forecasts</h3>
+        <p>Broader, thematic readings covering the full week. Emphasis on retrogrades, sign ingresses, and major planetary arcs.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#127760;</span>
+        <h3>Birth Chart</h3>
+        <p>Calculate your complete natal chart with Sun, Moon, and Rising signs. Tap any planet on the interactive wheel to see its sign, house, and interpretation. Powered by Swiss Ephemeris.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#9803;</span>
+        <h3>Zodiac Compatibility</h3>
+        <p>Compare any two signs across five dimensions: emotional, intellectual, communication, long-term, and passion. Supports romantic, friendship, and professional contexts.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#127769;</span>
+        <h3>Moon Phases</h3>
+        <p>Track the current moon phase with a photorealistic moon visualization. See the moon sign, illumination, days until next full and new moon, and phase interpretations.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#128198;</span>
+        <h3>Lunar Calendar</h3>
+        <p>Visual month-by-month moon phase calendar with moon sign data for every day of the year.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Astrology with substance -->
+  <section class="substance">
+    <div class="substance-inner">
+      <h2>Astrology with substance</h2>
+      <p>Lunara is built for people who already have a relationship with astrology. Every reading references real planetary positions, not vague affirmations. The tone is like advice from a knowledgeable friend &mdash; conversational but specific, action-oriented, and never preachy.</p>
+      <p style="margin-top: 16px; font-size: 0.95em; color: #C4B8A0;">Available in English, Espa&ntilde;ol, Fran&ccedil;ais, Deutsch, Portugu&ecirc;s, and &#26085;&#26412;&#35486;</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Download Lunara</h2>
+    <p class="cta-sub">Free on the App Store</p>
+    <div class="store-badges">
+      <a class="store-badge" href="#" target="_blank" rel="noopener">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
+
+</body>
+</html>
