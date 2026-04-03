@@ -29,7 +29,18 @@
       text-align: center;
       padding: 80px 20px 20px;
       background: #111;
+      overflow: hidden;
     }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/ttg_background.png") center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
 
     .hero-logo {
       max-width: 320px;
@@ -52,7 +63,19 @@
       padding: 50px 20px;
       text-align: center;
       background: #161616;
+      position: relative;
+      overflow: hidden;
     }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/ttg_background.png") center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .about > * { position: relative; z-index: 1; }
 
     .about h2 {
       font-size: 1.6em;
@@ -150,11 +173,16 @@
       margin-bottom: 0;
     }
 
-    /* Smaller game cards side by side */
+    /* Game cards in 2x2 grid */
     .games-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
+    }
+
+    .games-row .game-card {
+      display: flex;
+      flex-direction: column;
     }
 
     .games-row .game-card-image {
@@ -220,23 +248,22 @@
     <h2>Our Games</h2>
     <div class="games-grid">
 
-      <!-- Featured: Lunara -->
-      <a class="game-card" href="lunara/index.html">
-        <img src="lunara/images/icon.png" alt="Lunara: Daily Horoscope & Chart" class="game-card-image" style="object-fit: contain; background: #08060F; padding: 40px;">
-        <div class="game-card-body">
-          <span class="game-card-badge green">Latest Release</span>
-          <h3>Lunara: Daily Horoscope & Chart</h3>
-          <p class="game-card-sub">Astrology Companion &mdash; iOS</p>
-          <p>Your daily cosmic companion. Grounded astrology powered by real planetary data — daily horoscopes, birth chart calculator, moon phases, zodiac compatibility, and weekly forecasts.</p>
-        </div>
-      </a>
-
-      <!-- Row: Crystal Dig + Meow Wars + Stop Santa -->
       <div class="games-row">
+
+        <a class="game-card" href="lunara/index.html">
+          <img src="lunara/images/icon.png" alt="Lunara: Daily Horoscope & Chart" class="game-card-image" style="object-fit: contain; background: #08060F; padding: 40px;">
+          <div class="game-card-body">
+            <span class="game-card-badge green">Latest Release</span>
+            <h3>Lunara: Horoscope & Chart</h3>
+            <p class="game-card-sub">Astrology Companion &mdash; iOS</p>
+            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, compatibility, and moon phases. Completely free.</p>
+          </div>
+        </a>
 
         <a class="game-card" href="crystaldig/index.html">
           <img src="crystaldig/images/screenshot-01-mainmenu.png" alt="Crystal Dig: Gem Miner" class="game-card-image">
           <div class="game-card-body">
+            <span class="game-card-badge green">Latest Release</span>
             <h3>Crystal Dig: Gem Miner</h3>
             <p class="game-card-sub">Block Puzzle Adventure &mdash; iOS</p>
             <p>A block puzzle adventure where you mine gems, battle bosses, and dig your way through beautiful crystal caverns.</p>
@@ -269,7 +296,7 @@
   <!-- About -->
   <section class="about">
     <h2>About Us</h2>
-    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest release: Lunara: Daily Horoscope & Chart.</p>
+    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Crystal Dig & Lunara Horoscope</p>
   </section>
 
   <!-- Footer -->
