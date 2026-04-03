@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lunara: Daily Horoscope & Chart</title>
-  <meta name="description" content="Your daily cosmic companion. Grounded astrology powered by real planetary data.">
+  <meta name="description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, zodiac compatibility, and moon phases for all 12 signs. Completely free.">
   <meta name="author" content="Taco Truck Games, LLC">
   <meta property="og:title" content="Lunara: Daily Horoscope & Chart">
-  <meta property="og:description" content="Your daily cosmic companion. Grounded astrology powered by real planetary data.">
+  <meta property="og:description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, zodiac compatibility, and moon phases. Completely free.">
   <meta property="og:image" content="https://tacotruckgames.com/lunara/images/icon.png">
   <meta property="og:url" content="https://tacotruckgames.com/lunara/">
   <link rel="apple-touch-icon" href="images/icon.png">
@@ -39,7 +39,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%);
+      background: url("images/stars_background.png") center / cover no-repeat;
       z-index: 0;
     }
 
@@ -158,7 +158,19 @@
     /* ── Substance ── */
     .substance {
       padding: 70px 20px;
+      position: relative;
+      overflow: hidden;
     }
+
+    .substance::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/stars_moon_background.png") center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .substance > * { position: relative; z-index: 1; }
 
     .substance-inner {
       max-width: 680px;
@@ -219,7 +231,20 @@
       border-top: 1px solid rgba(255,255,255,0.08);
       color: #8E8494;
       font-size: 0.9em;
+      position: relative;
+      overflow: hidden;
     }
+
+    .footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/stars_background.png") center bottom / cover no-repeat;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .footer > * { position: relative; z-index: 1; }
 
     .footer a {
       color: #C9A84C;
@@ -260,7 +285,7 @@
     <img src="images/icon.png" alt="Lunara App Icon" class="hero-icon">
     <h1 class="hero-wordmark">Lunara</h1>
     <p class="hero-subtitle">Daily Horoscope &amp; Chart</p>
-    <p class="hero-tagline">Your daily cosmic companion &mdash; grounded astrology powered by real planetary data.</p>
+    <p class="hero-tagline">Every reading based on actual planetary transits. Daily horoscopes, birth charts, compatibility, and moon phases. Completely free.</p>
     <div class="store-badges">
       <a class="store-badge" href="#" target="_blank" rel="noopener">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
@@ -275,12 +300,12 @@
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#9800;</span>
         <h3>Daily Horoscopes</h3>
-        <p>Fresh readings every day based on real planetary positions. Each horoscope references actual transits, aspects, and moon phases &mdash; not generic copy.</p>
+        <p>Daily horoscopes for all 12 signs, updated every day with real planetary positions, moon phase, and a key planet breakdown. Each reading ends with a reflection question worth sitting with.</p>
       </div>
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#128197;</span>
         <h3>Weekly Forecasts</h3>
-        <p>Broader, thematic readings covering the full week. Emphasis on retrogrades, sign ingresses, and major planetary arcs.</p>
+        <p>Weekly forecasts that cover the full week ahead. Retrogrades, ingresses, and the biggest aspects of the week, plus a day-by-day glance at what's coming.</p>
       </div>
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#127760;</span>
@@ -290,7 +315,7 @@
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#9803;</span>
         <h3>Zodiac Compatibility</h3>
-        <p>Compare any two signs across five dimensions: emotional, intellectual, communication, long-term, and passion. Supports romantic, friendship, and professional contexts.</p>
+        <p>Goes deeper than "you're both fire signs." Compare any two signs across five dimensions and get honest narratives for romantic, friendship, and professional pairings.</p>
       </div>
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#127769;</span>
@@ -309,7 +334,8 @@
   <section class="substance">
     <div class="substance-inner">
       <h2>Astrology with substance</h2>
-      <p>Lunara is built for people who already have a relationship with astrology. Every reading references real planetary positions, not vague affirmations. The tone is like advice from a knowledgeable friend &mdash; conversational but specific, action-oriented, and never preachy.</p>
+      <p>Lunara gives you daily horoscopes that reference where the planets actually are today. No filler, no fortune cookie energy. Just grounded astrology that respects what you already know.</p>
+      <p style="margin-top: 12px;">Completely free. No paywall, no locked features. Everything other apps charge a premium for, Lunara gives you for free.</p>
       <p style="margin-top: 16px; font-size: 0.95em; color: #C4B8A0;">Available in English, Espa&ntilde;ol, Fran&ccedil;ais, Deutsch, Portugu&ecirc;s, and &#26085;&#26412;&#35486;</p>
     </div>
   </section>
@@ -317,7 +343,7 @@
   <!-- CTA -->
   <section class="cta">
     <h2>Download Lunara</h2>
-    <p class="cta-sub">Free on the App Store</p>
+    <p class="cta-sub">Completely free on the App Store</p>
     <div class="store-badges">
       <a class="store-badge" href="#" target="_blank" rel="noopener">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
