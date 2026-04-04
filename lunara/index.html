@@ -155,6 +155,57 @@
       line-height: 1.6;
     }
 
+    /* ── Screenshots Carousel ── */
+    .screenshots {
+      padding: 50px 0;
+      background: #0D0A1A;
+    }
+
+    .screenshots h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.8em;
+      margin-bottom: 24px;
+      color: #F5F0E8;
+      text-align: center;
+    }
+
+    .carousel {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 40px 20px;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel.dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 200px;
+      height: auto;
+      border-radius: 16px;
+      scroll-snap-align: center;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+      pointer-events: auto;
+    }
+
+    .carousel img:hover { transform: scale(1.03); }
+    .carousel.dragging img { pointer-events: none; }
+
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb {
+      background: rgba(201,168,76,0.3);
+      border-radius: 3px;
+    }
+
     /* ── Substance ── */
     .substance {
       padding: 70px 20px;
@@ -275,6 +326,8 @@
       .features { padding: 50px 16px; }
       .substance { padding: 50px 16px; }
       .cta { padding: 50px 16px; }
+      .carousel { padding: 0 20px 16px; gap: 14px; }
+      .carousel img { width: 160px; }
     }
   </style>
 </head>
@@ -290,6 +343,18 @@
       <a class="store-badge" href="#" target="_blank" rel="noopener">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
       </a>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <h2>Screenshots</h2>
+    <div class="carousel">
+      <img src="images/Today.png" alt="Daily Horoscope">
+      <img src="images/Week.png" alt="Weekly Forecast">
+      <img src="images/Chart.png" alt="Birth Chart">
+      <img src="images/Signs.png" alt="Zodiac Compatibility">
+      <img src="images/Moon.png" alt="Moon Phases">
     </div>
   </section>
 
@@ -361,5 +426,60 @@
     </div>
   </footer>
 
+<script>
+(function() {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+
+  let scrollSpeed = 0.5;
+  let isPaused = false;
+  let pauseTimeout;
+
+  function autoScroll() {
+    if (!isPaused) {
+      carousel.scrollLeft += scrollSpeed;
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+
+  function pauseScroll() {
+    isPaused = true;
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { isPaused = false; }, 3000);
+  }
+
+  carousel.addEventListener('wheel', pauseScroll);
+  carousel.addEventListener('touchstart', pauseScroll);
+
+  // Click-and-drag
+  let isDown = false, startX, scrollLeft;
+  carousel.addEventListener('mousedown', (e) => {
+    isDown = true;
+    carousel.classList.add('dragging');
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    pauseScroll();
+  });
+  carousel.addEventListener('mouseleave', () => {
+    isDown = false;
+    carousel.classList.remove('dragging');
+  });
+  carousel.addEventListener('mouseup', () => {
+    isDown = false;
+    carousel.classList.remove('dragging');
+  });
+  carousel.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    carousel.scrollLeft = scrollLeft - (x - startX);
+  });
+
+  requestAnimationFrame(autoScroll);
+})();
+</script>
 </body>
 </html>
