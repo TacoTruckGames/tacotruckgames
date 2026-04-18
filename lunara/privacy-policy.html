@@ -153,7 +153,7 @@
   <h2>Types of Data Collected</h2>
   <p>
     Among the types of Personal Data that this Application collects, by itself or through third parties, there are:
-    Usage Data, unique device identifiers (such as Advertising ID / IDFA via App Tracking Transparency), zodiac sign preference, and notification preferences.
+    Usage Data, unique device identifiers (such as Advertising ID / IDFA via App Tracking Transparency), zodiac sign preference, notification preferences, journal entries (stored on-device and in the User's iCloud), and data submitted to AI services when using the Mystic AI feature (zodiac sign, birth chart signs, question text, and journal entries when analysis is initiated).
   </p>
   <p>
     Complete details on each type of Personal Data collected are provided in the dedicated sections of this privacy policy or by specific explanation texts displayed prior to the Data collection.
@@ -170,7 +170,7 @@
 
   <!-- ============================================================ -->
   <h2>Birth Chart Data</h2>
-  <p>Birth chart data (birth date, time, and location) is stored exclusively on-device using Apple's CoreData framework. This data is never transmitted to our servers or any third party. Users can delete their birth chart data at any time from within the App.</p>
+  <p>Birth chart data (birth date, time, and location) is stored on-device using Apple's CoreData framework and synced to the User's personal iCloud account via Apple CloudKit. This data is never transmitted to our servers. When the User uses Mystic AI features, their sun, moon, and rising signs (but not birth date, time, or location) may be sent to third-party AI services to personalize readings. Users can delete their birth chart data at any time from within the App.</p>
 
   <!-- ============================================================ -->
   <h2>Mode and Place of Processing the Data</h2>
@@ -208,7 +208,10 @@
     <li><strong>Usage and analytics data:</strong> Retained for up to 26 months from the date of collection, after which it is anonymized or deleted.</li>
     <li><strong>Advertising identifiers (Advertising ID / IDFA):</strong> Retained until consent is withdrawn, the identifier is reset by the User, or the User requests deletion.</li>
     <li><strong>Zodiac sign preference and notification preferences:</strong> Retained on-device for the duration of the User's use of the App. Deleted when the App is uninstalled or the User requests deletion.</li>
-    <li><strong>Birth chart data:</strong> Stored exclusively on-device and retained until the User deletes it from within the App or uninstalls the App.</li>
+    <li><strong>Birth chart data:</strong> Stored on-device and in the User's iCloud account. Retained until the User deletes it from within the App or uninstalls the App. iCloud copy subject to the User's iCloud settings.</li>
+    <li><strong>Journal entries:</strong> Stored on-device and in the User's iCloud account. Retained until the User deletes individual entries or uninstalls the App. iCloud copy subject to the User's iCloud settings.</li>
+    <li><strong>AI interaction data:</strong> Processed in real-time to generate readings and not retained. Question text and reading content are not stored on our servers.</li>
+    <li><strong>Subscription status:</strong> Cached locally for the duration of the subscription. Updated automatically by Apple StoreKit.</li>
     <li><strong>Personal Data collected for the performance of a contract:</strong> Retained until such contract has been fully performed.</li>
   </ul>
   <p>
@@ -251,6 +254,44 @@
     <p>In order to understand Google's use of Data, consult <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google's partner policy</a>.</p>
     <p class="data-collected"><strong>Personal Data collected:</strong> Usage Data, unique device identifiers, device information, and approximate location (inferred from IP address).</p>
     <p class="data-collected"><strong>Place of processing:</strong> United States &mdash; <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &mdash; <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Opt Out</a>.</p>
+  </div>
+
+  <h3>AI Services (Mystic AI)</h3>
+  <div class="service-box">
+    <h4>Google Gemini API (Google LLC)</h4>
+    <p>Google Gemini is a generative AI service provided by Google LLC. This Application uses the Gemini API to generate personalized tarot card readings, follow-up responses, and journal analyses through the Mystic AI feature.</p>
+    <p>When you use Mystic AI, the following data may be transmitted to Google's Gemini API: your zodiac sign, birth chart data (sun, moon, and rising signs), today's horoscope context, the tarot card drawn, your question text, and journal entries (only when you explicitly initiate journal analysis). No personally identifiable information such as your name, email address, or precise location is transmitted.</p>
+    <p>Data is sent only for the purpose of generating your reading and is processed in real-time. We do not store AI-generated content on our servers.</p>
+    <p class="data-collected"><strong>Personal Data processed:</strong> Zodiac sign, birth chart signs, user-submitted question text, journal entries (when user initiates analysis).</p>
+    <p class="data-collected"><strong>Place of processing:</strong> United States &mdash; <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
+  </div>
+  <div class="service-box">
+    <h4>Ollama Cloud</h4>
+    <p>Ollama Cloud is a cloud-hosted AI inference service used as a backup provider for the Mystic AI feature. The same categories of data described above for Google Gemini may be transmitted to Ollama Cloud when it is used as a fallback provider.</p>
+    <p class="data-collected"><strong>Personal Data processed:</strong> Zodiac sign, birth chart signs, user-submitted question text, journal entries (when user initiates analysis).</p>
+    <p class="data-collected"><strong>Place of processing:</strong> United States &mdash; <a href="https://ollama.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
+  </div>
+
+  <h3>Journal Data</h3>
+  <div class="service-box">
+    <p>Journal entries (including text, mood, date, zodiac sign, and reflection prompts) are stored on-device using Apple's CoreData framework and synced to your personal iCloud account via Apple CloudKit. Journal data is not transmitted to our servers.</p>
+    <p>When you explicitly initiate the journal analysis feature, your journal entries are sent to third-party AI services (as described above) to generate a personalized analysis. This only occurs when you actively request an analysis.</p>
+    <p class="data-collected"><strong>Data stored:</strong> Journal text, mood selection, date, zodiac sign, moon phase, reflection prompts.</p>
+    <p class="data-collected"><strong>Storage:</strong> On-device (CoreData) and user's personal iCloud account (CloudKit).</p>
+  </div>
+
+  <h3>iCloud Sync (Apple CloudKit)</h3>
+  <div class="service-box">
+    <p>This Application uses Apple CloudKit to sync certain data across your devices, including journal entries, birth chart data, and app preferences. This data is stored in your personal iCloud account under the container <code>iCloud.com.tacotruckgames.lunara</code>.</p>
+    <p>We do not have direct access to data stored in your iCloud account. iCloud-synced data is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy Policy</a> and <a href="https://www.apple.com/legal/internet-services/icloud/" target="_blank" rel="noopener noreferrer">iCloud Terms of Service</a>.</p>
+    <p class="data-collected"><strong>Data synced:</strong> Journal entries, birth chart data, app preferences.</p>
+  </div>
+
+  <h3>Subscriptions (Apple StoreKit)</h3>
+  <div class="service-box">
+    <p>This Application offers optional auto-renewable subscriptions managed through Apple's App Store and StoreKit framework. We do not collect or store payment information. Apple handles all billing, receipts, and payment processing.</p>
+    <p>Subscription status is cached locally on your device to provide the appropriate app experience (e.g., unlocking premium features, removing ads). This cached status is not transmitted to our servers.</p>
+    <p class="data-collected"><strong>Data stored locally:</strong> Subscription status (active/inactive), product identifier, expiration date.</p>
   </div>
 
   <!-- ============================================================ -->
@@ -492,7 +533,7 @@
 
   <!-- ============================================================ -->
   <div class="page-footer-note">
-    <p>Latest update: March 31, 2026</p>
+    <p>Latest update: April 17, 2026</p>
   </div>
 
 </div>
