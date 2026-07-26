@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lunara: Daily Horoscope & Chart</title>
-  <meta name="description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, zodiac compatibility, and moon phases for all 12 signs. Completely free.">
+  <meta name="description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, zodiac compatibility, and moon phases for all 12 signs. Free in your browser at lunaraconnect.com.">
   <meta name="author" content="Taco Truck Games, LLC">
   <meta property="og:title" content="Lunara: Daily Horoscope & Chart">
-  <meta property="og:description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, zodiac compatibility, and moon phases. Completely free.">
+  <meta property="og:description" content="Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, and moon phases. Free in your browser &mdash; Android coming soon.">
   <meta property="og:image" content="https://tacotruckgames.com/lunara/images/icon.png">
   <meta property="og:url" content="https://tacotruckgames.com/lunara/">
   <link rel="apple-touch-icon" href="images/icon.png">
@@ -83,23 +83,34 @@
       margin-right: auto;
     }
 
-    .store-badges {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .store-badge {
+    /* ── Web app CTA ── */
+    .web-cta {
       display: inline-block;
-      transition: transform 0.2s;
+      background: linear-gradient(135deg, #C9A84C, #F0D080);
+      color: #08060F;
+      font-weight: 700;
+      font-size: 1.02em;
+      letter-spacing: 0.03em;
+      padding: 14px 34px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .store-badge:hover { transform: scale(1.05); }
+    .web-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(201,168,76,0.28);
+    }
 
-    .store-badge img {
-      height: 54px;
-      width: auto;
+    .cta-note {
+      margin-top: 16px;
+      font-size: 0.92em;
+      color: #8E8494;
+    }
+
+    .cta-note strong {
+      color: #C4B8A0;
+      font-weight: 500;
     }
 
     /* ── Features ── */
@@ -336,13 +347,10 @@
   <!-- Hero -->
   <section class="hero">
     <img src="images/icon.png" alt="Lunara App Icon" class="hero-icon">
-    <p class="hero-subtitle">Horoscope &amp; AI Mystic</p>
-    <p class="hero-tagline">Ask Mystic AI anything: tarot readings woven with your birth chart and horoscope. Journal your reflections, track mood by moon phase, compare charts with Synastry.</p>
-    <div class="store-badges">
-      <a class="store-badge" href="#" target="_blank" rel="noopener">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
-      </a>
-    </div>
+    <p class="hero-subtitle">Horoscope, Sky &amp; AI Mystic</p>
+    <p class="hero-tagline">Daily readings cast from the actual sky. Ask Mystic AI anything, journal your reflections, compare charts with Synastry, and find people whose stars align with yours.</p>
+    <a class="web-cta" href="https://www.lunaraconnect.com" target="_blank" rel="noopener">Open Lunara in your browser</a>
+    <p class="cta-note">Free at <strong>lunaraconnect.com</strong> &mdash; no download required. <strong>Android app coming soon.</strong></p>
   </section>
 
   <!-- Screenshots -->
@@ -392,6 +400,16 @@
         <p>Track the current moon phase with a photorealistic moon visualization. See the moon sign, illumination, days until next full and new moon, and phase interpretations.</p>
       </div>
       <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#10022;</span>
+        <h3>The Sky, Live</h3>
+        <p>See the heavens exactly as they are right now. Zodiac constellations, planet positions, and active retrogrades, rendered live from real ephemeris data.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">&#9825;</span>
+        <h3>Kindred Skies</h3>
+        <p>The astrology social network. Share what's in your stars, follow a constellation feed, and find people whose charts genuinely align with yours.</p>
+      </div>
+      <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#128142;</span>
         <h3>Synastry</h3>
         <p>Compare two birth charts for relationship compatibility. See inter-aspects, emotional resonance, communication style, and long-term potential scored across five dimensions.</p>
@@ -404,7 +422,7 @@
       <div class="feature-card">
         <span class="feature-icon" aria-hidden="true">&#128214;</span>
         <h3>Journal</h3>
-        <p>Daily reflection journal with mood tracking, writing prompts from your horoscope, and AI-powered pattern analysis. Syncs across devices via iCloud.</p>
+        <p>Daily reflection journal with mood tracking, writing prompts from your horoscope, and AI-powered pattern analysis. Syncs to your account across every device.</p>
       </div>
     </div>
   </section>
@@ -414,20 +432,17 @@
     <div class="substance-inner">
       <h2>Astrology with substance</h2>
       <p>Lunara gives you daily horoscopes built from actual planetary transit data, an AI tarot reader that weaves your birth chart into every reading, and a reflection journal that reveals patterns across your entries. No filler, no fortune cookie energy.</p>
-      <p style="margin-top: 12px;">Core features are free. Mystic AI offers an optional premium tier with unlimited tarot readings, journal analysis, and an ad-free experience.</p>
+      <p style="margin-top: 12px;">It runs entirely in your browser &mdash; sign up with an email and your chart is waiting. Core features are free. Mystic AI offers an optional premium tier with unlimited tarot readings, journal analysis, and an ad-free experience.</p>
       <p style="margin-top: 16px; font-size: 0.95em; color: #C4B8A0;">Available in English, Espa&ntilde;ol, Fran&ccedil;ais, Deutsch, Portugu&ecirc;s, and &#26085;&#26412;&#35486;</p>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta">
-    <h2>Download Lunara</h2>
-    <p class="cta-sub">Free on the App Store</p>
-    <div class="store-badges">
-      <a class="store-badge" href="#" target="_blank" rel="noopener">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
-      </a>
-    </div>
+    <h2>Start reading tonight</h2>
+    <p class="cta-sub">Free in any browser &mdash; nothing to install</p>
+    <a class="web-cta" href="https://www.lunaraconnect.com" target="_blank" rel="noopener">Open Lunara</a>
+    <p class="cta-note">Works on phone, tablet, and desktop. Add it to your home screen for an app-like experience. <strong>Android app coming soon.</strong></p>
   </section>
 
   <!-- Footer -->

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taco Truck Games</title>
   <meta name="description" content="Taco Truck Games is an independent game studio based in Seattle, WA focused on fun, quick-to-play games.">
-  <meta name="keywords" content="taco truck games, indie, game, studio, seattle, lunara, horoscope, crystal dig, meow wars, stop santa">
+  <meta name="keywords" content="taco truck games, indie, game, studio, seattle, lunara, horoscope, polari, cinedossier, crystal dig, meow wars, stop santa">
   <meta name="author" content="Taco Truck Games, LLC">
   <meta property="og:title" content="Taco Truck Games">
   <meta property="og:description" content="Indie studio. Big-studio experience. Based in Seattle.">
@@ -164,6 +164,7 @@
     }
 
     .game-card-badge.green { background: #4caf50; }
+    .game-card-badge.beta { background: #3a8fd6; }
 
     .game-card h3 {
       font-size: 1.5em;
@@ -194,6 +195,13 @@
       letter-spacing: 0.04em;
       padding: 3px 10px;
       border-radius: 20px;
+    }
+
+    /* Not-yet-shipped platforms read as outlined rather than solid */
+    .platform-tag.soon {
+      background: transparent;
+      color: #C9A84C;
+      border: 1px solid rgba(201,168,76,0.55);
     }
 
     .game-card p {
@@ -287,8 +295,19 @@
             <span class="game-card-badge green">Latest Release</span>
             <h3>Lunara: Horoscope & Chart</h3>
             <p class="game-card-sub">Astrology Companion</p>
-            <div class="platform-tags"><span class="platform-tag">iOS</span></div>
-            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, compatibility, and moon phases.</p>
+            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag soon">Android Soon</span></div>
+            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, moon phases, and a feed where kindred charts connect. Free at lunaraconnect.com.</p>
+          </div>
+        </a>
+
+        <a class="game-card" href="https://polari.men" target="_blank" rel="noopener">
+          <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
+          <div class="game-card-body">
+            <span class="game-card-badge green">Now Live</span>
+            <h3>Polari</h3>
+            <p class="game-card-sub">AI Companions</p>
+            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">18+</span></div>
+            <p>A curated cast of AI companions with real faces, real voices, and real memory. They text first, remember your life, and are always upfront about being AI. Free to start.</p>
           </div>
         </a>
 
@@ -300,6 +319,19 @@
             <p class="game-card-sub">Block Puzzle Adventure</p>
             <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
             <p>A block puzzle adventure where you mine gems, battle bosses, and dig your way through beautiful crystal caverns.</p>
+          </div>
+        </a>
+
+        <a class="game-card" href="https://cinedossier.com" target="_blank" rel="noopener">
+          <div class="game-card-image" style="background: #F4F6F8; display: flex; align-items: center; justify-content: center;">
+            <img src="images/cinedossier-logo.png" alt="CineDossier: Research &amp; Production Tracker" style="width: auto; height: 82%; max-width: 90%;">
+          </div>
+          <div class="game-card-body">
+            <span class="game-card-badge beta">Beta</span>
+            <h3>CineDossier</h3>
+            <p class="game-card-sub">Documentary Research Tracker</p>
+            <div class="platform-tags"><span class="platform-tag">Web App</span></div>
+            <p>A research workspace built for documentary teams. Spreadsheet grid, linked records, chronological timeline, and Kanban boards for sources, people, footage, and production tasks. Currently in beta.</p>
           </div>
         </a>
 
@@ -331,7 +363,7 @@
   <!-- About -->
   <section class="about">
     <h2>About Us</h2>
-    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Crystal Dig & Lunara Horoscope</p>
+    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Lunara, Polari, and Crystal Dig.</p>
   </section>
 
   <!-- Footer -->
