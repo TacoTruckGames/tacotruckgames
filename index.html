@@ -9,18 +9,24 @@
   <meta name="author" content="Taco Truck Games, LLC">
   <meta property="og:title" content="Taco Truck Games">
   <meta property="og:description" content="Indie studio. Big-studio experience. Based in Seattle.">
-  <meta property="og:image" content="https://tacotruckgames.com/images/ttg-logo.png">
+  <meta property="og:image" content="https://tacotruckgames.com/images/ttg-logo-v2.png">
   <meta property="og:url" content="https://tacotruckgames.com/">
   <link rel="icon" href="images/ttg-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --ttg-purple: #643F84;
+      --ttg-purple-dark: #533570;
+      --ttg-purple-card: #4B2F65;
+    }
+
     body {
       font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       color: #f0f0f0;
-      background: #111;
+      background: var(--ttg-purple);
     }
 
     /* ── Hero ── */
@@ -28,7 +34,7 @@
       position: relative;
       text-align: center;
       padding: 80px 20px 20px;
-      background: #111;
+      background: var(--ttg-purple);
       overflow: hidden;
     }
 
@@ -37,6 +43,8 @@
       position: absolute;
       inset: 0;
       background: url("images/ttg_background.png") center / cover no-repeat;
+      mix-blend-mode: overlay;
+      opacity: 0.35;
       z-index: 0;
     }
 
@@ -47,12 +55,12 @@
       width: 60%;
       height: auto;
       margin-bottom: 24px;
-      filter: drop-shadow(0 2px 12px rgba(255,255,255,0.08));
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
     }
 
     .hero-tagline {
       font-size: 1.3em;
-      color: #aaa;
+      color: #e2d8ec;
       max-width: 600px;
       margin: 0 auto;
       font-weight: 400;
@@ -62,7 +70,7 @@
     .about {
       padding: 50px 20px;
       text-align: center;
-      background: #161616;
+      background: var(--ttg-purple-dark);
       position: relative;
       overflow: hidden;
     }
@@ -72,6 +80,8 @@
       position: absolute;
       inset: 0;
       background: url("images/ttg_background.png") center / cover no-repeat;
+      mix-blend-mode: overlay;
+      opacity: 0.35;
       z-index: 0;
     }
 
@@ -86,7 +96,7 @@
     .about p {
       max-width: 700px;
       margin: 0 auto 12px;
-      color: #bbb;
+      color: #ded3e9;
       font-size: 1.05em;
     }
 
@@ -115,8 +125,8 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.06);
+      background: var(--ttg-purple-card);
+      border: 1px solid rgba(255,255,255,0.12);
       transition: transform 0.25s, box-shadow 0.25s;
       text-decoration: none;
       color: inherit;
@@ -163,7 +173,7 @@
 
     .game-card-sub {
       font-size: 0.9em;
-      color: #888;
+      color: #b9a7c9;
       margin-bottom: 10px;
     }
 
@@ -187,7 +197,7 @@
     }
 
     .game-card p {
-      color: #bbb;
+      color: #ded3e9;
       font-size: 0.95em;
       margin-bottom: 0;
     }
@@ -220,16 +230,16 @@
     .footer {
       text-align: center;
       padding: 40px 20px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      background: #111;
-      color: #666;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      background: var(--ttg-purple-dark);
+      color: #c3b3d1;
       font-size: 0.9em;
     }
 
-    .footer a { color: #6ba3e8; }
+    .footer a { color: #ffd166; }
     .footer-links { margin-top: 8px; }
     .footer-links a { margin: 0 12px; }
-    .footer-contact { margin-top: 12px; color: #555; }
+    .footer-contact { margin-top: 12px; color: #c3b3d1; }
 
     /* ── Responsive ── */
     @media (max-width: 700px) {
@@ -258,7 +268,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <img src="images/ttg-logo-white.png" alt="Taco Truck Games" class="hero-logo">
+    <img src="images/ttg-logo-v2.png" alt="Taco Truck Games" class="hero-logo">
     <p class="hero-tagline">Indie studio. Big-studio experience. Based in Seattle.</p>
   </section>
 
