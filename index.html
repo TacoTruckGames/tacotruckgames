@@ -171,6 +171,16 @@
     .game-card-badge.green { background: #4caf50; }
     .game-card-badge.beta { background: #3a8fd6; }
 
+    /* Pinned to the card's top-right corner, over the artwork */
+    .game-card-badge.floating {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      margin-bottom: 0;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+
     .game-card h3 {
       font-size: 1.5em;
       color: #fff;
@@ -293,9 +303,9 @@
       <div class="games-row">
 
         <a class="game-card" href="https://polari.men" target="_blank" rel="noopener">
+          <span class="game-card-badge green floating">Now Live</span>
           <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
           <div class="game-card-body">
-            <span class="game-card-badge green">Now Live</span>
             <h3>Polari</h3>
             <p class="game-card-sub">AI Companions</p>
             <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">18+</span></div>
