@@ -105,6 +105,11 @@
       padding: 30px 20px 60px;
     }
 
+    /* Second card section reads as its own block without doubling the gap */
+    .games.in-production {
+      padding-top: 10px;
+    }
+
     .games h2 {
       font-size: 1.8em;
       text-align: center;
@@ -282,23 +287,10 @@
 
   <!-- Games -->
   <section class="games">
-    <h2>Our Games & Apps</h2>
+    <h2>Our Released Apps</h2>
     <div class="games-grid">
 
       <div class="games-row">
-
-        <a class="game-card" href="https://cinedossier.com" target="_blank" rel="noopener">
-          <div class="game-card-image" style="background: #F4F6F8; display: flex; align-items: center; justify-content: center;">
-            <img src="images/cinedossier-logo.png" alt="CineDossier: Research &amp; Production Tracker" style="width: auto; height: 82%; max-width: 90%;">
-          </div>
-          <div class="game-card-body">
-            <span class="game-card-badge beta">Closed Beta</span>
-            <h3>CineDossier</h3>
-            <p class="game-card-sub">Documentary Research Tracker</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span></div>
-            <p>A research workspace built for documentary teams. Spreadsheet grid, linked records, chronological timeline, and Kanban boards for sources, people, footage, and production tasks. Currently in beta.</p>
-          </div>
-        </a>
 
         <a class="game-card" href="https://polari.men" target="_blank" rel="noopener">
           <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
@@ -308,19 +300,6 @@
             <p class="game-card-sub">AI Companions</p>
             <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">18+</span></div>
             <p>A curated cast of AI companions with real faces, real voices, and real memory. They text first, remember your life, and are always upfront about being AI. Free to start.</p>
-          </div>
-        </a>
-
-        <a class="game-card" href="lunara/index.html">
-          <div class="game-card-image" style="background: url('lunara/images/stars_background.png') center / cover no-repeat, #08060F; display: flex; align-items: center; justify-content: center;">
-            <img src="lunara/images/icon.png" alt="Lunara: Daily Horoscope & Chart" style="width: 140px; height: 140px; border-radius: 28px;">
-          </div>
-          <div class="game-card-body">
-            <span class="game-card-badge beta">Open Beta</span>
-            <h3>Lunara: Horoscope & Chart</h3>
-            <p class="game-card-sub">Astrology Companion</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag soon">Android Soon</span></div>
-            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, moon phases, and a feed where kindred charts connect. Free at lunaraconnect.com.</p>
           </div>
         </a>
 
@@ -359,10 +338,48 @@
     </div>
   </section>
 
+  <!-- In Production -->
+  <section class="games in-production">
+    <h2>In Production</h2>
+    <div class="games-grid">
+
+      <div class="games-row">
+
+        <a class="game-card" href="https://cinedossier.com" target="_blank" rel="noopener">
+          <div class="game-card-image" style="background: #F4F6F8; display: flex; align-items: center; justify-content: center;">
+            <img src="images/cinedossier-logo.png" alt="CineDossier: Research &amp; Production Tracker" style="width: auto; height: 82%; max-width: 90%;">
+          </div>
+          <div class="game-card-body">
+            <span class="game-card-badge beta">Closed Beta</span>
+            <h3>CineDossier</h3>
+            <p class="game-card-sub">Documentary Research Tracker</p>
+            <div class="platform-tags"><span class="platform-tag">Web App</span></div>
+            <p>A research workspace built for documentary teams. Spreadsheet grid, linked records, chronological timeline, and Kanban boards for sources, people, footage, and production tasks. Currently in beta.</p>
+          </div>
+        </a>
+
+        <a class="game-card" href="https://lunaraconnect.com" target="_blank" rel="noopener">
+          <div class="game-card-image" style="background: url('lunara/images/stars_background.png') center / cover no-repeat, #08060F; display: flex; align-items: center; justify-content: center;">
+            <img src="lunara/images/icon.png" alt="Lunara: Daily Horoscope & Chart" style="width: 140px; height: 140px; border-radius: 28px;">
+          </div>
+          <div class="game-card-body">
+            <span class="game-card-badge beta">Closed Alpha</span>
+            <h3>Lunara: Horoscope & Chart</h3>
+            <p class="game-card-sub">Astrology Companion</p>
+            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag soon">Android Soon</span></div>
+            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, moon phases, and a feed where kindred charts connect. Free at lunaraconnect.com.</p>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- About -->
   <section class="about">
     <h2>About Us</h2>
-    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Lunara, Polari, and Crystal Dig.</p>
+    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Polari and Crystal Dig, with CineDossier and Lunara in production.</p>
   </section>
 
   <!-- Footer -->
