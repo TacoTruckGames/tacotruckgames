@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crystal Dig: Gem Miner - A Block Puzzle Adventure</title>
-  <meta name="description" content="Dig deep into a sparkling puzzle adventure! Crystal Dig: Gem Miner combines classic block puzzle gameplay with an exciting underground mining expedition.">
+  <title>Crystal Dig: Gem Miner - A Block Puzzle Adventure Across the Solar System</title>
+  <meta name="description" content="Dig through 400 levels across 8 worlds, from Earth to Triton. Crystal Dig: Gem Miner combines classic block puzzle gameplay with a journey across the solar system and 40 boss battles.">
   <meta property="og:title" content="Crystal Dig: Gem Miner">
-  <meta property="og:description" content="A block puzzle adventure. Dig deep, collect gems, and battle bosses!">
+  <meta property="og:description" content="400 levels. 8 worlds. 40 bosses. A block puzzle adventure across the solar system.">
   <meta property="og:image" content="https://tacotruckgames.com/crystaldig/images/icon.png">
   <meta property="og:url" content="https://tacotruckgames.com/crystaldig/">
   <link rel="apple-touch-icon" href="images/icon.png">
@@ -175,7 +175,77 @@
       opacity: 0.3;
     }
 
+    .mode-card.bossrush::before {
+      background: linear-gradient(135deg, #6a2020 0%, #3a1010 100%);
+      opacity: 0.3;
+    }
+
     .mode-card > * { position: relative; z-index: 1; }
+
+    /* ── Worlds ── */
+    .worlds {
+      padding: 60px 20px;
+      background: #16213e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .worlds::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/background.png") center / cover no-repeat;
+      opacity: 0.12;
+      z-index: 0;
+    }
+
+    .worlds > * { position: relative; z-index: 1; }
+
+    .worlds h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .worlds > p {
+      text-align: center;
+      color: #bbb;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      font-size: 1.05em;
+    }
+
+    .world-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .world-card {
+      width: 140px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .world-card:hover { transform: translateY(-4px) scale(1.04); }
+
+    .world-card img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 14px rgba(120, 80, 220, 0.5));
+    }
+
+    .world-card .world-name {
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #f5a623;
+    }
 
     .mode-card-gem {
       flex-shrink: 0;
@@ -440,6 +510,8 @@
       .boss-card { width: 120px; }
       .boss-card img { width: 70px; height: 70px; }
       .gem-item img { width: 56px; }
+      .world-card { width: 110px; }
+      .world-card img { width: 84px; height: 84px; }
     }
 
     @media (max-width: 480px) {
@@ -448,6 +520,9 @@
       .carousel img { width: 160px; }
       .boss-card { width: 100px; padding: 12px 8px; }
       .boss-card img { width: 60px; height: 60px; }
+      .world-grid { gap: 16px; }
+      .world-card { width: 88px; }
+      .world-card img { width: 70px; height: 70px; }
     }
   </style>
 </head>
@@ -457,7 +532,7 @@
   <section class="hero">
     <img src="images/logo.png" alt="Crystal Dig: Gem Miner" class="hero-logo">
     <p class="hero-subtitle">A Block Puzzle Adventure</p>
-    <p class="hero-tagline">Dig deep into a sparkling puzzle adventure! Classic block puzzle gameplay meets an exciting underground mining expedition.</p>
+    <p class="hero-tagline">The dig no longer stops at Earth. Classic block puzzle gameplay meets a journey across the solar system &mdash; 400 levels, 8 worlds, 40 bosses.</p>
     <div class="store-badges">
       <a class="store-badge" href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744" target="_blank" rel="noopener">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
@@ -486,13 +561,13 @@
 
   <!-- Game Modes -->
   <section class="game-modes">
-    <h2>Two Ways to Play</h2>
+    <h2>Three Ways to Play</h2>
 
     <div class="mode-card classic">
       <img src="images/gem-emerald.png" alt="Emerald" class="mode-card-gem">
       <div class="mode-card-text">
         <h3>Classic Mode</h3>
-        <p>Place blocks, clear lines, and chase your highest score. Simple to learn, endlessly challenging. Compete on the Game Center leaderboard!</p>
+        <p>Place blocks, clear lines, and chase your highest score. Simple to learn, endlessly challenging. Compete on the global leaderboards!</p>
       </div>
       <img src="images/gem-sapphire.png" alt="Sapphire" class="mode-card-gem">
     </div>
@@ -501,41 +576,105 @@
       <img src="images/gem-ruby.png" alt="Ruby" class="mode-card-gem">
       <div class="mode-card-text">
         <h3>Adventure Mode</h3>
-        <p>Journey through 50 handcrafted levels across 5 underground layers &mdash; from the Surface down to the Magma Core. Each zone introduces new challenges and culminates in an epic boss battle.</p>
+        <p>Journey across the solar system through 400 handcrafted levels. Dig through Earth, then travel to Mars, Venus, Mercury, Europa, Titan, Miranda and Triton &mdash; each world with its own layers, hazards and secrets.</p>
       </div>
       <img src="images/gem-amethyst.png" alt="Amethyst" class="mode-card-gem">
+    </div>
+
+    <div class="mode-card bossrush">
+      <img src="images/gem-diamond.png" alt="Diamond" class="mode-card-gem">
+      <div class="mode-card-text">
+        <h3>Boss Rush</h3>
+        <p>Think you're tough enough? Take on the bosses back-to-back with no levels in between &mdash; the ultimate endurance challenge.</p>
+      </div>
+      <img src="images/gem-emerald.png" alt="Emerald" class="mode-card-gem">
+    </div>
+  </section>
+
+  <!-- Worlds -->
+  <section class="worlds">
+    <h2>Eight Worlds</h2>
+    <p>Every world has its own layers, hazards and secrets &mdash; and a guardian waiting at the bottom of each one.</p>
+    <div class="world-grid">
+      <div class="world-card">
+        <img src="images/planet-earth.png" alt="Earth">
+        <div class="world-name">Earth</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-mars.png" alt="Mars">
+        <div class="world-name">Mars</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-venus.png" alt="Venus">
+        <div class="world-name">Venus</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-mercury.png" alt="Mercury">
+        <div class="world-name">Mercury</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-europa.png" alt="Europa">
+        <div class="world-name">Europa</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-titan.png" alt="Titan">
+        <div class="world-name">Titan</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-miranda.png" alt="Miranda">
+        <div class="world-name">Miranda</div>
+      </div>
+      <div class="world-card">
+        <img src="images/planet-triton.png" alt="Triton">
+        <div class="world-name">Triton</div>
+      </div>
     </div>
   </section>
 
   <!-- Boss Battles -->
   <section class="bosses">
-    <h2>Epic Boss Battles</h2>
-    <p>Face off against five geological guardians as you dig deeper underground.</p>
+    <h2>40 Epic Boss Battles</h2>
+    <p>One guards the end of every layer, each with its own attack patterns, music and mechanics. Here are the eight that wait at the bottom of each world.</p>
     <div class="boss-grid">
       <div class="boss-card">
-        <img src="images/boss-geode.png" alt="Geode Boss">
-        <div class="boss-name">Geode</div>
-        <div class="boss-zone">Surface</div>
+        <img src="images/boss-lava.png" alt="Magma Heart Boss">
+        <div class="boss-name">Magma Heart</div>
+        <div class="boss-zone">Earth</div>
       </div>
       <div class="boss-card">
-        <img src="images/boss-snake.png" alt="Snake Boss">
-        <div class="boss-name">Snake</div>
-        <div class="boss-zone">Soil</div>
+        <img src="images/boss-olympusheart.png" alt="Olympus Heart Boss">
+        <div class="boss-name">Olympus Heart</div>
+        <div class="boss-zone">Mars</div>
       </div>
       <div class="boss-card">
-        <img src="images/boss-fossil.png" alt="Fossil Boss">
-        <div class="boss-name">Fossil</div>
-        <div class="boss-zone">Stone</div>
+        <img src="images/boss-venusforge.png" alt="Venus Forge Boss">
+        <div class="boss-name">Venus Forge</div>
+        <div class="boss-zone">Venus</div>
       </div>
       <div class="boss-card">
-        <img src="images/boss-golem.png" alt="Golem Boss">
-        <div class="boss-name">Golem</div>
-        <div class="boss-zone">Crystal Caverns</div>
+        <img src="images/boss-mercuryheart.png" alt="Mercury Heart Boss">
+        <div class="boss-name">Mercury Heart</div>
+        <div class="boss-zone">Mercury</div>
       </div>
       <div class="boss-card">
-        <img src="images/boss-lava.png" alt="Lava Boss">
-        <div class="boss-name">Lava Heart</div>
-        <div class="boss-zone">Magma Core</div>
+        <img src="images/boss-ventsovereign.png" alt="Vent Sovereign Boss">
+        <div class="boss-name">Vent Sovereign</div>
+        <div class="boss-zone">Europa</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-cryosovereign.png" alt="Cryo Sovereign Boss">
+        <div class="boss-name">Cryo Sovereign</div>
+        <div class="boss-zone">Titan</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-mirandacore.png" alt="Miranda Core Boss">
+        <div class="boss-name">Miranda Core</div>
+        <div class="boss-zone">Miranda</div>
+      </div>
+      <div class="boss-card">
+        <img src="images/boss-anchorwarden.png" alt="Anchor Warden Boss">
+        <div class="boss-name">Anchor Warden</div>
+        <div class="boss-zone">Triton</div>
       </div>
     </div>
   </section>
@@ -575,22 +714,22 @@
       <div class="feature-card">
         <img src="images/icon-shuffle.png" alt="Puzzle">
         <div class="feature-text">
-          <h3>50 Levels</h3>
-          <p>Handcrafted adventure levels across 5 unique underground zones.</p>
+          <h3>400 Levels</h3>
+          <p>Handcrafted adventure levels across 8 worlds, each with its own layers and hazards.</p>
         </div>
       </div>
       <div class="feature-card">
         <img src="images/icon-trophy.png" alt="Achievements">
         <div class="feature-text">
-          <h3>21 Achievements</h3>
-          <p>Unlock Game Center achievements as you master the depths.</p>
+          <h3>28 Achievements</h3>
+          <p>Unlock achievements and climb the global leaderboards as you master the depths.</p>
         </div>
       </div>
       <div class="feature-card">
         <img src="images/icon-star.png" alt="Power-ups">
         <div class="feature-text">
           <h3>Power-ups</h3>
-          <p>Pickaxe, Shuffle, and Undo to help you through tough spots.</p>
+          <p>Stuck with nowhere to place? Spend a Pickaxe, Shuffle or Undo to keep your run alive.</p>
         </div>
       </div>
       <div class="feature-card">
