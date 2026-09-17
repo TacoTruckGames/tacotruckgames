@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Santa: Remastered - Holiday Tower Defense, Coming Soon to iOS and Android</title>
+  <meta name="description" content="Stop Santa is back, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever. Coming soon to iOS and Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stop Santa: Remastered">
+  <meta property="og:description" content="Every year he comes down out of the dark with that sack. This year the road is a killing field. Holiday tower defense, remastered. Coming soon to iOS and Android.">
+  <meta property="og:image" content="https://tacotruckgames.com/StopSantaHD/images/image_metadata_tag.jpg">
+  <meta property="og:url" content="https://tacotruckgames.com/StopSantaHD/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stop Santa: Remastered">
+  <meta name="twitter:description" content="Every year he comes down out of the dark with that sack. This year the road is a killing field. Holiday tower defense, remastered. Coming soon to iOS and Android.">
+  <meta name="twitter:image" content="https://tacotruckgames.com/StopSantaHD/images/image_metadata_tag.jpg">
+  <link rel="icon" href="images/icon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1426;
+      --band: #101c33;
+      --text: #eef4ff;
+      --muted: #9fb3cf;
+      --dim: #6f83a3;
+      --ice: #7fd0ff;
+      --ice-2: #bfe8ff;
+      --red: #e0334f;
+      --red-2: #ff5f76;
+      --green: #3cb371;
+      --green-2: #6fdc98;
+      --gold: #f2c94c;
+      --line: rgba(255,255,255,0.09);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .display, .pill, .kicker { font-family: "Fredoka", "Nunito", sans-serif; }
+
+    h2 {
+      font-size: 2.2em;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 12px;
+      text-shadow: 0 3px 18px rgba(0,0,0,0.6);
+    }
+
+    .lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto 40px;
+      font-size: 1.1em;
+    }
+
+    .kicker {
+      display: block;
+      text-align: center;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ice);
+      margin-bottom: 8px;
+    }
+
+    section { position: relative; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: min(92vh, 940px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      padding: 36px 20px 52px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/hero.jpg") center 45% / cover no-repeat;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(11,20,38,0.25) 0%, rgba(11,20,38,0.0) 26%, rgba(11,20,38,0.0) 55%, rgba(11,20,38,0.78) 82%, rgba(11,20,38,0.97) 100%);
+      z-index: -1;
+    }
+
+    .hero-head, .hero-foot { display: flex; flex-direction: column; align-items: center; }
+
+    /* The wordmark sits in the painting's upper-left sky, where the key art
+       keeps it clear (Santa looms at the upper right); centred on a phone,
+       where the cover crop shows the middle of the picture. */
+    .hero-head { align-self: flex-start; margin-left: clamp(0px, 6vw, 96px); }
+
+    .hero-logo {
+      max-width: 460px;
+      width: 72%;
+      height: auto;
+      filter: drop-shadow(0 10px 26px rgba(0,0,0,0.7));
+    }
+
+    .remastered {
+      display: inline-block;
+      margin-top: 4px;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      font-size: 1.15em;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 6px 18px 6px 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(224,51,79,0.95), rgba(180,26,52,0.95));
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    }
+
+    .hero-tagline {
+      font-size: 1.4em;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #fff;
+      max-width: 640px;
+      margin: 0 auto 26px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .coming {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 0.95em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ice-2);
+      background: rgba(11,20,38,0.6);
+      border: 1px solid rgba(127,208,255,0.55);
+      backdrop-filter: blur(4px);
+    }
+
+    .coming::before {
+      content: "";
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--green-2);
+      box-shadow: 0 0 10px var(--green-2);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .store-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .store-badge { display: inline-block; transition: transform 0.2s; }
+    .store-badge:hover { transform: scale(1.05); }
+    .store-badge img { height: 54px; width: auto; display: block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.98em;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    }
+
+    /* ── Screenshots carousel ── */
+    .screenshots {
+      padding: 64px 0 56px;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 40px 24px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 520px;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      scroll-snap-align: center;
+      transition: transform 0.2s;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    .carousel img:hover { transform: scale(1.02); }
+
+    .carousel.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+    .carousel.dragging img { pointer-events: none; }
+
+    /* ── Then and now ── */
+    .thennow { padding: 80px 0; }
+
+    .pair-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .pair {
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 18px 18px 16px;
+      text-align: center;
+    }
+
+    .pair .faces {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .pair .faces img {
+      width: 100%;
+      max-width: 150px;
+      height: 150px;
+      object-fit: contain;
+      justify-self: center;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+    }
+
+    .pair .arrow {
+      font-family: "Fredoka", sans-serif;
+      font-size: 1.6em;
+      color: var(--ice);
+      padding-bottom: 56px;
+    }
+
+    .pair .labels {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      font-family: "Fredoka", sans-serif;
+      font-size: 0.72em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .pair .labels span:last-child { color: var(--ice); }
+
+    .pair h3 { margin-top: 10px; font-size: 1.1em; color: #fff; }
+
+    /* ── Regions ── */
+    .regions {
+      padding: 80px 0;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .region-card {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .region-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,0.65); }
+
+    .region-card img.bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+
+    .region-card:hover img.bg { transform: scale(1.06); }
+
+    .region-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,10,20,0.95) 0%, rgba(6,10,20,0.5) 45%, rgba(6,10,20,0.02) 100%);
+    }
+
+    .region-body {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 18px 16px;
+    }
+
+    .region-tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 0.72em;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 999px;
+      color: #0b1426;
+      background: var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .region-tag.free { background: var(--green-2); }
+
+    .region-num {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      z-index: 2;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    }
+
+    .region-body h3 {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .region-body p {
+      font-size: 0.9em;
+      line-height: 1.45;
+      color: #d6e2f5;
+      font-style: italic;
+    }
+
+    /* ── Towers ── */
+    .towers { padding: 80px 0; overflow: hidden; }
+
+    .towers::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/region-candy_forest.jpg") center / cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .towers > * { position: relative; z-index: 1; }
+
+    .family-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .family {
+      border-radius: 16px;
+      background: rgba(11,20,38,0.6);
+      border: 1px solid var(--line);
+      padding: 22px 18px 20px;
+      text-align: center;
+    }
+
+    .family h3 {
+      font-size: 1.35em;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .family .what {
+      color: var(--muted);
+      font-size: 0.92em;
+      margin-bottom: 14px;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      align-items: end;
+    }
+
+    .tier img {
+      width: 100%;
+      max-width: 120px;
+      height: 130px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+      transition: transform 0.25s;
+    }
+
+    .tier:hover img { transform: translateY(-4px) scale(1.05); }
+
+    .tier .name {
+      display: block;
+      margin-top: 6px;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 0.85em;
+      color: var(--ice-2);
+    }
+
+    .tier .roman {
+      display: block;
+      font-family: "Fredoka", sans-serif;
+      font-size: 0.7em;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+    }
+
+    /* ── Bosses ── */
+    .bosses {
+      padding: 80px 0;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .boss-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .boss-card {
+      text-align: center;
+      padding: 18px 16px 20px;
+      border-radius: 16px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .boss-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(0,0,0,0.6); }
+
+    .boss-card img {
+      width: 100%;
+      max-width: 250px;
+      height: 250px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.7));
+    }
+
+    .boss-card h3 { font-size: 1.25em; color: var(--red-2); margin-bottom: 2px; }
+
+    .boss-card .region {
+      font-family: "Fredoka", sans-serif;
+      font-size: 0.74em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .boss-card p { font-size: 0.92em; color: #d6e2f5; font-style: italic; line-height: 1.45; }
+
+    /* ── Features ── */
+    .features { padding: 80px 0; overflow: hidden; }
+
+    .features::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/region-glacier_pass.jpg") center / cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .features > * { position: relative; z-index: 1; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 26px 24px;
+      border-radius: 16px;
+      background: rgba(11,20,38,0.62);
+      border: 1px solid var(--line);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .feature-card:hover { border-color: rgba(127,208,255,0.45); transform: translateY(-3px); }
+
+    .feature-card img {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(127,208,255,0.35));
+    }
+
+    .feature-card h3 {
+      font-size: 1.05em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p { color: #d6e2f5; font-size: 0.95em; }
+
+    /* ── Story ── */
+    .story {
+      padding: 80px 0;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .panel {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+    }
+
+    .panel img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+    .panel p {
+      padding: 16px 20px 18px;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 500;
+      font-size: 1.08em;
+      line-height: 1.5;
+      color: var(--text);
+      text-align: center;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      position: relative;
+      text-align: center;
+      padding: 110px 20px 120px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/story-4.jpg") center / cover no-repeat;
+      opacity: 0.4;
+      z-index: -2;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg) 0%, rgba(11,20,38,0.3) 40%, rgba(11,20,38,0.3) 60%, var(--bg) 100%);
+      z-index: -1;
+    }
+
+    .cta .display {
+      font-size: 2.6em;
+      font-weight: 700;
+      color: #fff;
+      max-width: 760px;
+      margin: 0 auto 8px;
+      line-height: 1.2;
+      text-shadow: 0 3px 18px rgba(0,0,0,0.9);
+    }
+
+    .cta .sub {
+      color: var(--ice-2);
+      font-size: 1.15em;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 36px 20px 40px;
+      border-top: 1px solid var(--line);
+      color: var(--dim);
+      font-size: 0.9em;
+    }
+
+    .footer .disclosure { max-width: 720px; margin: 10px auto 18px; color: var(--muted); font-size: 0.92em; }
+    .footer-links { margin-top: 6px; }
+    .footer-links a { color: var(--ice); margin: 0 10px; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1000px) {
+      .region-grid, .boss-grid, .feature-grid, .pair-row, .family-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      h2 { font-size: 1.7em; }
+      .hero { min-height: min(80vh, 680px); padding-bottom: 48px; }
+      .hero-logo { max-width: 320px; }
+      .hero-head { align-self: center; margin-left: 0; }
+      .hero-tagline { font-size: 1.15em; }
+      .carousel { padding: 8px 20px 20px; gap: 14px; }
+      .carousel img { width: 320px; }
+      .feature-grid, .story-grid, .pair-row, .family-row { grid-template-columns: 1fr; }
+      .thennow, .regions, .towers, .bosses, .features, .story { padding: 60px 0; }
+      .cta .display { font-size: 2em; }
+    }
+
+    @media (max-width: 480px) {
+      .region-grid, .boss-grid { grid-template-columns: 1fr; }
+      .remastered { letter-spacing: 0.3em; font-size: 0.95em; }
+      .carousel img { width: 280px; }
+      .store-badge img { height: 46px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-head">
+      <img src="images/logo.png" alt="Stop Santa: Tower Defense" class="hero-logo">
+      <span class="remastered">Remastered</span>
+    </div>
+    <div class="hero-foot">
+      <p class="hero-tagline">Every year he comes down out of the dark with that sack. This year the road is a killing field.</p>
+      <div class="cta-row">
+        <span class="coming">Coming soon to iOS &amp; Android</span>
+        <div class="store-badges">
+          <a class="store-badge" href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895" target="_blank" rel="noopener">
+            <img src="images/badge_apple.png" alt="Download on the App Store">
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta" target="_blank" rel="noopener">
+            <img src="images/badge_google.png" alt="Get it on Google Play">
+          </a>
+        </div>
+      </div>
+      <p class="hero-note">A new engine, 60 levels, 18 enemies, six bosses. The North Pole is free. No ads, ever.</p>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <span class="kicker">On the road</span>
+    <h2>Screenshots</h2>
+    <div class="carousel">
+      <img src="images/screenshot-01.jpg" alt="Holding the North Pole road against the first waves">
+      <img src="images/screenshot-02.jpg" alt="The boss Santa on the road at the end of the North Pole">
+      <img src="images/screenshot-03.jpg" alt="The level select: ten levels of a region, star-rated">
+      <img src="images/screenshot-04.jpg" alt="Glacier Pass">
+      <img src="images/screenshot-05.jpg" alt="Candy Cane Forest">
+      <img src="images/screenshot-06.jpg" alt="A level's detail sheet: enemies, routes, tower spots">
+      <img src="images/screenshot-07.jpg" alt="The Frozen Reaches">
+      <img src="images/screenshot-08.jpg" alt="The Toy Workshop">
+      <img src="images/screenshot-09.jpg" alt="The Long Night">
+      <img src="images/screenshot-10.jpg" alt="The star board: six upgrade tracks, respec free">
+    </div>
+  </section>
+
+  <!-- Then and now -->
+  <section class="thennow">
+    <div class="wrap">
+      <span class="kicker">Rebuilt from the ground up</span>
+      <h2>Then and Now</h2>
+      <p class="lead">Every enemy repainted. Every map repainted. Nine levels became sixty. A new engine underneath it all, and the same bad Santa on top.</p>
+      <div class="pair-row">
+        <div class="pair">
+          <div class="faces"><img src="images/then-evil_elf1.png" alt="The original evil elf"><span class="arrow">&rarr;</span><img src="images/now-evil_elf1.png" alt="The remastered evil elf"></div>
+          <div class="labels"><span>2017</span><span></span><span>Remastered</span></div>
+          <h3>Evil Elf</h3>
+        </div>
+        <div class="pair">
+          <div class="faces"><img src="images/then-penguin1.png" alt="The original penguin"><span class="arrow">&rarr;</span><img src="images/now-penguin1.png" alt="The remastered penguin"></div>
+          <div class="labels"><span>2017</span><span></span><span>Remastered</span></div>
+          <h3>Battle Penguin</h3>
+        </div>
+        <div class="pair">
+          <div class="faces"><img src="images/then-santa.png" alt="The original boss Santa"><span class="arrow">&rarr;</span><img src="images/now-santa.png" alt="The remastered boss Santa"></div>
+          <div class="labels"><span>2017</span><span></span><span>Remastered</span></div>
+          <h3>Santa</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regions -->
+  <section class="regions">
+    <div class="wrap">
+      <span class="kicker">Six regions</span>
+      <h2>Sixty Levels, All the Way to the Workshop</h2>
+      <p class="lead">Ten levels a region, each with its own road, its own enemies and a boss at the end of it. The North Pole is free; the rest come as level packs, permanent unlocks only.</p>
+      <div class="region-grid">
+        <div class="region-card">
+          <img class="bg" src="images/region-north_pole.jpg" alt="">
+          <span class="region-num">1</span><span class="region-tag free">Free</span>
+          <div class="region-body"><h3>The North Pole</h3><p>Every year he comes down out of the dark with that sack.</p></div>
+        </div>
+        <div class="region-card">
+          <img class="bg" src="images/region-glacier_pass.jpg" alt="">
+          <span class="region-num">2</span><span class="region-tag">Level pack</span>
+          <div class="region-body"><h3>Glacier Pass</h3><p>Something up there has been waiting a long time for company.</p></div>
+        </div>
+        <div class="region-card">
+          <img class="bg" src="images/region-candy_forest.jpg" alt="">
+          <span class="region-num">3</span><span class="region-tag">Level pack</span>
+          <div class="region-body"><h3>Candy Cane Forest</h3><p>Everything here is sweet, and none of it is friendly.</p></div>
+        </div>
+        <div class="region-card">
+          <img class="bg" src="images/region-frozen_reaches.jpg" alt="">
+          <span class="region-num">4</span><span class="region-tag">Level pack</span>
+          <div class="region-body"><h3>The Frozen Reaches</h3><p>They come across the open ground, and they do not hurry.</p></div>
+        </div>
+        <div class="region-card">
+          <img class="bg" src="images/region-toy_workshop.jpg" alt="">
+          <span class="region-num">5</span><span class="region-tag">Level pack</span>
+          <div class="region-body"><h3>The Toy Workshop</h3><p>This is where all of them were made. End it here.</p></div>
+        </div>
+        <div class="region-card">
+          <img class="bg" src="images/region-north_pole_outskirts.jpg" alt="">
+          <span class="region-num">6</span><span class="region-tag">Level pack</span>
+          <div class="region-body"><h3>The Long Night</h3><p>One long night. Everything you have already killed, again.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Towers -->
+  <section class="towers">
+    <div class="wrap">
+      <span class="kicker">Three families, three tiers</span>
+      <h2>Build the Line</h2>
+      <p class="lead">Three kinds of tower, each upgrading twice into something louder. Place them on the pads along the road and let the elves come.</p>
+      <div class="family-row">
+        <div class="family">
+          <h3>Snowmen</h3>
+          <p class="what">Fast, cheap, and cold. An icy beam that turns to a storm, then to fire.</p>
+          <div class="tiers">
+            <div class="tier"><img src="images/tower-thunder.png" alt="Thunder"><span class="name">Thunder</span><span class="roman">I</span></div>
+            <div class="tier"><img src="images/tower-tornado.png" alt="Tornado"><span class="name">Tornado</span><span class="roman">II</span></div>
+            <div class="tier"><img src="images/tower-volcano.png" alt="Volcano"><span class="name">Volcano</span><span class="roman">III</span></div>
+          </div>
+        </div>
+        <div class="family">
+          <h3>Candy</h3>
+          <p class="what">Gingerbread towers that hit hard and slow. The last one keeps what it takes.</p>
+          <div class="tiers">
+            <div class="tier"><img src="images/tower-mage.png" alt="Mage"><span class="name">Mage</span><span class="roman">I</span></div>
+            <div class="tier"><img src="images/tower-aruma.png" alt="Aruma"><span class="name">Aruma</span><span class="roman">II</span></div>
+            <div class="tier"><img src="images/tower-lifestealer.png" alt="Life Stealer"><span class="name">Life Stealer</span><span class="roman">III</span></div>
+          </div>
+        </div>
+        <div class="family">
+          <h3>Rudolph's Rage</h3>
+          <p class="what">Barrels, antlers and red lightning. Slow to fire, and nothing walks off from it.</p>
+          <div class="tiers">
+            <div class="tier"><img src="images/tower-rudolphsrage1.png" alt="Rudolph's Rage I"><span class="name">Rage</span><span class="roman">I</span></div>
+            <div class="tier"><img src="images/tower-rudolphsrage2.png" alt="Rudolph's Rage II"><span class="name">Rage</span><span class="roman">II</span></div>
+            <div class="tier"><img src="images/tower-rudolphsrage3.png" alt="Rudolph's Rage III"><span class="name">Rage</span><span class="roman">III</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bosses -->
+  <section class="bosses">
+    <div class="wrap">
+      <span class="kicker">Six bosses</span>
+      <h2>What Comes Down the Road</h2>
+      <p class="lead">One at the end of every region, and the big man himself at the end of it all.</p>
+      <div class="boss-grid">
+        <div class="boss-card">
+          <img src="images/boss-santa.png" alt="Santa">
+          <h3>Santa</h3><p class="region">The North Pole</p>
+          <p>The sack falls. The big man goes down with it.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-glacier_warden.png" alt="The Glacier Warden">
+          <h3>The Glacier Warden</h3><p class="region">Glacier Pass</p>
+          <p>A crown of ice, and cracks that glow cold from within.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-gingerbread_king.png" alt="The Gingerbread King">
+          <h3>The Gingerbread King</h3><p class="region">Candy Cane Forest</p>
+          <p>Baked from cookie crust, armoured in icing. Do not eat anything.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-krampus.png" alt="Krampus">
+          <h3>Krampus</h3><p class="region">The Frozen Reaches</p>
+          <p>Horns, chains and a long tongue. He does not hurry either.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-nutcracker.png" alt="The Nutcracker">
+          <h3>The Nutcracker</h3><p class="region">The Toy Workshop</p>
+          <p>A hinged wooden jaw the size of a door. This is where they were made.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-mega_santa.png" alt="Mega Santa">
+          <h3>Mega Santa</h3><p class="region">The Long Night</p>
+          <p>He will come back with worse. He always does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="wrap">
+      <span class="kicker">What's new</span>
+      <h2>More Than a Coat of Paint</h2>
+      <p class="lead">The original was nine levels and three towers. The remaster keeps the joke and builds a real tower defense game around it.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <img src="images/icon-enemies.png" alt="">
+          <div><h3>60 levels, six regions</h3><p>Nine became sixty, tuned onto one smooth difficulty curve from the first elf to the last night.</p></div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-heart.png" alt="">
+          <div><h3>18 enemies, six bosses</h3><p>Frost imps, tundra brutes, gumdrop golems and tin soldiers join the elves, penguins and zombie Santas.</p></div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-blizzard.png" alt="">
+          <div><h3>Three free abilities</h3><p>Blizzard, Candy Bomb and the Frost Totem, on cooldowns. Never consumables, never sold.</p></div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-gold.png" alt="">
+          <div><h3>The star board</h3><p>Stars you earn are a budget to spend on six upgrade tracks, and respec is always free.</p></div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-frost_totem.png" alt="">
+          <div><h3>Endless mode</h3><p>Finish a region and run its finale lap after lap, each one meaner than the last. Best lap kept.</p></div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-candy_bomb.png" alt="">
+          <div><h3>A story in 36 panels</h3><p>An intro and an ending for every region, told straight-faced over a very silly war.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story">
+    <div class="wrap">
+      <span class="kicker">The North Pole</span>
+      <h2>How It Starts</h2>
+      <div class="story-grid">
+        <div class="panel"><img src="images/story-1.jpg" alt=""><p>Every year he comes down out of the dark with that sack.</p></div>
+        <div class="panel"><img src="images/story-2.jpg" alt=""><p>This year we are ready, and the road is a killing field.</p></div>
+        <div class="panel"><img src="images/story-3.jpg" alt=""><p>Stop Santa.</p></div>
+        <div class="panel"><img src="images/story-4.jpg" alt=""><p>He will come back with worse. He always does.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- trailer: when the remaster has one, MeowWars' .video-wrapper pattern goes here -->
+
+  <!-- CTA -->
+  <section class="cta">
+    <p class="display">Stop Santa.</p>
+    <p class="sub">Coming soon as a free update to Stop Santa on iOS and Android.</p>
+    <div class="cta-row">
+      <span class="coming">Coming soon</span>
+      <div class="store-badges">
+        <a class="store-badge" href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895" target="_blank" rel="noopener">
+          <img src="images/badge_apple.png" alt="Download on the App Store">
+        </a>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta" target="_blank" rel="noopener">
+          <img src="images/badge_google.png" alt="Get it on Google Play">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <p class="disclosure">Art and music generated with Gemini, then hand-directed, corrected and cut. Design decisions and direction are human.</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+
+      // --- Auto-scroll ---
+      var scrollSpeed = 0.5;
+      var autoScrollId;
+      var paused = false;
+
+      function autoScroll() {
+        if (!paused) {
+          carousel.scrollLeft += scrollSpeed;
+          if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+            carousel.scrollLeft = 0;
+          }
+        }
+        autoScrollId = requestAnimationFrame(autoScroll);
+      }
+
+      autoScrollId = requestAnimationFrame(autoScroll);
+
+      var resumeTimer;
+      function pauseAutoScroll() {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, 3000);
+      }
+
+      carousel.addEventListener('wheel', pauseAutoScroll);
+      carousel.addEventListener('touchstart', pauseAutoScroll);
+
+      // --- Click and drag ---
+      var isDragging = false;
+      var startX, scrollStart;
+
+      carousel.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollStart = carousel.scrollLeft;
+        carousel.classList.add('dragging');
+        pauseAutoScroll();
+      });
+
+      carousel.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        var x = e.pageX - carousel.offsetLeft;
+        carousel.scrollLeft = scrollStart - (x - startX);
+      });
+
+      carousel.addEventListener('mouseup', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+
+      carousel.addEventListener('mouseleave', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+    })();
+  </script>
+
+</body>
+</html>
