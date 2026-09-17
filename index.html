@@ -152,7 +152,32 @@
     }
 
     .game-card-body {
+      position: relative;
       padding: 28px 32px;
+    }
+
+    /* Release year: a quiet outlined tag in the body's top-right corner,
+       level with the title, where the card had nothing. Muted on purpose so
+       the coloured badges over the artwork stay the loud ones. */
+    .game-card-year {
+      position: absolute;
+      top: 30px;
+      right: 32px;
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #b9a7c9;
+      border: 1px solid rgba(185,167,201,0.45);
+      border-radius: 20px;
+      padding: 3px 11px;
+      line-height: 1.5;
+    }
+
+    .game-card-year::before {
+      content: "Released ";
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      opacity: 0.8;
     }
 
     .game-card-badge {
@@ -185,6 +210,8 @@
       font-size: 1.5em;
       color: #fff;
       margin-bottom: 6px;
+      /* Room for the year tag beside a long title on a narrow card. */
+      padding-right: 130px;
     }
 
     .game-card-sub {
@@ -249,6 +276,11 @@
       font-size: 1.25em;
     }
 
+    .games-row .game-card-year {
+      top: 24px;
+      right: 24px;
+    }
+
     /* ── Footer ── */
     .footer {
       text-align: center;
@@ -306,6 +338,7 @@
           <span class="game-card-badge green floating">Now Live</span>
           <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
           <div class="game-card-body">
+            <span class="game-card-year">2026</span>
             <h3>Polari</h3>
             <p class="game-card-sub">AI Companions</p>
             <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">18+</span><span class="platform-tag soon">Android Soon</span><span class="platform-tag soon">iOS Soon</span></div>
@@ -314,8 +347,10 @@
         </a>
 
         <a class="game-card" href="crystaldig/index.html">
+          <span class="game-card-badge green floating">More Levels</span>
           <img src="crystaldig/images/screenshot-01-mainmenu.png" alt="Crystal Dig: Gem Miner" class="game-card-image">
           <div class="game-card-body">
+            <span class="game-card-year">2026</span>
             <h3>Crystal Dig: Gem Miner</h3>
             <p class="game-card-sub">Block Puzzle Adventure</p>
             <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
@@ -326,6 +361,7 @@
         <a class="game-card" href="MeowWars/index.html">
           <img src="MeowWars/images/MeowWars_Splash.png" alt="Meow Wars: Card Battle" class="game-card-image">
           <div class="game-card-body">
+            <span class="game-card-year">2018</span>
             <h3>Meow Wars: Card Battle</h3>
             <p class="game-card-sub">Card Battle</p>
             <div class="platform-tags"><span class="platform-tag">Steam</span><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
@@ -336,6 +372,7 @@
         <a class="game-card" href="StopSanta/index.html">
           <img src="images/stopsanta-header.png" alt="Stop Santa: Tower Defense" class="game-card-image">
           <div class="game-card-body">
+            <span class="game-card-year">2017</span>
             <h3>Stop Santa</h3>
             <p class="game-card-sub">Tower Defense</p>
             <div class="platform-tags"><span class="platform-tag">Steam</span><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
