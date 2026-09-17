@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Depths of Ruin - A Norse Roguelite Action RPG, Coming to Steam</title>
+  <meta name="description" content="Depths of Ruin is a dark Norse roguelite action RPG. Descend through eight realms of the dead, take the blessings of three gods, and kill the lord of each realm. Coming to Steam.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Depths of Ruin">
+  <meta property="og:description" content="The dead have stopped keeping their bargain. Go down. A Norse roguelite action RPG, coming to Steam.">
+  <meta property="og:image" content="https://tacotruckgames.com/depthsofruin/images/image_metadata_tag.jpg">
+  <meta property="og:url" content="https://tacotruckgames.com/depthsofruin/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Depths of Ruin">
+  <meta name="twitter:description" content="The dead have stopped keeping their bargain. Go down. A Norse roguelite action RPG, coming to Steam.">
+  <meta name="twitter:image" content="https://tacotruckgames.com/depthsofruin/images/image_metadata_tag.jpg">
+  <link rel="icon" href="images/icon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0a0e;
+      --band: #14111a;
+      --band-2: #0f0d13;
+      --text: #ece6d8;
+      --muted: #a89f8c;
+      --dim: #7d7568;
+      --ember: #e8863a;
+      --ember-2: #f0a45a;
+      --gold: #c9a84c;
+      --gold-2: #f0d080;
+      --corpse: #6fbf73;
+      --line: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.035);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .display { font-family: "Cinzel", "Times New Roman", serif; }
+
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.8);
+    }
+
+    .lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 40px;
+      font-size: 1.08em;
+    }
+
+    .kicker {
+      display: block;
+      text-align: center;
+      font-family: "Cinzel", serif;
+      font-size: 0.78em;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-bottom: 10px;
+    }
+
+    section { position: relative; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: min(92vh, 940px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* The wordmark lives in the painting's dark upper third (the key art
+         keeps it clear on purpose); the words and buttons sit on the floor
+         under the fight, on the gradient. The heroes' faces stay uncovered. */
+      justify-content: space-between;
+      text-align: center;
+      padding: 40px 20px 56px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/hero.jpg") center 40% / cover no-repeat;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(11,10,14,0.35) 0%, rgba(11,10,14,0.0) 28%, rgba(11,10,14,0.0) 58%, rgba(11,10,14,0.78) 82%, rgba(11,10,14,0.96) 100%),
+        radial-gradient(ellipse at 50% 100%, rgba(232,134,58,0.16), transparent 60%);
+      z-index: -1;
+    }
+
+    .hero-head, .hero-foot { display: flex; flex-direction: column; align-items: center; }
+
+    .hero-logo {
+      max-width: 480px;
+      width: 78%;
+      height: auto;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 8px 28px rgba(0,0,0,0.85)) drop-shadow(0 0 40px rgba(232,134,58,0.25));
+    }
+
+    .hero-subtitle {
+      font-family: "Cinzel", serif;
+      font-size: 1.05em;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+    }
+
+    .hero-tagline {
+      font-size: 1.45em;
+      line-height: 1.4;
+      color: #fff;
+      max-width: 620px;
+      margin: 0 auto 32px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .steam-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 30px;
+      border-radius: 999px;
+      font-family: "Cinzel", serif;
+      font-weight: 700;
+      font-size: 1.05em;
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #2a475e 0%, #1b2838 100%);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .steam-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.7), 0 0 24px rgba(102,192,244,0.25), inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+
+    .steam-cta svg { width: 24px; height: 24px; fill: #fff; flex-shrink: 0; }
+
+    .coming {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-family: "Cinzel", serif;
+      font-size: 0.9em;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-2);
+      background: rgba(11,10,14,0.55);
+      border: 1px solid rgba(201,168,76,0.55);
+      backdrop-filter: blur(4px);
+    }
+
+    .coming::before {
+      content: "";
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ember);
+      box-shadow: 0 0 10px var(--ember);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.95em;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    }
+
+    /* ── Screenshots carousel ── */
+    .screenshots {
+      padding: 64px 0 56px;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 40px 24px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 520px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      scroll-snap-align: center;
+      transition: transform 0.2s;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    .carousel img:hover { transform: scale(1.02); }
+
+    .carousel.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+    .carousel.dragging img { pointer-events: none; }
+
+    /* ── Realms ── */
+    .realms { padding: 80px 0; }
+
+    .realm-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .realm-card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--band);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .realm-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,0.65); }
+
+    .realm-card img.bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+
+    .realm-card:hover img.bg { transform: scale(1.06); }
+
+    .realm-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,5,8,0.95) 0%, rgba(6,5,8,0.55) 45%, rgba(6,5,8,0.05) 100%);
+    }
+
+    .realm-body {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 16px 14px;
+    }
+
+    .realm-body img.rune {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 12px rgba(201,168,76,0.45));
+    }
+
+    .realm-num {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-family: "Cinzel", serif;
+      font-size: 0.8em;
+      letter-spacing: 0.2em;
+      color: rgba(240,208,128,0.8);
+    }
+
+    .realm-body h3 {
+      font-size: 1.15em;
+      font-weight: 600;
+      color: var(--gold-2);
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .realm-body p {
+      font-size: 0.86em;
+      line-height: 1.45;
+      color: #d8d0c0;
+      font-style: italic;
+    }
+
+    /* ── Heroes ── */
+    .heroes {
+      padding: 80px 0;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .heroes::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/realm-barrows.jpg") center / cover no-repeat;
+      opacity: 0.12;
+      z-index: 0;
+    }
+
+    .heroes > * { position: relative; z-index: 1; }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .hero-card {
+      text-align: center;
+      padding: 10px 14px 22px;
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .hero-card:hover { transform: translateY(-5px); border-color: rgba(201,168,76,0.4); }
+
+    .hero-card .figure {
+      height: 300px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 8px;
+      background: radial-gradient(ellipse at 50% 100%, rgba(232,134,58,0.18), transparent 60%);
+    }
+
+    .hero-card .figure img {
+      max-height: 300px;
+      width: auto;
+      max-width: 100%;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.8));
+      transition: transform 0.3s;
+    }
+
+    .hero-card:hover .figure img { transform: scale(1.04); }
+
+    .hero-card h3 {
+      font-size: 1.3em;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .hero-card .role {
+      color: var(--muted);
+      font-size: 0.95em;
+      margin-bottom: 10px;
+    }
+
+    .hero-card .moves {
+      display: inline-block;
+      font-family: "Cinzel", serif;
+      font-size: 0.78em;
+      letter-spacing: 0.14em;
+      color: var(--ember-2);
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+
+    /* ── Bosses ── */
+    .bosses { padding: 80px 0; }
+
+    .boss-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .boss-card {
+      text-align: center;
+      padding: 18px 16px 20px;
+      border-radius: 14px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .boss-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(0,0,0,0.6); }
+
+    .boss-card img {
+      width: 100%;
+      max-width: 230px;
+      height: 230px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.75));
+    }
+
+    .boss-card h3 {
+      font-size: 1.05em;
+      color: var(--gold-2);
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .boss-card .realm {
+      font-family: "Cinzel", serif;
+      font-size: 0.72em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .boss-card p {
+      font-size: 0.88em;
+      color: #cfc6b4;
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 80px 0;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .features::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/realm-svartalfheim.jpg") center / cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .features > * { position: relative; z-index: 1; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 26px 24px;
+      border-radius: 14px;
+      background: rgba(11,10,14,0.55);
+      border: 1px solid var(--line);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .feature-card:hover { border-color: rgba(232,134,58,0.4); transform: translateY(-3px); }
+
+    .feature-card img {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(201,168,76,0.35));
+    }
+
+    .feature-card h3 {
+      font-size: 0.98em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p { color: #cfc6b4; font-size: 0.95em; }
+
+    /* ── Story ── */
+    .story { padding: 80px 0; }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .panel {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--band);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+    }
+
+    .panel img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .panel p {
+      padding: 16px 20px 18px;
+      font-family: "Cinzel", serif;
+      font-size: 1.02em;
+      line-height: 1.5;
+      color: var(--text);
+      text-align: center;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      position: relative;
+      text-align: center;
+      padding: 110px 20px 120px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("images/story-2.jpg") center / cover no-repeat;
+      opacity: 0.35;
+      z-index: -2;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg) 0%, rgba(11,10,14,0.3) 40%, rgba(11,10,14,0.3) 60%, var(--bg) 100%);
+      z-index: -1;
+    }
+
+    .cta .display {
+      font-size: 1.9em;
+      font-weight: 600;
+      color: #fff;
+      max-width: 760px;
+      margin: 0 auto 30px;
+      line-height: 1.35;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.9);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 36px 20px 40px;
+      border-top: 1px solid var(--line);
+      color: var(--dim);
+      font-size: 0.9em;
+    }
+
+    .footer .disclosure {
+      max-width: 720px;
+      margin: 10px auto 18px;
+      color: var(--muted);
+      font-size: 0.92em;
+    }
+
+    .footer-links { margin-top: 6px; }
+    .footer-links a { color: var(--ember-2); margin: 0 10px; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1000px) {
+      .realm-grid, .boss-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-row { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      h2 { font-size: 1.55em; }
+      .hero { min-height: min(80vh, 680px); padding-bottom: 56px; }
+      .hero-logo { max-width: 320px; }
+      .hero-tagline { font-size: 1.2em; }
+      .carousel { padding: 8px 20px 20px; gap: 14px; }
+      .carousel img { width: 320px; }
+      .feature-grid, .story-grid { grid-template-columns: 1fr; }
+      .hero-card .figure, .hero-card .figure img { height: 240px; max-height: 240px; }
+      .realms, .heroes, .bosses, .features, .story { padding: 60px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .realm-grid, .hero-row, .boss-grid { grid-template-columns: 1fr; }
+      .realm-card { aspect-ratio: 16 / 10; }
+      .hero-subtitle { letter-spacing: 0.2em; font-size: 0.9em; }
+      .carousel img { width: 280px; }
+      .cta .display { font-size: 1.45em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-head">
+      <img src="images/logo.png" alt="Depths of Ruin" class="hero-logo">
+      <p class="hero-subtitle">A Norse Roguelite Action RPG</p>
+    </div>
+    <div class="hero-foot">
+      <p class="hero-tagline">The dead have stopped keeping their bargain. Go down.</p>
+      <div class="cta-row">
+        <!-- TODO: point at the Steam store page once it exists, e.g.
+             https://store.steampowered.com/app/<APP_ID>/Depths_of_Ruin/ -->
+        <a class="steam-cta" href="#" data-steam-app="" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.7 2 2.4 6.1 2 11.3l5.4 2.2a2.8 2.8 0 0 1 1.6-.5h.2l2.4-3.5v-.1a3.8 3.8 0 1 1 3.8 3.8h-.1l-3.4 2.4v.2a2.8 2.8 0 0 1-5.6.3L2.4 14.6A10 10 0 1 0 12 2Zm-5.7 15.2 1.2.5a2.1 2.1 0 1 0 1.1-4l-1.3-.5a1.5 1.5 0 1 1-1 2.8Zm9.1-8.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 .6a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8Z"/></svg>
+          Wishlist on Steam
+        </a>
+        <span class="coming">Coming to Steam</span>
+      </div>
+      <p class="hero-note">Four heroes. Eight realms. One stair, and it only goes down.</p>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <span class="kicker">In the dark</span>
+    <h2>Screenshots</h2>
+    <div class="carousel">
+      <img src="images/screenshot-01.jpg" alt="The Barrow King's fight in the Barrow Crypts">
+      <img src="images/screenshot-02.jpg" alt="Hel's Warden in Frozen Helheim">
+      <img src="images/screenshot-03.jpg" alt="The camp: the roster on their plinths, the chosen hero in the arch">
+      <img src="images/screenshot-04.jpg" alt="Fire and frost at the Muspelheim Gate">
+      <img src="images/screenshot-05.jpg" alt="Frost giants in the halls of Asgard">
+      <img src="images/screenshot-06.jpg" alt="The descent: eight realms down the world tree">
+      <img src="images/screenshot-07.jpg" alt="A keybearer stirs in Frozen Helheim">
+      <img src="images/screenshot-08.jpg" alt="Choosing a blessing">
+      <img src="images/screenshot-09.jpg" alt="Fires in the snow of Jotunheim">
+      <img src="images/screenshot-10.jpg" alt="Victory: the spoils of a raid">
+    </div>
+  </section>
+
+  <!-- Realms -->
+  <section class="realms">
+    <div class="wrap">
+      <span class="kicker">Eight realms</span>
+      <h2>The Stair Keeps Going Down</h2>
+      <p class="lead">Every raid is a descent. Each realm has its own rooms, its own dead, and a lord at the bottom of it who is not expecting company.</p>
+      <div class="realm-grid">
+        <div class="realm-card">
+          <img class="bg" src="images/realm-barrows.jpg" alt="">
+          <span class="realm-num">I</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-barrows.png" alt="">
+            <h3>Barrow Crypts</h3>
+            <p>They buried their kings under the hills, with their swords and their horses and their debts.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-helheim.jpg" alt="">
+          <span class="realm-num">II</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-helheim.png" alt="">
+            <h3>Frozen Helheim</h3>
+            <p>Hel keeps her dead standing. She thinks it is tidier.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-muspelheim.jpg" alt="">
+          <span class="realm-num">III</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-muspelheim.png" alt="">
+            <h3>Muspelheim Gate</h3>
+            <p>There is a door at the bottom of the ice, and it is warm.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-nastrond.jpg" alt="">
+          <span class="realm-num">IV</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-nastrond.png" alt="">
+            <h3>Naströnd</h3>
+            <p>A shore of bones, and a hall roofed with the backs of serpents.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-jotunheim.jpg" alt="">
+          <span class="realm-num">V</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-jotunheim.png" alt="">
+            <h3>Jotunheim</h3>
+            <p>The stairs give out and the country begins: everything here was built for something taller.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-svartalfheim.jpg" alt="">
+          <span class="realm-num">VI</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-svartalfheim.png" alt="">
+            <h3>Svartalfheim</h3>
+            <p>Down among the roots the dwarves cut a forge into the dark and never put it out.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-vanaheim.jpg" alt="">
+          <span class="realm-num">VII</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-vanaheim.png" alt="">
+            <h3>Vanaheim</h3>
+            <p>Green country, and every green thing in it is older than your line.</p>
+          </div>
+        </div>
+        <div class="realm-card">
+          <img class="bg" src="images/realm-asgard.jpg" alt="">
+          <span class="realm-num">VIII</span>
+          <div class="realm-body">
+            <img class="rune" src="images/rune-asgard.png" alt="">
+            <h3>Asgard</h3>
+            <p>The bridge is still there. Burning, as it was promised it would be.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Heroes -->
+  <section class="heroes">
+    <div class="wrap">
+      <span class="kicker">Four heroes</span>
+      <h2>Who Goes Down</h2>
+      <p class="lead">One skill, one ultimate, and a body built for a different kind of fight. Three of them have to be earned.</p>
+      <div class="hero-row">
+        <div class="hero-card">
+          <div class="figure"><img src="images/hero-berserker.png" alt="The Berserker"></div>
+          <h3>Berserker</h3>
+          <p class="role">Axe fury. A whirlwind that shreds crowds.</p>
+          <span class="moves">Whirl &middot; Ragnar&ouml;k</span>
+        </div>
+        <div class="hero-card">
+          <div class="figure"><img src="images/hero-valkyrie.png" alt="The Valkyrie"></div>
+          <h3>Valkyrie</h3>
+          <p class="role">Spear huntress. Piercing throws.</p>
+          <span class="moves">Volley &middot; Spearstorm</span>
+        </div>
+        <div class="hero-card">
+          <div class="figure"><img src="images/hero-seidkona.png" alt="The Seiðkona"></div>
+          <h3>Sei&eth;kona</h3>
+          <p class="role">Rune seeress. Chilling frost magic.</p>
+          <span class="moves">Nova &middot; Fimbulwinter</span>
+        </div>
+        <div class="hero-card">
+          <div class="figure"><img src="images/hero-jotunn.png" alt="The Jötunn"></div>
+          <h3>J&ouml;tunn</h3>
+          <p class="role">Mountain giant. Slow, immense, splits the ground.</p>
+          <span class="moves">Sunder &middot; Worldbreaker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bosses -->
+  <section class="bosses">
+    <div class="wrap">
+      <span class="kicker">Eight lords</span>
+      <h2>What Waits at the Bottom</h2>
+      <p class="lead">Each realm is held by something that has had a very long time to get comfortable.</p>
+      <div class="boss-grid">
+        <div class="boss-card">
+          <img src="images/boss-barrows.png" alt="The Barrow King">
+          <h3>The Barrow King</h3>
+          <p class="realm">Barrow Crypts</p>
+          <p>Comes apart like wet rope, and the crown goes out.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-helheim.png" alt="Hel's Warden">
+          <h3>Hel's Warden</h3>
+          <p class="realm">Frozen Helheim</p>
+          <p>Splits down the middle, and the ice inside him goes out like a lamp.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-muspelheim.png" alt="Surtr's Herald">
+          <h3>Surtr's Herald</h3>
+          <p class="realm">Muspelheim Gate</p>
+          <p>Burns down to slag, and the slag keeps screaming a while.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-nastrond.png" alt="Níðhöggr">
+          <h3>N&iacute;&eth;h&ouml;ggr</h3>
+          <p class="realm">Nastr&ouml;nd</p>
+          <p>Its head comes down and does not come up.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-jotunheim.png" alt="Thrym, Frost-Thane">
+          <h3>Thrym, Frost-Thane</h3>
+          <p class="realm">Jotunheim</p>
+          <p>Goes down a piece at a time, the way a mountain does.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-svartalfheim.png" alt="Eitri the Deep-Smith">
+          <h3>Eitri the Deep-Smith</h3>
+          <p class="realm">Svartalfheim</p>
+          <p>Goes into his own crucible, and the metal takes him without complaint.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-vanaheim.png" alt="Gullveig Thrice-Burned">
+          <h3>Gullveig Thrice-Burned</h3>
+          <p class="realm">Vanaheim</p>
+          <p>Burns a fourth time, and this once nothing walks out.</p>
+        </div>
+        <div class="boss-card">
+          <img src="images/boss-asgard.png" alt="The Watchman at the Rainbow">
+          <h3>The Watchman at the Rainbow</h3>
+          <p class="realm">Asgard</p>
+          <p>Falls off the rainbow with the horn still in his hand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="wrap">
+      <span class="kicker">How it plays</span>
+      <h2>Every Run Is a Descent</h2>
+      <p class="lead">Fast, readable action with a build that comes together one blessing at a time, and a camp that remembers what you brought back.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <img src="images/icon-descent.png" alt="">
+          <div>
+            <h3>A room ends by leaving it</h3>
+            <p>Killing everything is not the objective. A keybearer stirs, drops the key, and the gate opens: walk through it while the siege keeps coming.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-gods.png" alt="">
+          <div>
+            <h3>Blessings of three gods</h3>
+            <p>Odin, Thor and Loki each offer their favour. Stack a blessing three deep, or hold two gods at once and evolve them into something neither meant.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-elements.png" alt="">
+          <div>
+            <h3>Burn, frost, shock</h3>
+            <p>Every hit can carry a status, and statuses react. Freeze what is burning, shock what is frozen, and watch the room come apart.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-skill.png" alt="">
+          <div>
+            <h3>One skill, one ultimate</h3>
+            <p>No hotbar to manage. Each hero has an attack, a skill on a short cooldown, and an ultimate charged by the damage you deal.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-camp.png" alt="">
+          <div>
+            <h3>The camp remembers</h3>
+            <p>Gear drops, and comes home with you. Wear it, forge it, spend on talents that last for good, and take bounties back down.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <img src="images/icon-lords.png" alt="">
+          <div>
+            <h3>Eight lords, eight realms</h3>
+            <p>Each realm ends at its lord, with a telegraphed fight that rewards reading the ground. Kill one and the stair under its seat keeps going down.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story">
+    <div class="wrap">
+      <span class="kicker">The bargain</span>
+      <h2>Why You Are Going Down</h2>
+      <div class="story-grid">
+        <div class="panel">
+          <img src="images/story-1.jpg" alt="Kings buried under the hills">
+          <p>They buried their kings under the hills, with their swords and their horses and their debts.</p>
+        </div>
+        <div class="panel">
+          <img src="images/story-2.jpg" alt="The mouth of the barrow">
+          <p>Something down there has stopped keeping its side of the arrangement.</p>
+        </div>
+        <div class="panel">
+          <img src="images/story-3.jpg" alt="Below the barrows, Helheim">
+          <p>Below the barrows the air stops moving, and then it stops being air.</p>
+        </div>
+        <div class="panel">
+          <img src="images/story-4.jpg" alt="The burning bridge to Asgard">
+          <p>The bridge is still there. Burning, as it was promised it would be.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- trailer: when there is one, MeowWars' .video-wrapper pattern goes here -->
+
+  <!-- CTA -->
+  <section class="cta">
+    <p class="display">Under where he sat, the stair keeps going down.</p>
+    <div class="cta-row">
+      <a class="steam-cta" href="#" data-steam-app="" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.7 2 2.4 6.1 2 11.3l5.4 2.2a2.8 2.8 0 0 1 1.6-.5h.2l2.4-3.5v-.1a3.8 3.8 0 1 1 3.8 3.8h-.1l-3.4 2.4v.2a2.8 2.8 0 0 1-5.6.3L2.4 14.6A10 10 0 1 0 12 2Zm-5.7 15.2 1.2.5a2.1 2.1 0 1 0 1.1-4l-1.3-.5a1.5 1.5 0 1 1-1 2.8Zm9.1-8.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 .6a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8Z"/></svg>
+        Wishlist on Steam
+      </a>
+      <span class="coming">Coming to Steam</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Taco Truck Games, LLC &mdash; Seattle, WA</p>
+    <p class="disclosure">Art generated with Gemini, then hand-directed, corrected and cut. Sound effects are recorded (CC0 and CC-BY). Code, design and writing are human.</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+
+      // --- Auto-scroll ---
+      var scrollSpeed = 0.5;
+      var autoScrollId;
+      var paused = false;
+
+      function autoScroll() {
+        if (!paused) {
+          carousel.scrollLeft += scrollSpeed;
+          if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+            carousel.scrollLeft = 0;
+          }
+        }
+        autoScrollId = requestAnimationFrame(autoScroll);
+      }
+
+      autoScrollId = requestAnimationFrame(autoScroll);
+
+      var resumeTimer;
+      function pauseAutoScroll() {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, 3000);
+      }
+
+      carousel.addEventListener('wheel', pauseAutoScroll);
+      carousel.addEventListener('touchstart', pauseAutoScroll);
+
+      // --- Click and drag ---
+      var isDragging = false;
+      var startX, scrollStart;
+
+      carousel.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollStart = carousel.scrollLeft;
+        carousel.classList.add('dragging');
+        pauseAutoScroll();
+      });
+
+      carousel.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        var x = e.pageX - carousel.offsetLeft;
+        carousel.scrollLeft = scrollStart - (x - startX);
+      });
+
+      carousel.addEventListener('mouseup', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+
+      carousel.addEventListener('mouseleave', function() {
+        isDragging = false;
+        carousel.classList.remove('dragging');
+      });
+
+      // The wishlist button has no store page to point at yet: until it does,
+      // a click scrolls to the screenshots rather than reloading the top.
+      document.querySelectorAll('.steam-cta').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          if (a.getAttribute('href') === '#') {
+            e.preventDefault();
+            document.querySelector('.screenshots').scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
