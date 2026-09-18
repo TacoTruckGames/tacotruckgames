@@ -87,6 +87,26 @@
 
     .about > * { position: relative; z-index: 1; }
 
+    /* The taco truck guy at the left of the About text, on the same row. */
+    .about-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .about-mascot {
+      flex-shrink: 0;
+      width: 180px;
+      height: auto;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+    }
+
+    .about-text { flex: 1; }
+
     .about h2 {
       font-size: 1.6em;
       color: #fff;
@@ -95,7 +115,7 @@
 
     .about p {
       max-width: 700px;
-      margin: 0 auto 12px;
+      margin: 0 0 12px;
       color: #ded3e9;
       font-size: 1.05em;
     }
@@ -307,6 +327,9 @@
       .game-card-image { height: 240px; }
       .games-row .game-card-image { height: 220px; }
       .game-card-body { padding: 22px 20px; }
+      .about-inner { flex-direction: column; gap: 16px; text-align: center; }
+      .about-mascot { width: 140px; }
+      .about p { margin: 0 auto 12px; }
     }
 
     @media (max-width: 480px) {
@@ -451,8 +474,13 @@
 
   <!-- About -->
   <section class="about">
-    <h2>About Us</h2>
-    <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Polari and Crystal Dig, with CineDossier and Lunara in production.</p>
+    <div class="about-inner">
+      <img src="images/ttg-guy.png" alt="" class="about-mascot">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Polari and Crystal Dig, with CineDossier and Lunara in production.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
