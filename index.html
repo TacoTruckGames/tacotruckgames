@@ -226,6 +226,17 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.35);
     }
 
+    /* Coming Soon and the age rating sit at the top-LEFT; the status badges
+       (Now Live, More Levels) keep the right, so a card can carry both. */
+    .game-card-badge.floating.left { right: auto; left: 16px; }
+
+    .game-card-badge.mature {
+      background: #1c1c22;
+      color: #fff;
+      border: 2px solid #e8573a;
+      padding: 2px 10px;
+    }
+
     .game-card h3 {
       font-size: 1.5em;
       color: #fff;
@@ -233,6 +244,9 @@
       /* Room for the year tag beside a long title on a narrow card. */
       padding-right: 130px;
     }
+
+    /* No year tag (In Production), no reserved room: the title runs full width. */
+    .game-card-body:not(:has(.game-card-year)) h3 { padding-right: 0; }
 
     .game-card-sub {
       font-size: 0.9em;
@@ -359,12 +373,13 @@
 
         <a class="game-card" href="https://polari.men" target="_blank" rel="noopener">
           <span class="game-card-badge green floating">Now Live</span>
+          <span class="game-card-badge mature floating left">18+</span>
           <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
           <div class="game-card-body">
             <span class="game-card-year">2026</span>
             <h3>Polari</h3>
             <p class="game-card-sub">AI Companions</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">18+</span><span class="platform-tag soon">Android Soon</span><span class="platform-tag soon">iOS Soon</span></div>
+            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">Android</span><span class="platform-tag soon">iOS Soon</span></div>
             <p>A curated cast of AI companions with real faces, real voices, and real memory. They text first, remember your life, and are always upfront about being AI. Free to start.</p>
           </div>
         </a>
@@ -416,7 +431,7 @@
       <div class="games-row">
 
         <a class="game-card" href="depthsofruin/index.html">
-          <span class="game-card-badge floating">Coming Soon</span>
+          <span class="game-card-badge floating left">Coming Soon</span>
           <img src="depthsofruin/images/image_metadata_tag.jpg" alt="Depths of Ruin" class="game-card-image">
           <div class="game-card-body">
             <h3>Depths of Ruin</h3>
@@ -427,7 +442,7 @@
         </a>
 
         <a class="game-card" href="StopSantaHD/index.html">
-          <span class="game-card-badge floating">Coming Soon</span>
+          <span class="game-card-badge floating left">Coming Soon</span>
           <img src="StopSantaHD/images/image_metadata_tag.jpg" alt="Stop Santa: Remastered" class="game-card-image">
           <div class="game-card-body">
             <h3>Stop Santa: Remastered</h3>
