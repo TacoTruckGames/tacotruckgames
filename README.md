@@ -30,8 +30,8 @@ We focus on fun, quick-to-play games across mobile and PC.
 
 <img src="crystaldig/images/logo.png" alt="Crystal Dig: Gem Miner" width="280"/><br/>
 
-**Crystal Dig: Gem Miner** (2025)<br/>
-<sub>Block puzzle adventure — mine gems, battle bosses, and dig through 50 handcrafted levels across 5 crystal caverns.</sub><br/><br/>
+**Crystal Dig: Gem Miner** (2026)<br/>
+<sub>Free block puzzle adventure — place blocks, clear rows and columns, and collect gems. Endless Classic mode with leaderboards, plus 400 handcrafted Adventure levels across 8 worlds (Earth to Triton) and 40 boss battles. Seasonal events coming in the next update.</sub><br/><br/>
 
 <a href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" height="28"/></a>
 <a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.CrystalDig"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a>

@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crystal Dig: Gem Miner - A Block Puzzle Adventure Across the Solar System</title>
-  <meta name="description" content="Dig through 400 levels across 8 worlds, from Earth to Triton. Crystal Dig: Gem Miner combines classic block puzzle gameplay with a journey across the solar system and 40 boss battles.">
+  <meta name="description" content="Crystal Dig: Gem Miner is a free block puzzle game: place blocks, clear rows and columns, and collect gems. Play endless Classic mode or dig through 400 handcrafted Adventure levels across 8 worlds with 40 boss battles. Seasonal events are coming in the next update.">
   <meta property="og:title" content="Crystal Dig: Gem Miner">
   <meta property="og:description" content="400 levels. 8 worlds. 40 bosses. A block puzzle adventure across the solar system.">
-  <meta property="og:image" content="https://tacotruckgames.com/crystaldig/images/icon.png">
+  <meta property="og:image" content="https://tacotruckgames.com/crystaldig/images/feature-graphic.jpg">
   <meta property="og:url" content="https://tacotruckgames.com/crystaldig/">
   <link rel="apple-touch-icon" href="images/icon.png">
   <style>
@@ -172,11 +172,6 @@
 
     .mode-card.adventure::before {
       background: linear-gradient(135deg, #4a2060 0%, #2a1040 100%);
-      opacity: 0.3;
-    }
-
-    .mode-card.bossrush::before {
-      background: linear-gradient(135deg, #6a2020 0%, #3a1010 100%);
       opacity: 0.3;
     }
 
@@ -498,8 +493,148 @@
     .footer-links { margin-top: 8px; }
     .footer-links a { margin: 0 10px; }
 
+    /* ── Trailer ── */
+    .trailer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+
+    .trailer video {
+      width: 270px;
+      max-width: 70vw;
+      aspect-ratio: 9 / 16;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      background: #0e1426;
+    }
+
+    .trailer-text { max-width: 420px; }
+
+    .trailer-text h3 {
+      font-size: 1.3em;
+      color: #f5a623;
+      margin-bottom: 8px;
+    }
+
+    .trailer-text p { color: #bbb; margin-bottom: 10px; }
+
+    .screenshots .note {
+      text-align: center;
+      color: #888;
+      font-size: 0.85em;
+      margin-top: 8px;
+      padding: 0 20px;
+    }
+
+    /* ── Coming Soon: Seasonal Events ── */
+    .seasons {
+      padding: 60px 20px;
+      background: linear-gradient(180deg, #1a1a2e 0%, #231a3a 100%);
+    }
+
+    .seasons-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .soon-badge {
+      display: block;
+      width: max-content;
+      margin: 0 auto 12px;
+      background: #4caf50;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 14px;
+      border-radius: 999px;
+    }
+
+    .seasons h2 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .seasons-intro {
+      text-align: center;
+      color: #bbb;
+      max-width: 620px;
+      margin: 0 auto 32px;
+      font-size: 1.05em;
+    }
+
+    .season-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .season-card {
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .season-card h3 { font-size: 1em; color: #fff; margin-bottom: 2px; }
+    .season-card .season-when { font-size: 0.85em; color: #ddd; }
+    .season-card.halloween { background: linear-gradient(135deg, rgba(232,110,30,0.35), rgba(70,20,90,0.45)); }
+    .season-card.harvest   { background: linear-gradient(135deg, rgba(200,120,40,0.35), rgba(110,50,20,0.45)); }
+    .season-card.winter    { background: linear-gradient(135deg, rgba(90,160,230,0.35), rgba(30,50,110,0.45)); }
+    .season-card.newyear   { background: linear-gradient(135deg, rgba(240,200,80,0.35), rgba(60,30,100,0.45)); }
+
+    .season-detail {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .season-detail.reverse { flex-direction: row-reverse; }
+
+    .season-detail img {
+      flex-shrink: 0;
+      width: 220px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .season-detail h3 {
+      font-size: 1.3em;
+      color: #f5a623;
+      margin-bottom: 8px;
+    }
+
+    .season-detail p { color: #bbb; }
+
+    .season-detail ul {
+      color: #bbb;
+      margin: 10px 0 0 20px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel img, .feature-card, .boss-card, .world-card, .gem-item, .store-badge { transition: none; }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
+      .season-grid { grid-template-columns: repeat(2, 1fr); }
+      .season-detail, .season-detail.reverse { flex-direction: column; text-align: center; }
+      .season-detail ul { text-align: left; display: inline-block; }
+      .season-detail img { width: 200px; }
+      .trailer { gap: 24px; text-align: center; }
       .mode-card {
         flex-direction: column;
         text-align: center;
@@ -532,7 +667,7 @@
   <section class="hero">
     <img src="images/logo.png" alt="Crystal Dig: Gem Miner" class="hero-logo">
     <p class="hero-subtitle">A Block Puzzle Adventure</p>
-    <p class="hero-tagline">The dig no longer stops at Earth. Classic block puzzle gameplay meets a journey across the solar system &mdash; 400 levels, 8 worlds, 40 bosses.</p>
+    <p class="hero-tagline">Place blocks, clear rows and columns, and collect sparkling gems. Then take the dig across the solar system &mdash; 400 levels, 8 worlds, 40 bosses. Free to play.</p>
     <div class="store-badges">
       <a class="store-badge" href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744" target="_blank" rel="noopener">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
@@ -545,56 +680,53 @@
 
   <!-- Screenshots -->
   <section class="screenshots">
-    <h2>Screenshots</h2>
-    <div class="carousel">
-      <img src="images/screenshot-09-magma.png" alt="Magma Boss - Magma Core">
-      <img src="images/screenshot-08-golem.png" alt="Mirror Golem Boss - Crystal Caverns">
-      <img src="images/screenshot-02-classic.png" alt="Classic Mode">
-      <img src="images/screenshot-01-mainmenu.png" alt="Main Menu">
-      <img src="images/screenshot-04-adventure.png" alt="Adventure Mode">
-      <img src="images/screenshot-03-gameover.png" alt="Game Over - Score Summary">
-      <img src="images/screenshot-07-fossil.png" alt="Fossil Boss - Stone">
-      <img src="images/screenshot-05-geode.png" alt="Geode Boss - Surface">
-      <img src="images/screenshot-06-snake.png" alt="Snake Boss - Soil">
+    <h2>See It in Action</h2>
+    <div class="trailer">
+      <video src="images/trailer.mp4" poster="images/trailer-poster.webp" width="540" height="960" autoplay muted loop playsinline preload="metadata" aria-label="Crystal Dig gameplay trailer, no sound: Classic mode line clears, the Magma Heart and Anchor Warden boss battles, the world map, and a first look at the upcoming seasonal event track and store"></video>
+      <div class="trailer-text">
+        <h3>Easy to learn, hard to put down</h3>
+        <p>Drag blocks onto the board and fill a full row or column to clear it. Gems buried in the blocks drop into your pouch, and chaining several clears at once builds big combos.</p>
+        <p>Out of room? A Pickaxe, Shuffle or Undo can save the run.</p>
+      </div>
     </div>
+    <div class="carousel" role="region" aria-label="Screenshots, scroll sideways for more" tabindex="0">
+      <img src="images/shot-boss-anchorwarden.webp" width="607" height="1080" loading="lazy" alt="Adventure level 400 on Triton: the Anchor Warden boss battle as a big ruby is cleared for 250 points">
+      <img src="images/shot-classic.webp" width="607" height="1080" loading="lazy" alt="Classic mode on Earth: a multi-line clear scores a +100 combo while gems fly to the gem pouch (Winter Holidays theme, coming soon)">
+      <img src="images/shot-boss-magmaheart.webp" width="607" height="1080" loading="lazy" alt="Adventure level 50: battling the Magma Heart boss at the bottom of Earth (Autumn Harvest theme, coming soon)">
+      <img src="images/shot-gems-miranda.webp" width="607" height="1080" loading="lazy" alt="Adventure level 346 on Miranda: collecting diamonds, rubies and emeralds (Winter Holidays theme, coming soon)">
+      <img src="images/shot-worldmap.webp" width="607" height="1080" loading="lazy" alt="The Choose a World map with Earth and Mars complete and Venus up next (Halloween theme, coming soon)">
+      <img src="images/shot-mainmenu.webp" width="607" height="1080" loading="lazy" alt="Main menu with Adventure and Classic buttons and a high score of 18,430 (Winter Holidays theme, coming soon)">
+    </div>
+    <p class="note">Some screenshots and the trailer show seasonal themes that arrive in the next update.</p>
   </section>
 
   <!-- Game Modes -->
   <section class="game-modes">
-    <h2>Three Ways to Play</h2>
+    <h2>Two Ways to Play</h2>
 
     <div class="mode-card classic">
-      <img src="images/gem-emerald.png" alt="Emerald" class="mode-card-gem">
+      <img src="images/gem-emerald.png" alt="" class="mode-card-gem">
       <div class="mode-card-text">
         <h3>Classic Mode</h3>
-        <p>Place blocks, clear lines, and chase your highest score. Simple to learn, endlessly challenging. Compete on the global leaderboards!</p>
+        <p>Endless block puzzle. Place blocks, clear rows and columns, and chase your best score. Simple to learn, endlessly challenging &mdash; and your high score goes up on the Game Center and Google Play Games leaderboards.</p>
       </div>
-      <img src="images/gem-sapphire.png" alt="Sapphire" class="mode-card-gem">
+      <img src="images/gem-sapphire.png" alt="" class="mode-card-gem">
     </div>
 
     <div class="mode-card adventure">
-      <img src="images/gem-ruby.png" alt="Ruby" class="mode-card-gem">
+      <img src="images/gem-ruby.png" alt="" class="mode-card-gem">
       <div class="mode-card-text">
         <h3>Adventure Mode</h3>
-        <p>Journey across the solar system through 400 handcrafted levels. Dig through Earth, then travel to Mars, Venus, Mercury, Europa, Titan, Miranda and Triton &mdash; each world with its own layers, hazards and secrets.</p>
+        <p>Journey across the solar system through 400 handcrafted levels. Dig down through 40 underground layers, starting on Earth and travelling on to Mars, Venus, Mercury, Europa, Titan, Miranda and Triton &mdash; with a boss battle waiting at the bottom of every layer.</p>
       </div>
-      <img src="images/gem-amethyst.png" alt="Amethyst" class="mode-card-gem">
-    </div>
-
-    <div class="mode-card bossrush">
-      <img src="images/gem-diamond.png" alt="Diamond" class="mode-card-gem">
-      <div class="mode-card-text">
-        <h3>Boss Rush</h3>
-        <p>Think you're tough enough? Take on the bosses back-to-back with no levels in between &mdash; the ultimate endurance challenge.</p>
-      </div>
-      <img src="images/gem-emerald.png" alt="Emerald" class="mode-card-gem">
+      <img src="images/gem-amethyst.png" alt="" class="mode-card-gem">
     </div>
   </section>
 
   <!-- Worlds -->
   <section class="worlds">
     <h2>Eight Worlds</h2>
-    <p>Every world has its own layers, hazards and secrets &mdash; and a guardian waiting at the bottom of each one.</p>
+    <p>Eight worlds, five underground layers each, 50 levels per world. Every layer has its own look, hazards and secrets &mdash; and a guardian waiting at the bottom.</p>
     <div class="world-grid">
       <div class="world-card">
         <img src="images/planet-earth.png" alt="Earth">
@@ -634,7 +766,7 @@
   <!-- Boss Battles -->
   <section class="bosses">
     <h2>40 Epic Boss Battles</h2>
-    <p>One guards the end of every layer, each with its own attack patterns, music and mechanics. Here are the eight that wait at the bottom of each world.</p>
+    <p>A boss guards the end of each of the 40 layers &mdash; from the Geode, the Fossil and the Mirror Golem to the Magma Heart. Here are the eight that wait at the bottom of each world.</p>
     <div class="boss-grid">
       <div class="boss-card">
         <img src="images/boss-lava.png" alt="Magma Heart Boss">
@@ -712,31 +844,82 @@
     <h2>Features</h2>
     <div class="feature-grid">
       <div class="feature-card">
-        <img src="images/icon-shuffle.png" alt="Puzzle">
+        <img src="images/icon-shuffle.png" alt="">
         <div class="feature-text">
           <h3>400 Levels</h3>
-          <p>Handcrafted adventure levels across 8 worlds, each with its own layers and hazards.</p>
+          <p>Handcrafted Adventure levels across 8 worlds and 40 underground layers, plus an endless Classic mode.</p>
         </div>
       </div>
       <div class="feature-card">
-        <img src="images/icon-trophy.png" alt="Achievements">
+        <img src="images/icon-trophy.png" alt="">
         <div class="feature-text">
-          <h3>28 Achievements</h3>
-          <p>Unlock achievements and climb the global leaderboards as you master the depths.</p>
+          <h3>Leaderboards</h3>
+          <p>Post your Classic high score to Game Center or Google Play Games and see how you stack up.</p>
         </div>
       </div>
       <div class="feature-card">
-        <img src="images/icon-star.png" alt="Power-ups">
+        <img src="images/icon-star.png" alt="">
         <div class="feature-text">
           <h3>Power-ups</h3>
           <p>Stuck with nowhere to place? Spend a Pickaxe, Shuffle or Undo to keep your run alive.</p>
         </div>
       </div>
       <div class="feature-card">
-        <img src="images/gem-diamond.png" alt="Languages">
+        <img src="images/gem-ruby.png" alt="">
+        <div class="feature-text">
+          <h3>Free to Play</h3>
+          <p>Free to download and play, with optional in-app purchases.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="images/gem-diamond.png" alt="">
         <div class="feature-text">
           <h3>7 Languages</h3>
-          <p>Fully localized in English, Spanish, French, German, Japanese, Simplified Chinese, and Korean.</p>
+          <p>Play in English, Spanish, French, German, Japanese, Korean or Simplified Chinese.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="images/gem-sapphire.png" alt="">
+        <div class="feature-text">
+          <h3>Seasonal Events <small>(coming soon)</small></h3>
+          <p>Limited-time events with their own look, tokens and rewards arrive in the next update.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon: Seasonal Events -->
+  <section class="seasons" id="seasons">
+    <div class="seasons-inner">
+      <span class="soon-badge">Coming Soon &middot; Next Update</span>
+      <h2>Seasonal Events</h2>
+      <p class="seasons-intro">The next update brings limited-time seasonal events to Crystal Dig. Each season dresses the whole game in its own look &mdash; menus, worlds and gems &mdash; and comes with its own tokens and rewards.</p>
+
+      <div class="season-grid">
+        <div class="season-card halloween"><h3>Halloween</h3><div class="season-when">October</div></div>
+        <div class="season-card harvest"><h3>Autumn Harvest</h3><div class="season-when">November</div></div>
+        <div class="season-card winter"><h3>Winter Holidays</h3><div class="season-when">December</div></div>
+        <div class="season-card newyear"><h3>New Year</h3><div class="season-when">Into January</div></div>
+      </div>
+
+      <div class="season-detail">
+        <img src="images/shot-season-track.webp" width="607" height="1080" loading="lazy" alt="Preview of the Winter Holidays event track: snowflake token milestones with rewards to claim and a Tier 3 prize of a gift chest and 250 crystals">
+        <div>
+          <h3>Collect tokens, climb the event track</h3>
+          <p>Play during an event to earn seasonal tokens. Reach each milestone on the 25-step event track to claim rewards, with big prizes waiting at every tier.</p>
+        </div>
+      </div>
+
+      <div class="season-detail reverse">
+        <img src="images/shot-store.webp" width="607" height="1080" loading="lazy" alt="Preview of the redesigned store with an Autumn Harvest bundle, a Daily Deal, a free Daily Gift and crystal packs">
+        <div>
+          <h3>A redesigned store</h3>
+          <p>The store is getting a fresh look, too:</p>
+          <ul>
+            <li>A new Daily Deal every day</li>
+            <li>A free Daily Gift to collect</li>
+            <li>Seasonal bundles during each event</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -767,8 +950,12 @@
 
   <script>
     (function() {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var video = document.querySelector('.trailer video');
+      if (video && reduceMotion) { video.removeAttribute('autoplay'); video.pause(); video.setAttribute('controls', ''); }
+
       var carousel = document.querySelector('.carousel');
-      if (!carousel) return;
+      if (!carousel || reduceMotion) return;
 
       // --- Auto-scroll ---
       var scrollSpeed = 0.5;
@@ -796,6 +983,8 @@
 
       carousel.addEventListener('wheel', pauseAutoScroll);
       carousel.addEventListener('touchstart', pauseAutoScroll);
+      carousel.addEventListener('focus', pauseAutoScroll);
+      carousel.addEventListener('keydown', pauseAutoScroll);
 
       // --- Click and drag ---
       var isDragging = false;
