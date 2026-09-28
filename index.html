@@ -12,6 +12,20 @@
   <meta property="og:image" content="https://tacotruckgames.com/images/ttg-logo-v2.png">
   <meta property="og:url" content="https://tacotruckgames.com/">
   <link rel="icon" href="images/ttg-icon.png">
+  <script>
+    /* Seasonal theme switch (Crystal Dig card). Halloween runs Sep 25 - Oct 31 on the visitor's
+       local date; #halloween or #noseason on the URL forces a state for testing. */
+    (function () {
+      function apply() {
+        var h = location.hash, d = new Date(), m = d.getMonth() + 1;
+        var on = h === '#halloween' || (h !== '#noseason' && ((m === 9 && d.getDate() >= 25) || m === 10));
+        if (on) document.documentElement.setAttribute('data-season', 'halloween');
+        else document.documentElement.removeAttribute('data-season');
+      }
+      apply();
+      window.addEventListener('hashchange', apply);
+    })();
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -354,6 +368,14 @@
       .game-card h3 { font-size: 1.2em; }
       .games-row .game-card h3 { font-size: 1.1em; }
     }
+
+    /* ── Seasonal: Halloween (Crystal Dig card only; set by the script in <head>) ── */
+    html:not([data-season="halloween"]) .only-halloween { display: none; }
+    html[data-season="halloween"] .no-halloween { display: none; }
+    .game-card-badge.halloween { background: #c2410c; }
+    html[data-season="halloween"] .game-card.crystaldig {
+      box-shadow: 0 0 0 2px rgba(255, 154, 46, 0.55), 0 10px 30px rgba(194, 65, 12, 0.35);
+    }
   </style>
 </head>
 <body>
@@ -384,9 +406,11 @@
           </div>
         </a>
 
-        <a class="game-card" href="crystaldig/index.html">
-          <span class="game-card-badge green floating">Seasonal Events Soon</span>
-          <img src="crystaldig/images/feature-graphic.jpg" alt="Crystal Dig: Gem Miner logo in a glowing lava cave with the tagline Dig deep. Match gems. Beat bosses." class="game-card-image" style="object-position: left center;" loading="lazy">
+        <a class="game-card crystaldig" href="crystaldig/index.html">
+          <span class="game-card-badge green floating no-halloween">Seasonal Events Soon</span>
+          <span class="game-card-badge halloween floating only-halloween">Halloween Event Soon</span>
+          <img src="crystaldig/images/feature-graphic.jpg" alt="Crystal Dig: Gem Miner logo in a glowing lava cave with the tagline Dig deep. Match gems. Beat bosses." class="game-card-image no-halloween" style="object-position: left center;" loading="lazy">
+          <img src="crystaldig/images/halloween/home-card.webp" alt="Crystal Dig: Gem Miner Halloween logo in front of a moonlit mine lined with jack-o'-lanterns and purple crystals" class="game-card-image only-halloween" style="object-position: left center;" loading="lazy">
           <div class="game-card-body">
             <span class="game-card-year">2026</span>
             <h3>Crystal Dig: Gem Miner</h3>

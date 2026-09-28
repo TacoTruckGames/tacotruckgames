@@ -1,0 +1,223 @@
+/*
+ * Crystal Dig — Halloween seasonal theme.
+ *
+ * Every rule is scoped to html[data-season="halloween"], which the inline
+ * script in index.html sets from Sep 25 to Oct 31 (visitor's local date).
+ * Outside that window, or with JavaScript off, nothing here applies and none
+ * of the images below are downloaded. Force it for testing with #halloween or
+ * #noseason on the URL.
+ */
+
+html[data-season="halloween"] {
+  --cd-bg: #1a0f26;
+  --cd-bg-alt: #221233;
+  --cd-bg-deep: #2d1540;
+  --cd-accent: #ff9a2e;
+  --cd-link: #c9a2ff;
+  --cd-badge: #c2410c;
+  --hw-purple: #8b4fd8;
+  --hw-orange-glow: rgba(255, 140, 30, 0.45);
+}
+
+/* ── Hero: Halloween logo + moonlit mine entrance ── */
+html[data-season="halloween"] .hero::before {
+  background:
+    linear-gradient(180deg, rgba(26, 15, 38, 0.25) 0%, rgba(26, 15, 38, 0.55) 55%, rgba(26, 15, 38, 0.92) 100%),
+    url("images/halloween/hero-wide.webp") center 35% / cover no-repeat;
+  opacity: 1;
+}
+
+html[data-season="halloween"] .hero-logo {
+  filter: drop-shadow(0 4px 22px var(--hw-orange-glow));
+}
+
+html[data-season="halloween"] .hero-subtitle { color: #d9c6f0; }
+html[data-season="halloween"] .hero-tagline { color: #f3ecfa; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); }
+
+@media (max-width: 700px) {
+  html[data-season="halloween"] .hero::before {
+    background:
+      linear-gradient(180deg, rgba(26, 15, 38, 0.2) 0%, rgba(26, 15, 38, 0.6) 50%, rgba(26, 15, 38, 0.93) 100%),
+      url("images/halloween/hero-tall.webp") center top / cover no-repeat;
+  }
+}
+
+/* ── Section backdrops: the game's Halloween scenes ── */
+html[data-season="halloween"] .screenshots {
+  background: linear-gradient(180deg, var(--cd-bg-alt) 0%, #1c0f2b 100%);
+}
+
+html[data-season="halloween"] .worlds::before {
+  background-image: url("images/halloween/spacemap.webp");
+  opacity: 0.35;
+}
+
+html[data-season="halloween"] .bosses::before {
+  background-image: url("images/halloween/deep.webp");
+  opacity: 0.3;
+}
+
+html[data-season="halloween"] .gems-section::before {
+  background-image: url("images/halloween/layermap.webp");
+  opacity: 0.2;
+}
+
+html[data-season="halloween"] .cta::before {
+  background:
+    linear-gradient(180deg, rgba(26, 15, 38, 0.85) 0%, rgba(26, 15, 38, 0.55) 100%),
+    url("images/halloween/store.webp") center 40% / cover no-repeat;
+  opacity: 1;
+}
+
+html[data-season="halloween"] .worlds > p,
+html[data-season="halloween"] .bosses > p,
+html[data-season="halloween"] .gems-section > p {
+  color: #ddd0ea;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* Planet glow goes pumpkin */
+html[data-season="halloween"] .world-card img {
+  filter: drop-shadow(0 4px 14px var(--hw-orange-glow));
+}
+
+/* Cards pick up a purple/orange edge */
+html[data-season="halloween"] .mode-card,
+html[data-season="halloween"] .feature-card,
+html[data-season="halloween"] .boss-card {
+  border-color: rgba(255, 154, 46, 0.22);
+}
+
+html[data-season="halloween"] .mode-card.classic::before {
+  background: linear-gradient(135deg, #5a2d0c 0%, #2a1206 100%);
+}
+
+html[data-season="halloween"] .mode-card.adventure::before {
+  background: linear-gradient(135deg, #4a2070 0%, #22103a 100%);
+}
+
+html[data-season="halloween"] .boss-card { background: rgba(20, 8, 30, 0.6); }
+
+html[data-season="halloween"] .feature-card { background: rgba(139, 79, 216, 0.08); }
+html[data-season="halloween"] .feature-card:hover { background: rgba(139, 79, 216, 0.14); }
+
+html[data-season="halloween"] .carousel img[src$="shot-worldmap.webp"] {
+  order: -1;
+  box-shadow: 0 8px 28px var(--hw-orange-glow);
+}
+
+/* ── Coming Soon: Halloween takes the spotlight ── */
+html[data-season="halloween"] .seasons {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-season="halloween"] .seasons::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/halloween/layermap.webp") center / cover no-repeat;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+html[data-season="halloween"] .seasons-inner { position: relative; z-index: 1; }
+
+html[data-season="halloween"] .season-card.halloween {
+  border: 2px solid var(--cd-accent);
+  box-shadow: 0 0 22px var(--hw-orange-glow);
+  transform: translateY(-2px);
+}
+
+html[data-season="halloween"] .season-card.halloween .season-when { color: #ffe2c2; font-weight: 600; }
+
+.hw-callout {
+  align-items: center;
+  gap: 18px;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 154, 46, 0.45);
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.28), rgba(91, 33, 182, 0.3));
+}
+
+html[data-season="halloween"] .hw-callout { display: flex; }
+
+.hw-callout-art {
+  flex-shrink: 0;
+  width: 92px;
+  height: 92px;
+  background: url("images/halloween/chest.webp") center / contain no-repeat;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.hw-callout p { color: #f3ecfa; margin: 0; }
+.hw-callout strong { color: var(--cd-accent); }
+
+@media (max-width: 480px) {
+  .hw-callout { flex-direction: column; text-align: center; }
+  .hw-callout-art { width: 76px; height: 76px; }
+}
+
+/* ── Drifting bats and pumpkins ── */
+html[data-season="halloween"] .season-fx {
+  display: block;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.season-fx span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url("images/halloween/bat.webp") center / contain no-repeat;
+  width: 44px;
+  height: 22px;
+  opacity: 0.75;
+  will-change: transform;
+  animation: hw-fly 26s linear infinite;
+}
+
+.season-fx span.pumpkin {
+  background-image: url("images/halloween/pumpkin.webp");
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  animation-name: hw-fall;
+  animation-duration: 34s;
+}
+
+/* Bats cross the screen from left to right with a gentle bob */
+.season-fx span:nth-child(1) { top: 12%; animation-delay: -2s; }
+.season-fx span:nth-child(2) { top: 28%; animation-delay: -11s; animation-duration: 31s; width: 34px; height: 17px; }
+.season-fx span:nth-child(3) { top: 55%; animation-delay: -19s; animation-duration: 23s; }
+.season-fx span:nth-child(4) { top: 74%; animation-delay: -6s; animation-duration: 36s; width: 30px; height: 15px; opacity: 0.55; }
+.season-fx span:nth-child(5) { left: 18%; animation-delay: -4s; }
+.season-fx span:nth-child(6) { left: 63%; animation-delay: -21s; animation-duration: 41s; width: 24px; height: 24px; }
+.season-fx span:nth-child(7) { left: 86%; animation-delay: -30s; animation-duration: 38s; width: 26px; height: 26px; }
+
+@keyframes hw-fly {
+  0%   { transform: translate3d(-60px, 0, 0); }
+  25%  { transform: translate3d(25vw, -18px, 0); }
+  50%  { transform: translate3d(50vw, 10px, 0); }
+  75%  { transform: translate3d(75vw, -14px, 0); }
+  100% { transform: translate3d(calc(100vw + 60px), 0, 0); }
+}
+
+@keyframes hw-fall {
+  0%   { transform: translate3d(0, -60px, 0) rotate(0deg); }
+  100% { transform: translate3d(30px, calc(100vh + 60px), 0) rotate(200deg); }
+}
+
+@media (max-width: 480px) {
+  .season-fx span:nth-child(3),
+  .season-fx span:nth-child(6) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-season="halloween"] .season-fx { display: none; }
+}

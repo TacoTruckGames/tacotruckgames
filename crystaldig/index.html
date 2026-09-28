@@ -10,14 +10,44 @@
   <meta property="og:image" content="https://tacotruckgames.com/crystaldig/images/feature-graphic.jpg">
   <meta property="og:url" content="https://tacotruckgames.com/crystaldig/">
   <link rel="apple-touch-icon" href="images/icon.png">
+  <script>
+    /* Seasonal theme switch. Halloween runs Sep 25 - Oct 31 on the visitor's local date.
+       Add #halloween or #noseason to the URL to force a state for testing.
+       All seasonal styling lives in halloween.css under html[data-season]. */
+    (function () {
+      function pick() {
+        var h = location.hash;
+        if (h === '#halloween') return 'halloween';
+        if (h === '#noseason') return '';
+        var d = new Date(), m = d.getMonth() + 1;
+        return (m === 9 && d.getDate() >= 25) || m === 10 ? 'halloween' : '';
+      }
+      function apply() {
+        var s = pick(), root = document.documentElement;
+        if (s) root.setAttribute('data-season', s); else root.removeAttribute('data-season');
+      }
+      apply();
+      window.addEventListener('hashchange', apply);
+    })();
+  </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Palette. Seasonal themes (halloween.css) override these under html[data-season]. */
+    :root {
+      --cd-bg: #1a1a2e;
+      --cd-bg-alt: #16213e;
+      --cd-bg-deep: #231a3a;
+      --cd-accent: #f5a623;
+      --cd-link: #6ba3e8;
+      --cd-badge: #4caf50;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       color: #f0f0f0;
-      background: #1a1a2e;
+      background: var(--cd-bg);
     }
 
     /* ── Hero ── */
@@ -85,7 +115,7 @@
     /* ── Screenshots carousel ── */
     .screenshots {
       padding: 50px 0;
-      background: #16213e;
+      background: var(--cd-bg-alt);
     }
 
     .screenshots h2 {
@@ -180,7 +210,7 @@
     /* ── Worlds ── */
     .worlds {
       padding: 60px 20px;
-      background: #16213e;
+      background: var(--cd-bg-alt);
       position: relative;
       overflow: hidden;
     }
@@ -239,7 +269,7 @@
     .world-card .world-name {
       font-size: 0.95em;
       font-weight: 600;
-      color: #f5a623;
+      color: var(--cd-accent);
     }
 
     .mode-card-gem {
@@ -251,7 +281,7 @@
 
     .mode-card-text h3 {
       font-size: 1.3em;
-      color: #f5a623;
+      color: var(--cd-accent);
       margin-bottom: 8px;
     }
 
@@ -328,7 +358,7 @@
     .boss-card .boss-name {
       font-size: 0.9em;
       font-weight: 600;
-      color: #f5a623;
+      color: var(--cd-accent);
     }
 
     .boss-card .boss-zone {
@@ -339,7 +369,7 @@
     /* ── Gems Collection ── */
     .gems-section {
       padding: 60px 20px;
-      background: #16213e;
+      background: var(--cd-bg-alt);
       position: relative;
       overflow: hidden;
     }
@@ -445,7 +475,7 @@
 
     .feature-card .feature-text h3 {
       font-size: 1em;
-      color: #f5a623;
+      color: var(--cd-accent);
       margin-bottom: 4px;
     }
 
@@ -489,7 +519,7 @@
       font-size: 0.9em;
     }
 
-    .footer a { color: #6ba3e8; }
+    .footer a { color: var(--cd-link); }
     .footer-links { margin-top: 8px; }
     .footer-links a { margin: 0 10px; }
 
@@ -519,7 +549,7 @@
 
     .trailer-text h3 {
       font-size: 1.3em;
-      color: #f5a623;
+      color: var(--cd-accent);
       margin-bottom: 8px;
     }
 
@@ -536,7 +566,7 @@
     /* ── Coming Soon: Seasonal Events ── */
     .seasons {
       padding: 60px 20px;
-      background: linear-gradient(180deg, #1a1a2e 0%, #231a3a 100%);
+      background: linear-gradient(180deg, var(--cd-bg) 0%, var(--cd-bg-deep) 100%);
     }
 
     .seasons-inner {
@@ -548,7 +578,7 @@
       display: block;
       width: max-content;
       margin: 0 auto 12px;
-      background: #4caf50;
+      background: var(--cd-badge);
       color: #fff;
       font-size: 0.75em;
       font-weight: 700;
@@ -613,7 +643,7 @@
 
     .season-detail h3 {
       font-size: 1.3em;
-      color: #f5a623;
+      color: var(--cd-accent);
       margin-bottom: 8px;
     }
 
@@ -659,13 +689,21 @@
       .world-card { width: 88px; }
       .world-card img { width: 70px; height: 70px; }
     }
+
+    /* Seasonal swaps: only-halloween content is hidden unless the season script sets data-season. */
+    html:not([data-season="halloween"]) .only-halloween { display: none; }
+    html[data-season="halloween"] .no-halloween { display: none; }
   </style>
+  <link rel="stylesheet" href="halloween.css">
 </head>
 <body>
 
+  <div class="season-fx only-halloween" aria-hidden="true"><span></span><span></span><span></span><span></span><span class="pumpkin"></span><span class="pumpkin"></span><span class="pumpkin"></span></div>
+
   <!-- Hero -->
   <section class="hero">
-    <img src="images/logo.png" alt="Crystal Dig: Gem Miner" class="hero-logo">
+    <img src="images/logo.png" alt="Crystal Dig: Gem Miner" class="hero-logo no-halloween" loading="lazy">
+    <img src="images/halloween/logo.webp" alt="Crystal Dig: Gem Miner" class="hero-logo only-halloween" width="497" height="512" loading="lazy">
     <p class="hero-subtitle">A Block Puzzle Adventure</p>
     <p class="hero-tagline">Place blocks, clear rows and columns, and collect sparkling gems. Then take the dig across the solar system &mdash; 400 levels, 8 worlds, 40 bosses. Free to play.</p>
     <div class="store-badges">
@@ -895,8 +933,13 @@
       <h2>Seasonal Events</h2>
       <p class="seasons-intro">The next update brings limited-time seasonal events to Crystal Dig. Each season dresses the whole game in its own look &mdash; menus, worlds and gems &mdash; and comes with its own tokens and rewards.</p>
 
+      <div class="hw-callout only-halloween">
+        <div class="hw-callout-art" aria-hidden="true"></div>
+        <p><strong>Halloween is first.</strong> The Halloween event starts October 1 in the next update: jack-o'-lantern mines, pumpkin tokens to collect and a spooky event track full of prizes.</p>
+      </div>
+
       <div class="season-grid">
-        <div class="season-card halloween"><h3>Halloween</h3><div class="season-when">October</div></div>
+        <div class="season-card halloween"><h3>Halloween</h3><div class="season-when">October<span class="only-halloween"> &middot; from Oct 1</span></div></div>
         <div class="season-card harvest"><h3>Autumn Harvest</h3><div class="season-when">November</div></div>
         <div class="season-card winter"><h3>Winter Holidays</h3><div class="season-when">December</div></div>
         <div class="season-card newyear"><h3>New Year</h3><div class="season-when">Into January</div></div>
