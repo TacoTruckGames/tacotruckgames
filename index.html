@@ -28,8 +28,8 @@
     })();
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261103e">
-  <script src="site.js?v=20261103e" defer></script>
+  <link rel="stylesheet" href="site.css?v=20261103g">
+  <script src="site.js?v=20261103g" defer></script>
   <noscript><style>.panel[hidden]{display:block !important;margin-bottom:24px}.media:has(img[data-src]),.media.video{display:none}.panel > .panel-art{display:block}.cine{height:auto;padding-top:var(--nav-h)}.cine-text{position:static;padding:24px 20px 8px}.showcase{margin-top:0}</style></noscript>
 </head>
 <body>
@@ -91,11 +91,16 @@
           <span class="rail-text"><span class="rail-name">Stop Santa: Remastered</span><span class="rail-status">Coming Soon</span></span>
         </a>
 
-        <p class="rail-group">Other Products</p>
+        <p class="rail-group">Other Products &amp; Services</p>
 
         <a class="rail-item" role="tab" id="tab-cinedossier" href="#cinedossier" aria-controls="panel-cinedossier" aria-selected="false" tabindex="-1" style="--accent:#3a8fd6; --accent-ink:#fff;">
           <img class="rail-icon contain" src="images/cinedossier-logo.png" alt="" width="40" height="40">
           <span class="rail-text"><span class="rail-name">CineDossier</span><span class="rail-status">Closed Beta</span></span>
+        </a>
+
+        <a class="rail-item" role="tab" id="tab-codev" href="#codev" aria-controls="panel-codev" aria-selected="false" tabindex="-1" style="--accent:#e8573a; --accent-ink:#fff;">
+          <span class="rail-icon rail-icon-text" aria-hidden="true">&lt;/&gt;</span>
+          <span class="rail-text"><span class="rail-name">Co-Development</span><span class="rail-status">By Application</span></span>
         </a>
 
         <!-- Lunara: hidden for now. Move the <a> out of this <template> to restore it. -->
@@ -328,6 +333,31 @@
             <ul class="facts"><li>Grid</li><li>Linked records</li><li>Timeline</li><li>Kanban</li></ul>
             <div class="actions">
               <a class="btn" href="https://cinedossier.com" target="_blank" rel="noopener">Open cinedossier.com <span class="ext">&nearr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Co-Development: the studio's engineering services arm (codev.tacotruckgames.com).
+             Banner is a CC0 Godot editor screenshot (Wikimedia Commons, public domain). -->
+        <article class="panel" id="panel-codev" role="tabpanel" aria-labelledby="tab-codev" data-project="codev" hidden style="--accent:#e8573a; --accent-ink:#fff; --art-pos:center top;">
+          <div class="panel-art">
+            <img data-src="codev/images/godot-editor.webp" alt="A game-engine editor in use">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <h3 class="panel-title">Co-Development</h3>
+              <div class="panel-head-text">
+                <p class="panel-sub">Mobile Porting &amp; Optimization</p>
+                <div class="pills">
+                  <span class="pill status">By Application</span>
+                  <span class="pill plat">Unity</span><span class="pill plat">Godot</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">Engineering-led co-development for Unity and Godot teams. We get games onto iOS and Android, shrink build size and build time, and tune performance so frame rates hold on the devices players actually own &mdash; shipped from Seattle.</p>
+            <ul class="facts"><li>iOS + Android ports</li><li>Build optimization</li><li>Performance tuning</li><li>Cross-play &amp; online</li></ul>
+            <div class="actions">
+              <a class="btn" href="https://codev.tacotruckgames.com" target="_blank" rel="noopener">Visit codev.tacotruckgames.com <span class="ext">&nearr;</span></a>
             </div>
           </div>
         </article>

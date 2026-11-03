@@ -9,6 +9,7 @@
   --ttg-purple-dark: #533570;
   --ttg-purple-card: #4B2F65;
   --ttg-purple-deep: #3a2452;
+  --panel-card: #2a2a2e; /* right-hand showcase panel: dark grey, not purple */
   --gold: #C9A84C;
   --ink: #f0f0f0;
   --soft: #ded3e9;
@@ -101,7 +102,7 @@ a { color: #ffd166; }
 }
 
 .cine-text {
-  top: 10px;
+  top: 0;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -230,7 +231,7 @@ a { color: #ffd166; }
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--ttg-purple-card);
+  background: var(--panel-card);
   border: 1px solid var(--line);
   box-shadow: 0 12px 40px rgba(0,0,0,0.45);
 }
@@ -278,7 +279,7 @@ a { color: #ffd166; }
   inset: 0;
   background:
     linear-gradient(to bottom right, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 42%),
-    linear-gradient(to bottom, rgba(75,47,101,0) 55%, var(--ttg-purple-card) 100%);
+    linear-gradient(to bottom, rgba(42,42,46,0) 55%, var(--panel-card) 100%);
   pointer-events: none;
 }
 
