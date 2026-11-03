@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taco Truck Games</title>
   <meta name="description" content="Taco Truck Games is an independent game studio based in Seattle, WA focused on fun, quick-to-play games.">
-  <meta name="keywords" content="taco truck games, indie, game, studio, seattle, lunara, horoscope, polari, cinedossier, crystal dig, meow wars, stop santa">
+  <meta name="keywords" content="taco truck games, indie, game, studio, seattle, lunara, horoscope, cinedossier, crystal dig, meow wars, stop santa">
   <meta name="author" content="Taco Truck Games, LLC">
   <meta property="og:title" content="Taco Truck Games">
   <meta property="og:description" content="Indie studio. Big-studio experience. Based in Seattle.">
@@ -13,8 +13,9 @@
   <meta property="og:url" content="https://tacotruckgames.com/">
   <link rel="icon" href="images/ttg-icon.png">
   <script>
-    /* Seasonal theme switch (Crystal Dig card). Halloween runs Sep 25 - Oct 31 on the visitor's
-       local date; #halloween or #noseason on the URL forces a state for testing. */
+    /* Seasonal theme switch (Crystal Dig panel). Halloween runs Sep 25 - Oct 31 on the visitor's
+       local date; #halloween or #noseason on the URL forces a state for testing. Project
+       selection also lives in the hash (#crystaldig etc.); each script ignores the other's values. */
     (function () {
       function apply() {
         var h = location.hash, d = new Date(), m = d.getMonth() + 1;
@@ -27,506 +28,405 @@
     })();
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ttg-purple: #643F84;
-      --ttg-purple-dark: #533570;
-      --ttg-purple-card: #4B2F65;
-    }
-
-    body {
-      font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #f0f0f0;
-      background: var(--ttg-purple);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 20px 20px 20px;
-      background: var(--ttg-purple);
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("images/ttg_background.png") center / cover no-repeat;
-      mix-blend-mode: overlay;
-      opacity: 0.35;
-      z-index: 0;
-    }
-
-    .hero > * { position: relative; z-index: 1; }
-
-    .hero-logo {
-      max-width: 320px;
-      width: 60%;
-      height: auto;
-      margin-bottom: 24px;
-      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
-    }
-
-    .hero-tagline {
-      font-size: 1.3em;
-      color: #e2d8ec;
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 400;
-    }
-
-    /* ── About ── */
-    .about {
-      padding: 50px 20px;
-      text-align: center;
-      background: var(--ttg-purple-dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("images/ttg_background.png") center / cover no-repeat;
-      mix-blend-mode: overlay;
-      opacity: 0.35;
-      z-index: 0;
-    }
-
-    .about > * { position: relative; z-index: 1; }
-
-    /* The taco truck guy at the left of the About text, on the same row. */
-    .about-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .about-mascot {
-      flex-shrink: 0;
-      width: 180px;
-      height: auto;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
-    }
-
-    .about-text { flex: 1; }
-
-    .about h2 {
-      font-size: 1.6em;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .about p {
-      max-width: 700px;
-      margin: 0 0 12px;
-      color: #ded3e9;
-      font-size: 1.05em;
-    }
-
-    /* ── Games ── */
-    .games {
-      padding: 30px 20px 60px;
-    }
-
-    /* Second card section reads as its own block without doubling the gap */
-    .games.in-production {
-      padding-top: 10px;
-    }
-
-    .games h2 {
-      font-size: 1.8em;
-      text-align: center;
-      color: #fff;
-      margin-bottom: 40px;
-    }
-
-    .games-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    /* Featured game card */
-    .game-card {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background: var(--ttg-purple-card);
-      border: 1px solid rgba(255,255,255,0.12);
-      transition: transform 0.25s, box-shadow 0.25s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .game-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
-
-    .game-card-image {
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      object-position: center 29.5%;
-      display: block;
-    }
-
-    .game-card-body {
-      position: relative;
-      padding: 28px 32px;
-    }
-
-    /* Release year: a quiet outlined tag in the body's top-right corner,
-       level with the title, where the card had nothing. Muted on purpose so
-       the coloured badges over the artwork stay the loud ones. */
-    .game-card-year {
-      position: absolute;
-      top: 30px;
-      right: 32px;
-      font-size: 0.78em;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #b9a7c9;
-      border: 1px solid rgba(185,167,201,0.45);
-      border-radius: 20px;
-      padding: 3px 11px;
-      line-height: 1.5;
-    }
-
-    .game-card-year::before {
-      content: "Released ";
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      opacity: 0.8;
-    }
-
-    .game-card-badge {
-      display: inline-block;
-      background: #e8573a;
-      color: #fff;
-      font-size: 0.75em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 10px;
-    }
-
-    .game-card-badge.green { background: #4caf50; }
-    .game-card-badge.beta { background: #3a8fd6; }
-
-    /* Pinned to the card's top-right corner, over the artwork */
-    .game-card-badge.floating {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      margin-bottom: 0;
-      z-index: 2;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-    }
-
-    /* Coming Soon and the age rating sit at the top-LEFT; the status badges
-       (Now Live, More Levels) keep the right, so a card can carry both. */
-    .game-card-badge.floating.left { right: auto; left: 16px; }
-
-    .game-card-badge.mature {
-      background: #1c1c22;
-      color: #fff;
-      border: 2px solid #e8573a;
-      padding: 2px 10px;
-    }
-
-    .game-card h3 {
-      font-size: 1.5em;
-      color: #fff;
-      margin-bottom: 6px;
-      /* Room for the year tag beside a long title on a narrow card. */
-      padding-right: 130px;
-    }
-
-    /* No year tag (In Production), no reserved room: the title runs full width. */
-    .game-card-body:not(:has(.game-card-year)) h3 { padding-right: 0; }
-
-    .game-card-sub {
-      font-size: 0.9em;
-      color: #b9a7c9;
-      margin-bottom: 10px;
-    }
-
-    .platform-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .platform-tag {
-      display: inline-block;
-      background: #C9A84C;
-      color: #111;
-      font-size: 0.7em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-
-    /* Not-yet-shipped platforms read as outlined rather than solid */
-    .platform-tag.soon {
-      background: transparent;
-      color: #C9A84C;
-      border: 1px solid rgba(201,168,76,0.55);
-    }
-
-    .game-card p {
-      color: #ded3e9;
-      font-size: 0.95em;
-      margin-bottom: 0;
-    }
-
-    /* Game cards in 2x2 grid */
-    .games-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .games-row .game-card {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .games-row .game-card-image {
-      height: 220px;
-    }
-
-    .games-row .game-card-body {
-      padding: 22px 24px;
-    }
-
-    .games-row .game-card h3 {
-      font-size: 1.25em;
-    }
-
-    .games-row .game-card-year {
-      top: 24px;
-      right: 24px;
-    }
-
-    /* ── Footer ── */
-    .footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      background: var(--ttg-purple-dark);
-      color: #c3b3d1;
-      font-size: 0.9em;
-    }
-
-    .footer a { color: #ffd166; }
-    .footer-links { margin-top: 8px; }
-    .footer-links a { margin: 0 12px; }
-    .footer-contact { margin-top: 12px; color: #c3b3d1; }
-
-    /* ── Responsive ── */
-    @media (max-width: 700px) {
-      .hero { padding: 18px 20px 40px; }
-      .hero-logo { max-width: 240px; width: 55%; }
-      .hero-tagline { font-size: 1.1em; }
-      .games-row {
-        grid-template-columns: 1fr;
-      }
-      .game-card-image { height: 240px; }
-      .games-row .game-card-image { height: 220px; }
-      .game-card-body { padding: 22px 20px; }
-      .about-inner { flex-direction: column; gap: 16px; text-align: center; }
-      .about-mascot { width: 140px; }
-      .about p { margin: 0 auto 12px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero { padding: 16px 16px 30px; }
-      .hero-logo { max-width: 200px; }
-      .game-card-image { height: 200px; }
-      .games-row .game-card-image { height: 180px; }
-      .game-card h3 { font-size: 1.2em; }
-      .games-row .game-card h3 { font-size: 1.1em; }
-    }
-
-    /* ── Seasonal: Halloween (Crystal Dig card only; set by the script in <head>) ── */
-    html:not([data-season="halloween"]) .only-halloween { display: none; }
-    html[data-season="halloween"] .no-halloween { display: none; }
-    .game-card-badge.halloween { background: #c2410c; }
-    html[data-season="halloween"] .game-card.crystaldig {
-      box-shadow: 0 0 0 2px rgba(255, 154, 46, 0.55), 0 10px 30px rgba(194, 65, 12, 0.35);
-    }
-  </style>
+  <link rel="stylesheet" href="site.css?v=20261103e">
+  <script src="site.js?v=20261103e" defer></script>
+  <noscript><style>.panel[hidden]{display:block !important;margin-bottom:24px}.media:has(img[data-src]),.media.video{display:none}.panel > .panel-art{display:block}.cine{height:auto;padding-top:var(--nav-h)}.cine-text{position:static;padding:24px 20px 8px}.showcase{margin-top:0}</style></noscript>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="hero">
-    <img src="images/ttg-logo-v2.png" alt="Taco Truck Games" class="hero-logo">
-    <p class="hero-tagline">Indie studio. Big-studio experience. Based in Seattle.</p>
-  </section>
+  <a class="skip" href="#games">Skip to projects</a>
 
-  <!-- Games -->
-  <section class="games">
-    <h2>Our Released Apps</h2>
-    <div class="games-grid">
-
-      <div class="games-row">
-
-        <a class="game-card" href="https://polari.men" target="_blank" rel="noopener">
-          <span class="game-card-badge green floating">Now Live</span>
-          <span class="game-card-badge mature floating left">18+</span>
-          <img src="images/polari-card.png" alt="Polari.Men &mdash; AI companions who actually show up." class="game-card-image" style="object-position: center;">
-          <div class="game-card-body">
-            <span class="game-card-year">2026</span>
-            <h3>Polari</h3>
-            <p class="game-card-sub">AI Companions</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">Android</span><span class="platform-tag soon">iOS Soon</span></div>
-            <p>A curated cast of AI companions with real faces, real voices, and real memory. They text first, remember your life, and are always upfront about being AI. Free to start.</p>
-          </div>
-        </a>
-
-        <a class="game-card crystaldig" href="crystaldig/index.html">
-          <span class="game-card-badge green floating no-halloween">Seasonal Events</span>
-          <span class="game-card-badge halloween floating only-halloween">Halloween Event Live</span>
-          <img src="crystaldig/images/feature-graphic.jpg" alt="Crystal Dig: Gem Miner logo in a glowing lava cave with the tagline Dig deep. Match gems. Beat bosses." class="game-card-image no-halloween" style="object-position: left center;" loading="lazy">
-          <img src="crystaldig/images/halloween/home-card.webp" alt="Crystal Dig: Gem Miner Halloween logo in front of a moonlit mine lined with jack-o'-lanterns and purple crystals" class="game-card-image only-halloween" style="object-position: left center;" loading="lazy">
-          <div class="game-card-body">
-            <span class="game-card-year">2026</span>
-            <h3>Crystal Dig: Gem Miner</h3>
-            <p class="game-card-sub">Block Puzzle Adventure</p>
-            <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
-            <p>Place blocks, clear rows and columns, and collect gems &mdash; in endless Classic mode or across 400 Adventure levels, 8 worlds from Earth to Triton, and 40 boss battles. Free to play, with limited-time seasonal events all through the holidays.</p>
-          </div>
-        </a>
-
-        <a class="game-card" href="MeowWars/index.html">
-          <img src="MeowWars/images/MeowWars_Splash.png" alt="Meow Wars: Card Battle" class="game-card-image">
-          <div class="game-card-body">
-            <span class="game-card-year">2018</span>
-            <h3>Meow Wars: Card Battle</h3>
-            <p class="game-card-sub">Card Battle</p>
-            <div class="platform-tags"><span class="platform-tag">Steam</span><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
-            <p>A cat-themed card battle game with charming hand-drawn characters. Battle through challengers, challenge friends to PVP duels, and free Claw Mountain from Commander Catrat's grip.</p>
-          </div>
-        </a>
-
-        <a class="game-card" href="StopSanta/index.html">
-          <img src="images/stopsanta-header.png" alt="Stop Santa: Tower Defense" class="game-card-image">
-          <div class="game-card-body">
-            <span class="game-card-year">2017</span>
-            <h3>Stop Santa</h3>
-            <p class="game-card-sub">Tower Defense</p>
-            <div class="platform-tags"><span class="platform-tag">Steam</span><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
-            <p>Santa has gone crazy and enlisted an army of evil elves, zombie Santas, and sadistic penguins. It's up to you and the remaining elves to stop him in this holiday-themed tower defense game!</p>
-          </div>
-        </a>
-
-      </div>
-
+  <!-- Cinematic header: the selected project's key art is the top of the page.
+       site.js moves the active panel's .panel-art in here; the studio logo and tagline float over it. -->
+  <header class="cine" id="top" data-project="crystaldig">
+    <div class="cine-art" aria-hidden="true"></div>
+    <div class="cine-text">
+      <img class="cine-logo" src="images/ttg-logo-v2-460.webp" alt="Taco Truck Games" width="460" height="463">
+      <p class="cine-tag">Indie studio. Big-studio experience. Based in Seattle.</p>
     </div>
-  </section>
+  </header>
 
-  <!-- In Production -->
-  <section class="games in-production">
-    <h2>In Production</h2>
-    <div class="games-grid">
+  <!-- Project showcase: rail of tabs on the left, one panel per project on the right.
+       All panels are in the page; site.js shows one at a time and syncs the URL hash. -->
+  <section class="showcase" id="games">
+    <h2 class="visually-hidden">Our Games &amp; Apps</h2>
 
-      <div class="games-row">
+    <div class="showcase-grid">
 
-        <a class="game-card" href="depthsofruin/index.html">
-          <span class="game-card-badge floating left">Coming Soon</span>
-          <img src="depthsofruin/images/image_metadata_tag.jpg" alt="Depths of Ruin" class="game-card-image">
-          <div class="game-card-body">
-            <h3>Depths of Ruin</h3>
-            <p class="game-card-sub">Norse Roguelite Action RPG</p>
-            <div class="platform-tags"><span class="platform-tag soon">Steam Soon</span></div>
-            <p>The dead have stopped keeping their bargain. Descend through eight realms of the dead as one of four heroes, take the blessings of three gods, and kill the lord at the bottom of each. Coming to Steam.</p>
-          </div>
+      <nav class="rail" role="tablist" aria-label="Projects" aria-orientation="vertical">
+        <p class="rail-group">Released Games</p>
+
+        <a class="rail-item" role="tab" id="tab-crystaldig" href="#crystaldig" aria-controls="panel-crystaldig" aria-selected="true" style="--accent:#f5a623; --accent-ink:#2a1700;">
+          <img class="rail-icon" src="crystaldig/images/icon-128.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Crystal Dig: Gem Miner</span><span class="rail-status no-halloween">Released 2026</span><span class="rail-status only-halloween">Halloween Event Live</span></span>
         </a>
 
-        <a class="game-card" href="StopSantaHD/index.html">
-          <span class="game-card-badge floating left">Coming Soon</span>
-          <img src="StopSantaHD/images/image_metadata_tag.jpg" alt="Stop Santa: Remastered" class="game-card-image">
-          <div class="game-card-body">
-            <h3>Stop Santa: Remastered</h3>
-            <p class="game-card-sub">Holiday Tower Defense, Rebuilt</p>
-            <div class="platform-tags"><span class="platform-tag soon">iOS Soon</span><span class="platform-tag soon">Android Soon</span></div>
-            <p>Stop Santa, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever.</p>
-          </div>
+        <!-- Polari: hidden for now. Move the <a> out of this <template> to restore it. -->
+        <template id="polari-tab-hidden">
+        <a class="rail-item" role="tab" id="tab-polari" href="#polari" aria-controls="panel-polari" aria-selected="false" tabindex="-1" style="--accent:#2dd4bf; --accent-ink:#042f2e;">
+          <span class="rail-icon rail-icon-text" aria-hidden="true">P</span>
+          <span class="rail-text"><span class="rail-name">Polari</span><span class="rail-status">Released 2026 &middot; 18+</span></span>
         </a>
+        </template>
+
+        <a class="rail-item" role="tab" id="tab-meowwars" href="#meowwars" aria-controls="panel-meowwars" aria-selected="false" tabindex="-1" style="--accent:#f08a24; --accent-ink:#2a1200;">
+          <img class="rail-icon" src="images/meowwars-icon-128.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Meow Wars: Card Battle</span><span class="rail-status">Released 2018</span></span>
+        </a>
+
+        <a class="rail-item" role="tab" id="tab-stopsanta" href="#stopsanta" aria-controls="panel-stopsanta" aria-selected="false" tabindex="-1" style="--accent:#e03c31; --accent-ink:#fff;">
+          <img class="rail-icon" src="StopSanta/images/icon-128.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Stop Santa: Tower Defense</span><span class="rail-status">Released 2017</span></span>
+        </a>
+
+        <p class="rail-group">Games in Production</p>
+
+        <a class="rail-item" role="tab" id="tab-depthsofruin" href="#depthsofruin" aria-controls="panel-depthsofruin" aria-selected="false" tabindex="-1" style="--accent:#e8863a; --accent-ink:#1a0b02;">
+          <img class="rail-icon" src="depthsofruin/images/icon-rail-128.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Depths of Ruin</span><span class="rail-status">Coming to Steam</span></span>
+        </a>
+
+        <a class="rail-item" role="tab" id="tab-stopsantahd" href="#stopsantahd" aria-controls="panel-stopsantahd" aria-selected="false" tabindex="-1" style="--accent:#7fd0ff; --accent-ink:#06223a;">
+          <img class="rail-icon" src="StopSantaHD/images/icon.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Stop Santa: Remastered</span><span class="rail-status">Coming Soon</span></span>
+        </a>
+
+        <p class="rail-group">Other Products</p>
+
+        <a class="rail-item" role="tab" id="tab-cinedossier" href="#cinedossier" aria-controls="panel-cinedossier" aria-selected="false" tabindex="-1" style="--accent:#3a8fd6; --accent-ink:#fff;">
+          <img class="rail-icon contain" src="images/cinedossier-logo.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">CineDossier</span><span class="rail-status">Closed Beta</span></span>
+        </a>
+
+        <!-- Lunara: hidden for now. Move the <a> out of this <template> to restore it. -->
+        <template id="lunara-tab-hidden">
+        <a class="rail-item" role="tab" id="tab-lunara" href="#lunara" aria-controls="panel-lunara" aria-selected="false" tabindex="-1" style="--accent:#c8b4ff; --accent-ink:#1a0f3a;">
+          <img class="rail-icon" src="lunara/images/icon-128.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Lunara: Horoscope &amp; Chart</span><span class="rail-status">Closed Alpha</span></span>
+        </a>
+        </template>
+      </nav>
+
+      <div class="stage">
+
+        <!-- Crystal Dig (default; its media uses real src so it is in the first paint) -->
+        <article class="panel" id="panel-crystaldig" role="tabpanel" aria-labelledby="tab-crystaldig" data-project="crystaldig" style="--accent:#f5a623; --accent-ink:#2a1700; --art-pos:left center;">
+          <div class="panel-art">
+            <img class="no-halloween" src="crystaldig/images/background.png" alt="" style="object-position: center 30%">
+            <img class="only-halloween" src="crystaldig/images/halloween/hero-wide.webp" alt="">
+            <img class="panel-logo center vcenter xxl no-halloween" src="crystaldig/images/logo-480.webp" alt="Crystal Dig: Gem Miner">
+            <img class="panel-logo center vcenter xxl only-halloween" src="crystaldig/images/halloween/logo.webp" alt="Crystal Dig: Gem Miner, Halloween edition">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Block Puzzle Adventure</p>
+                <div class="pills">
+                  <span class="pill status no-halloween">Released</span>
+                  <span class="pill halloween only-halloween">Halloween Event Live</span>
+                  <span class="pill">2026</span>
+                  <span class="pill plat">iOS</span><span class="pill plat">Android</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">Place blocks, clear rows and columns, and collect gems &mdash; in endless Classic mode with leaderboards, or across 400 handcrafted Adventure levels spanning 8 worlds from Earth to Triton and 40 boss battles. Free to play, with limited-time seasonal events all through the holidays.</p>
+            <ul class="facts"><li>400 levels</li><li>8 worlds</li><li>40 bosses</li><li>Free to play</li></ul>
+            <div class="actions">
+              <a class="badge" href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744" target="_blank" rel="noopener"><img src="images/badge_apple.png" alt="Download on the App Store"></a>
+              <a class="badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.CrystalDig" target="_blank" rel="noopener"><img src="images/badge_google.png" alt="Get it on Google Play"></a>
+              <a class="btn ghost" href="crystaldig/index.html">Visit project page</a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Crystal Dig trailer and screenshots">
+            <button class="media video" type="button" data-video="crystaldig/images/trailer.mp4" data-poster="crystaldig/images/trailer-poster.webp" aria-label="Play the Crystal Dig trailer"><img src="crystaldig/images/trailer-poster.webp" alt=""><span class="play"></span></button>
+            <button class="media" type="button"><img src="crystaldig/images/shot-classic.webp" alt="Classic mode board"></button>
+            <button class="media" type="button"><img src="crystaldig/images/shot-worldmap.webp" alt="World map: choose a planet"></button>
+            <button class="media" type="button"><img src="crystaldig/images/shot-boss-magmaheart.webp" alt="Boss battle against Magma Heart"></button>
+            <button class="media" type="button"><img src="crystaldig/images/shot-season-track.webp" alt="Seasonal event reward track"></button>
+          </div>
+        </article>
+
+        <!-- Polari: hidden for now. Move the <article> out of this <template> to restore it. -->
+        <template id="polari-hidden">
+        <article class="panel" id="panel-polari" role="tabpanel" aria-labelledby="tab-polari" data-project="polari" hidden style="--accent:#2dd4bf; --accent-ink:#042f2e;">
+          <div class="panel-art">
+            <img data-src="images/polari-card.png" alt="">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <h3 class="panel-title">Polari<span class="dot">.</span>Men</h3>
+              <div class="panel-head-text">
+                <p class="panel-sub">AI Companions</p>
+                <div class="pills">
+                  <span class="pill status">Now Live</span>
+                  <span class="pill">2026</span>
+                  <span class="pill mature">18+</span>
+                  <span class="pill plat">Web App</span><span class="pill plat">Android</span><span class="pill plat soon">iOS Soon</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">A curated cast of AI companions with real faces, real voices, and real memory. They text first, remember your life, and are always upfront about being AI. Free to start.</p>
+            <ul class="facts"><li>Real voices</li><li>Real memory</li><li>They text first</li><li>Free to start</li></ul>
+            <div class="actions">
+              <a class="btn" href="https://polari.men" target="_blank" rel="noopener">Open polari.men <span class="ext">&nearr;</span></a>
+            </div>
+          </div>
+        </article>
+        </template>
+
+        <!-- Meow Wars -->
+        <article class="panel" id="panel-meowwars" role="tabpanel" aria-labelledby="tab-meowwars" data-project="meowwars" hidden style="--accent:#f08a24; --accent-ink:#2a1200; --art-pos:center 40%;">
+          <div class="panel-art">
+            <img data-src="MeowWars/images/cover/background_top.jpg" alt="">
+            <img class="art-overlay" data-src="MeowWars/images/cover/cover_cats-min.png" alt="">
+            <img class="panel-logo vcenter lg" data-src="MeowWars/images/cover/logo-min.png" alt="Meow Wars: Card Battle">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Card Battle</p>
+                <div class="pills">
+                  <span class="pill status">Released</span>
+                  <span class="pill">2018</span>
+                  <span class="pill plat">Steam</span><span class="pill plat">iOS</span><span class="pill plat">Android</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">A cat-themed card battle game with charming hand-drawn characters. Battle through challengers, challenge friends to PVP duels, and free Claw Mountain from Commander Catrat's grip.</p>
+            <ul class="facts"><li>Campaign</li><li>PvP duels</li><li>8 hand-drawn cats</li><li>Original soundtrack</li></ul>
+            <div class="actions">
+              <a class="badge" href="https://store.steampowered.com/app/762110/Meow_Wars_Card_Battle/" target="_blank" rel="noopener"><img src="images/badge_steam.png" alt="Available on Steam"></a>
+              <a class="badge" href="https://apps.apple.com/us/app/meow-wars/id1353622193" target="_blank" rel="noopener"><img src="images/badge_apple.png" alt="Download on the App Store"></a>
+              <a class="badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.MeowWars" target="_blank" rel="noopener"><img src="images/badge_google.png" alt="Get it on Google Play"></a>
+              <a class="btn ghost" href="MeowWars/index.html">Visit project page</a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Meow Wars trailer and screenshots">
+            <button class="media video wide" type="button" data-youtube="zJsIUwJ9npM" aria-label="Play the Meow Wars trailer"><img data-src="https://i.ytimg.com/vi/zJsIUwJ9npM/hqdefault.jpg" alt=""><span class="play"></span></button>
+            <button class="media" type="button"><img data-src="MeowWars/images/screenshots/meowwars_screenshot_a_full.jpg" alt="Meow Wars battle screen"></button>
+            <button class="media" type="button"><img data-src="MeowWars/images/screenshots/meowwars_screenshot_b_full.jpg" alt="Meow Wars card hand"></button>
+            <button class="media" type="button"><img data-src="MeowWars/images/screenshots/meowwars_screenshot_c_full.jpg" alt="Meow Wars campaign map"></button>
+            <button class="media" type="button"><img data-src="MeowWars/images/screenshots/meowwars_screenshot_d_full.jpg" alt="Meow Wars duel"></button>
+          </div>
+        </article>
+
+        <!-- Stop Santa -->
+        <article class="panel" id="panel-stopsanta" role="tabpanel" aria-labelledby="tab-stopsanta" data-project="stopsanta" hidden style="--accent:#e03c31; --accent-ink:#fff; --art-pos:center 22%;">
+          <div class="panel-art">
+            <img data-src="StopSanta/images/background_xmas.gif" alt="">
+            <img class="panel-logo center flush-top xl" data-src="StopSanta/images/StopSanta_Logo.png" alt="Stop Santa: Tower Defense">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Tower Defense</p>
+                <div class="pills">
+                  <span class="pill status">Released</span>
+                  <span class="pill">2017</span>
+                  <span class="pill plat">Steam</span><span class="pill plat">iOS</span><span class="pill plat">Android</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">Santa has gone crazy and enlisted an army of evil elves, zombie Santas, and sadistic penguins. It's up to you and the remaining elves to stop him in this holiday-themed tower defense game!</p>
+            <ul class="facts"><li>Holiday towers</li><li>Elves, zombies, penguins</li><li>Frozen tundra levels</li></ul>
+            <div class="actions">
+              <a class="badge" href="https://store.steampowered.com/app/746410/Stop_Santa__Tower_Defense/" target="_blank" rel="noopener"><img src="images/badge_steam.png" alt="Available on Steam"></a>
+              <a class="badge" href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895" target="_blank" rel="noopener"><img src="images/badge_apple.png" alt="Download on the App Store"></a>
+              <a class="badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta" target="_blank" rel="noopener"><img src="images/badge_google.png" alt="Get it on Google Play"></a>
+              <a class="btn ghost" href="StopSanta/index.html">Visit project page</a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Stop Santa trailer and screenshots">
+            <button class="media video wide" type="button" data-youtube="9JKWRtq7dec" aria-label="Play the Stop Santa trailer"><img data-src="https://i.ytimg.com/vi/9JKWRtq7dec/hqdefault.jpg" alt=""><span class="play"></span></button>
+            <button class="media" type="button"><img data-src="StopSanta/images/screenshots/StopSanta_Screen_1.jpg" alt="Stop Santa gameplay"></button>
+            <button class="media" type="button"><img data-src="StopSanta/images/screenshots/StopSanta_Screen_2.jpg" alt="Stop Santa tower placement"></button>
+            <button class="media" type="button"><img data-src="StopSanta/images/screenshots/StopSanta_Screen_3.jpg" alt="Stop Santa enemy wave"></button>
+            <button class="media" type="button"><img data-src="StopSanta/images/screenshots/StopSanta_Screen_4.jpg" alt="Stop Santa boss fight"></button>
+          </div>
+        </article>
+
+        <!-- Depths of Ruin -->
+        <article class="panel" id="panel-depthsofruin" role="tabpanel" aria-labelledby="tab-depthsofruin" data-project="depthsofruin" hidden style="--accent:#e8863a; --accent-ink:#1a0b02; --art-pos:center 30%;">
+          <div class="panel-art">
+            <img data-src="depthsofruin/images/hero.jpg" alt="">
+            <img class="panel-logo big" data-src="depthsofruin/images/logo-500.webp" alt="Depths of Ruin">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Norse Roguelite Action RPG</p>
+                <div class="pills">
+                  <span class="pill status">In Production</span>
+                  <span class="pill plat soon">Steam Soon</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">The dead have stopped keeping their bargain. Descend through eight realms of the dead as one of four heroes, take the blessings of three gods, and kill the lord at the bottom of each. Coming to Steam.</p>
+            <ul class="facts"><li>8 realms</li><li>4 heroes</li><li>3 gods</li><li>8 lords</li></ul>
+            <div class="actions">
+              <span class="btn" aria-disabled="true">Steam &mdash; coming soon</span>
+              <a class="btn ghost" href="depthsofruin/index.html">Visit project page</a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Depths of Ruin screenshots">
+            <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-01.jpg" alt="Depths of Ruin combat"></button>
+            <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-02.jpg" alt="Depths of Ruin realm"></button>
+            <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-03.jpg" alt="Depths of Ruin boss"></button>
+            <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-04.jpg" alt="Depths of Ruin hero select"></button>
+          </div>
+        </article>
+
+        <!-- Stop Santa: Remastered -->
+        <article class="panel" id="panel-stopsantahd" role="tabpanel" aria-labelledby="tab-stopsantahd" data-project="stopsantahd" hidden style="--accent:#7fd0ff; --accent-ink:#06223a; --art-pos:center 35%;">
+          <div class="panel-art">
+            <img data-src="StopSantaHD/images/hero.jpg" alt="">
+            <img class="panel-logo big" data-src="StopSantaHD/images/logo-480.webp" alt="Stop Santa: Remastered">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Holiday Tower Defense, Rebuilt</p>
+                <div class="pills">
+                  <span class="pill status">Coming Soon</span>
+                  <span class="pill plat soon">iOS Soon</span><span class="pill plat soon">Android Soon</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">Stop Santa, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever.</p>
+            <ul class="facts"><li>60 levels</li><li>6 regions</li><li>18 enemies</li><li>6 bosses</li><li>No ads</li></ul>
+            <div class="actions">
+              <span class="badge soon" title="Coming soon"><img src="images/badge_apple.png" alt="App Store, coming soon"></span>
+              <span class="badge soon" title="Coming soon"><img src="images/badge_google.png" alt="Google Play, coming soon"></span>
+              <a class="btn ghost" href="StopSantaHD/index.html">Visit project page</a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Stop Santa: Remastered screenshots">
+            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-01.jpg" alt="Stop Santa: Remastered gameplay"></button>
+            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-02.jpg" alt="Stop Santa: Remastered region"></button>
+            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-03.jpg" alt="Stop Santa: Remastered towers"></button>
+            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-04.jpg" alt="Stop Santa: Remastered boss"></button>
+          </div>
+        </article>
+
+        <!-- CineDossier -->
+        <article class="panel" id="panel-cinedossier" role="tabpanel" aria-labelledby="tab-cinedossier" data-project="cinedossier" hidden style="--accent:#3a8fd6; --accent-ink:#fff;">
+          <div class="panel-art light">
+            <img data-src="images/cinedossier-logo.png" alt="">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <h3 class="panel-title">CineDossier</h3>
+              <div class="panel-head-text">
+                <p class="panel-sub">Documentary Research Tracker</p>
+                <div class="pills">
+                  <span class="pill status">Closed Beta</span>
+                  <span class="pill plat">Web App</span><span class="pill plat">macOS</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">A research workspace built for documentary teams. Spreadsheet grid, linked records, chronological timeline, and Kanban boards for sources, people, footage, and production tasks. Currently in beta.</p>
+            <ul class="facts"><li>Grid</li><li>Linked records</li><li>Timeline</li><li>Kanban</li></ul>
+            <div class="actions">
+              <a class="btn" href="https://cinedossier.com" target="_blank" rel="noopener">Open cinedossier.com <span class="ext">&nearr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lunara: hidden for now. Move the <article> out of this <template> to restore it. -->
+        <template id="lunara-hidden">
+        <article class="panel" id="panel-lunara" role="tabpanel" aria-labelledby="tab-lunara" data-project="lunara" hidden style="--accent:#c8b4ff; --accent-ink:#1a0f3a;">
+          <div class="panel-art">
+            <img data-src="lunara/images/stars_moon_background.jpg" alt="">
+            <img class="art-badge" data-src="lunara/images/icon-128.png" alt="">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <h3 class="panel-title">Lunara: Horoscope &amp; Chart</h3>
+              <div class="panel-head-text">
+                <p class="panel-sub">Astrology Companion</p>
+                <div class="pills">
+                  <span class="pill status">Closed Alpha</span>
+                  <span class="pill plat">Web App</span><span class="pill plat soon">Android Soon</span>
+                </div>
+              </div>
+            </div>
+            <p class="panel-pitch">Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, moon phases, and a feed where kindred charts connect. Free at lunaraconnect.com.</p>
+            <ul class="facts"><li>Real transits</li><li>Birth chart</li><li>Live sky</li><li>Moon phases</li></ul>
+            <div class="actions">
+              <a class="btn" href="https://lunaraconnect.com" target="_blank" rel="noopener">Open lunaraconnect.com <span class="ext">&nearr;</span></a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Lunara screenshots">
+            <button class="media" type="button"><img data-src="lunara/images/Today-600.webp" alt="Lunara: today's reading"></button>
+            <button class="media" type="button"><img data-src="lunara/images/Week-600.webp" alt="Lunara: week ahead"></button>
+            <button class="media" type="button"><img data-src="lunara/images/Chart-600.webp" alt="Lunara: birth chart"></button>
+            <button class="media" type="button"><img data-src="lunara/images/Moon-600.webp" alt="Lunara: moon phases"></button>
+          </div>
+        </article>
+        </template>
 
       </div>
-
-      <div class="games-row">
-
-        <a class="game-card" href="https://cinedossier.com" target="_blank" rel="noopener">
-          <div class="game-card-image" style="background: #F4F6F8; display: flex; align-items: center; justify-content: center;">
-            <img src="images/cinedossier-logo.png" alt="CineDossier: Research &amp; Production Tracker" style="width: auto; height: 82%; max-width: 90%;">
-          </div>
-          <div class="game-card-body">
-            <span class="game-card-badge beta">Closed Beta</span>
-            <h3>CineDossier</h3>
-            <p class="game-card-sub">Documentary Research Tracker</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag">macOS</span></div>
-            <p>A research workspace built for documentary teams. Spreadsheet grid, linked records, chronological timeline, and Kanban boards for sources, people, footage, and production tasks. Currently in beta.</p>
-          </div>
-        </a>
-
-        <a class="game-card" href="https://lunaraconnect.com" target="_blank" rel="noopener">
-          <div class="game-card-image" style="background: url('lunara/images/stars_background.png') center / cover no-repeat, #08060F; display: flex; align-items: center; justify-content: center;">
-            <img src="lunara/images/icon.png" alt="Lunara: Daily Horoscope & Chart" style="width: 140px; height: 140px; border-radius: 28px;">
-          </div>
-          <div class="game-card-body">
-            <span class="game-card-badge beta">Closed Alpha</span>
-            <h3>Lunara: Horoscope & Chart</h3>
-            <p class="game-card-sub">Astrology Companion</p>
-            <div class="platform-tags"><span class="platform-tag">Web App</span><span class="platform-tag soon">Android Soon</span></div>
-            <p>Every reading based on actual planetary transits. Daily horoscopes, birth charts, the live sky, moon phases, and a feed where kindred charts connect. Free at lunaraconnect.com.</p>
-          </div>
-        </a>
-
-      </div>
-
     </div>
   </section>
 
   <!-- About -->
-  <section class="about">
+  <section class="about" id="about">
     <div class="about-inner">
-      <img src="images/ttg-guy.png" alt="" class="about-mascot">
+      <img src="images/ttg-guy.webp" alt="" class="about-mascot">
       <div class="about-text">
         <h2>About Us</h2>
-        <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest releases include Polari and Crystal Dig, with CineDossier and Lunara in production.</p>
+        <p>Independent game studio based in Seattle, WA. Founded in 2016 by Adrian Sotomayor, a 25+ year veteran who's shipped titles like Minecraft, Hearthstone, Among Us, and Risk of Rain 2 across mobile, PC, and console. Now focused on crafting original games and apps with indie heart. Latest release is Crystal Dig, with Depths of Ruin, Stop Santa: Remastered and CineDossier in production.</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
+  <!-- Contact: email link plus a form. The form has no backend on GitHub Pages, so
+       site.js turns it into a pre-filled email in the visitor's mail app. -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <h2>Contact us</h2>
+        <p>Press, partnerships, support, or just want to say hi? Drop us a line.</p>
+        <a class="contact-email" href="mailto:Adrian@TacoTruckGames.com">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l8 5 8-5V7H4Zm16 2.7-8 5-8-5V17h16V9.7Z"/></svg>
+          Adrian@TacoTruckGames.com
+        </a>
+        <p class="contact-note">Based in Seattle, WA. We usually reply within a couple of days.</p>
+      </div>
+      <form class="contact-form" id="contact-form" action="mailto:Adrian@TacoTruckGames.com" method="post" enctype="text/plain">
+        <div class="field-row">
+          <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
+          <label class="field"><span>Your email</span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span>Subject</span>
+            <select name="subject">
+              <option>General question</option>
+              <option>Support for a game or app</option>
+              <option>Press / media</option>
+              <option>Partnership / business</option>
+            </select>
+          </label>
+        </div>
+        <label class="field"><span>Message</span><textarea name="message" rows="3" required></textarea></label>
+        <div class="form-actions">
+          <button class="btn" type="submit">Send message</button>
+          <span class="form-hint">Opens in your mail app.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
   <footer class="footer">
-    <p>&copy; 2025 Taco Truck Games, LLC &mdash; Seattle, WA</p>
-<p class="footer-contact"><a href="mailto:Adrian@TacoTruckGames.com">Adrian@TacoTruckGames.com</a></p>
+    <p>&copy; 2026 Taco Truck Games, LLC &mdash; Seattle, WA</p>
   </footer>
+
+  <!-- Lightbox for trailers and enlarged screenshots (filled by site.js) -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <button class="lightbox-nav prev" type="button" aria-label="Previous" hidden>&#8249;</button>
+    <button class="lightbox-nav next" type="button" aria-label="Next" hidden>&#8250;</button>
+    <div class="lightbox-body"></div>
+  </div>
 
 </body>
 </html>
