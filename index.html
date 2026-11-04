@@ -28,8 +28,8 @@
     })();
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261103g">
-  <script src="site.js?v=20261103g" defer></script>
+  <link rel="stylesheet" href="site.css?v=20261103i">
+  <script src="site.js?v=20261103i" defer></script>
   <noscript><style>.panel[hidden]{display:block !important;margin-bottom:24px}.media:has(img[data-src]),.media.video{display:none}.panel > .panel-art{display:block}.cine{height:auto;padding-top:var(--nav-h)}.cine-text{position:static;padding:24px 20px 8px}.showcase{margin-top:0}</style></noscript>
 </head>
 <body>
@@ -411,8 +411,9 @@
   </section>
 
   <!-- Footer -->
-  <!-- Contact: email link plus a form. The form has no backend on GitHub Pages, so
-       site.js turns it into a pre-filled email in the visitor's mail app. -->
+  <!-- Contact: email link plus a form. GitHub Pages has no backend, so site.js posts the
+       form to the Worker at codev.tacotruckgames.com (/api/contact), which stores it and
+       emails us via Resend. If that call fails, site.js falls back to a pre-filled mailto. -->
   <section class="contact" id="contact">
     <div class="contact-inner">
       <div class="contact-text">
@@ -424,10 +425,10 @@
         </a>
         <p class="contact-note">Based in Seattle, WA. We usually reply within a couple of days.</p>
       </div>
-      <form class="contact-form" id="contact-form" action="mailto:Adrian@TacoTruckGames.com" method="post" enctype="text/plain">
+      <form class="contact-form" id="contact-form" novalidate data-endpoint="https://codev.tacotruckgames.com/api/contact">
         <div class="field-row">
-          <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
-          <label class="field"><span>Your email</span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" maxlength="120" required><small class="field-error" aria-live="polite"></small></label>
+          <label class="field"><span>Your email</span><input type="email" name="email" autocomplete="email" inputmode="email" maxlength="254" required><small class="field-error" aria-live="polite"></small></label>
           <label class="field"><span>Subject</span>
             <select name="subject">
               <option>General question</option>
@@ -437,10 +438,11 @@
             </select>
           </label>
         </div>
-        <label class="field"><span>Message</span><textarea name="message" rows="3" required></textarea></label>
+        <label class="field"><span>Message</span><textarea name="message" rows="3" maxlength="5000" required></textarea><small class="field-error" aria-live="polite"></small></label>
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <div class="form-actions">
           <button class="btn" type="submit">Send message</button>
-          <span class="form-hint">Opens in your mail app.</span>
+          <span class="form-hint" role="status" aria-live="polite">We reply within a couple of days.</span>
         </div>
       </form>
     </div>

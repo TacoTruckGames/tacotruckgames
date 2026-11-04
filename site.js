@@ -126,17 +126,82 @@
     });
   })();
 
-  /* ── Contact form: no backend on a static site, so build a pre-filled email ── */
+  /* ── Contact form: validate, then POST to the Worker on codev.tacotruckgames.com
+     (GitHub Pages has no backend). It stores the message and emails us. If the
+     request fails, offer a pre-filled mailto instead. ── */
   var form = document.getElementById('contact-form');
   if (form) {
+    var endpoint = form.getAttribute('data-endpoint');
+    var hint = form.querySelector('.form-hint');
+    var button = form.querySelector('button[type=submit]');
+    var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var rules = {
+      name: function (v) { return v.length < 2 ? 'Please enter your name.' : ''; },
+      email: function (v) { return EMAIL.test(v) ? '' : 'Enter a valid email address.'; },
+      message: function (v) { return v.length < 10 ? 'Please write a short message.' : ''; }
+    };
+
+    function val(name) { return (form.elements[name].value || '').trim(); }
+    function showError(name, msg) {
+      var input = form.elements[name];
+      var slot = input.parentNode.querySelector('.field-error');
+      if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+      if (slot) slot.textContent = msg || '';
+      return !msg;
+    }
+    function validateField(name) { return showError(name, rules[name](val(name))); }
+    function validateAll() {
+      var firstBad = null;
+      Object.keys(rules).forEach(function (n) { if (!validateField(n) && !firstBad) firstBad = n; });
+      if (firstBad) form.elements[firstBad].focus();
+      return !firstBad;
+    }
+    Object.keys(rules).forEach(function (n) {
+      var input = form.elements[n];
+      input.addEventListener('blur', function () { validateField(n); });
+      input.addEventListener('input', function () { if (input.getAttribute('aria-invalid')) validateField(n); });
+    });
+
+    function setHint(html, cls) { if (hint) { hint.innerHTML = html; hint.className = 'form-hint' + (cls ? ' ' + cls : ''); } }
+    function mailto() {
+      var subject = '[tacotruckgames.com] ' + val('subject') + ' — ' + val('name');
+      var body = val('message') + '\n\n— ' + val('name') + ' <' + val('email') + '>';
+      return 'mailto:Adrian@TacoTruckGames.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var f = form.elements;
-      var subject = '[tacotruckgames.com] ' + f.subject.value + ' — ' + f.name.value;
-      var body = f.message.value + '\n\n— ' + f.name.value + ' <' + f.email.value + '>';
-      location.href = 'mailto:Adrian@TacoTruckGames.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      var hint = form.querySelector('.form-hint');
-      if (hint) { hint.textContent = 'Your mail app should open with the message filled in.'; hint.classList.add('sent'); }
+      if (!validateAll()) return;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      setHint('');
+
+      var payload = {};
+      ['name', 'email', 'subject', 'message', 'website'].forEach(function (n) { payload[n] = val(n); });
+
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) { return { res: res, data: data }; });
+        })
+        .then(function (r) {
+          if (r.res.ok && r.data.ok) {
+            form.innerHTML = '<div class="form-success"><strong>Thanks — we got it.</strong><p>We usually reply within a couple of days from Adrian@TacoTruckGames.com.</p></div>';
+            return;
+          }
+          if (r.res.status === 400 && r.data.errors) {
+            Object.keys(r.data.errors).forEach(function (n) { if (rules[n]) showError(n, r.data.errors[n]); });
+            setHint('Please fix the highlighted fields.', 'error');
+          } else {
+            throw new Error(r.data.error || 'Request failed');
+          }
+        })
+        .catch(function (err) {
+          setHint((err.message === 'Failed to fetch' ? 'We couldn\'t reach the server.' : err.message) +
+            ' <a href="' + mailto() + '">Send it by email instead</a>.', 'error');
+        })
+        .then(function () {
+          if (document.body.contains(button)) { button.disabled = false; button.textContent = 'Send message'; }
+        });
     });
   }
 

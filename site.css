@@ -657,9 +657,19 @@ a { color: #ffd166; }
 .field textarea { resize: vertical; min-height: 72px; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
 
+.field [aria-invalid="true"] { border-color: #e8573a; background: rgba(232,87,58,0.1); }
+.field-error { color: #ffb3a3; font-size: 0.8em; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.field-error:empty { display: none; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
 .form-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .form-hint { color: var(--muted); font-size: 0.9em; }
 .form-hint.sent { color: #9ff0b5; }
+.form-hint.error { color: #ffb3a3; }
+.form-hint a { color: var(--gold); }
+.form-success { padding: 10px 4px; }
+.form-success strong { color: #9ff0b5; font-size: 1.05em; }
+.form-success p { color: var(--muted); font-size: 0.95em; margin-top: 6px; }
 
 /* ── Seasonal: Halloween (Crystal Dig only; set by the script in <head>) ── */
 html:not([data-season="halloween"]) .only-halloween { display: none !important; }
