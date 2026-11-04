@@ -90,6 +90,42 @@
   window.addEventListener('hashchange', fromHash);
   fromHash();
 
+  /* ── Swipe left/right to move between projects (mobile) ──
+     Handled over the hero and the showcase, but not the rail or a screenshot
+     strip (those scroll horizontally on their own), nor the lightbox. */
+  function stepProject(dir) {
+    var i = ids.indexOf(current);
+    if (i < 0) return;
+    var n = (i + dir + ids.length) % ids.length;
+    history.replaceState(null, '', '#' + ids[n]);
+    select(ids[n]);
+  }
+
+  (function () {
+    var sx = 0, sy = 0, track = false;
+    function onStart(e) {
+      if (e.touches.length !== 1) { track = false; return; }
+      var t = e.target;
+      if (t.closest && t.closest('.rail, .media-strip, .lightbox')) { track = false; return; }
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY; track = true;
+    }
+    function onEnd(e) {
+      if (!track) return;
+      track = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - sx, dy = t.clientY - sy;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        stepProject(dx < 0 ? 1 : -1); /* swipe left → next project */
+      }
+    }
+    ['.cine', '.showcase'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (!el) return;
+      el.addEventListener('touchstart', onStart, { passive: true });
+      el.addEventListener('touchend', onEnd, { passive: true });
+    });
+  })();
+
   /* ── Contact form: no backend on a static site, so build a pre-filled email ── */
   var form = document.getElementById('contact-form');
   if (form) {
