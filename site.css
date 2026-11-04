@@ -148,6 +148,10 @@ a { color: #ffd166; }
   align-items: start;
 }
 
+/* Left column wrapper (tagline + rail). min-width:0 lets the grid column
+   shrink so the horizontally-scrolling rail doesn't blow out the mobile layout. */
+.lead { min-width: 0; }
+
 .rail {
   position: sticky;
   top: calc(var(--nav-h) + 16px);
