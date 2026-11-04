@@ -12,6 +12,9 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var narrow = window.matchMedia('(max-width: 900px)');
   var current = null;
+  var stage = document.querySelector('.stage');
+  var panelList = ids.map(panelOf);
+  var mobileReady = false;
 
   function panelOf(id) { return document.getElementById('panel-' + id); }
 
@@ -25,10 +28,66 @@
     });
   }
 
+  function setTabStates(id) {
+    var tab = document.getElementById('tab-' + id);
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+  }
+
+  function revealTab(id, smooth) {
+    var tab = document.getElementById('tab-' + id);
+    if (narrow.matches && tab && tab.scrollIntoView) {
+      tab.scrollIntoView({ block: 'nearest', inline: 'center', behavior: (smooth && !reduce.matches) ? 'smooth' : 'auto' });
+    }
+  }
+
+  /* Mobile carousel: show and load every panel so swiping between them is smooth. */
+  function prepCarousel() {
+    if (mobileReady) return;
+    mobileReady = true;
+    panelList.forEach(function (p) { if (p) { hydrate(p); p.hidden = false; p.classList.remove('is-entering'); } });
+  }
+
+  /* Size the carousel to the active panel so short panels don't leave a gap. */
+  function fitStage(id) {
+    if (!stage || !narrow.matches) return;
+    var p = panelList[ids.indexOf(id)];
+    if (p) stage.style.height = p.offsetHeight + 'px';
+  }
+
+  var suppressSync = false, suppressT;
+  function scrollToPanel(id, smooth) {
+    if (!stage) return;
+    var i = ids.indexOf(id);
+    if (i < 0) return;
+    var behavior = (smooth && !reduce.matches) ? 'smooth' : 'auto';
+    suppressSync = true;
+    clearTimeout(suppressT);
+    stage.scrollTo({ left: Math.round(i * stage.clientWidth), behavior: behavior });
+    suppressT = setTimeout(function () { suppressSync = false; }, behavior === 'smooth' ? 520 : 60);
+  }
+
   function select(id, opts) {
     opts = opts || {};
     if (ids.indexOf(id) < 0) return;
     var tab = document.getElementById('tab-' + id);
+
+    /* Mobile: all panels stay in the DOM carousel; "selecting" scrolls to one. */
+    if (narrow.matches && stage) {
+      prepCarousel();
+      setTabStates(id);
+      current = id;
+      fitStage(id);
+      scrollToPanel(id, opts.smooth !== false);
+      revealTab(id, true);
+      if (opts.focus && tab) tab.focus({ preventScroll: true });
+      return;
+    }
+
+    /* Desktop: one panel at a time, with a short enter animation. */
     if (id !== current) {
       tabs.forEach(function (t) {
         var on = t === tab;
@@ -50,10 +109,7 @@
       });
       current = id;
     }
-    if (opts.focus) tab.focus({ preventScroll: true });
-    if (narrow.matches && tab.scrollIntoView) {
-      tab.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
-    }
+    if (opts.focus && tab) tab.focus({ preventScroll: true });
   }
 
   /* A project id selects that project; an empty hash (e.g. after Back) restores the default;
@@ -89,42 +145,59 @@
 
   window.addEventListener('hashchange', fromHash);
   fromHash();
-
-  /* ── Swipe left/right to move between projects (mobile) ──
-     Handled over the hero and the showcase, but not the rail or a screenshot
-     strip (those scroll horizontally on their own), nor the lightbox. */
-  function stepProject(dir) {
-    var i = ids.indexOf(current);
-    if (i < 0) return;
-    var n = (i + dir + ids.length) % ids.length;
-    history.replaceState(null, '', '#' + ids[n]);
-    select(ids[n]);
+  /* Land exactly on the active panel at load, with no scroll animation. */
+  if (narrow.matches && stage && current) {
+    requestAnimationFrame(function () { fitStage(current); scrollToPanel(current, false); });
   }
 
-  (function () {
-    var sx = 0, sy = 0, track = false;
-    function onStart(e) {
-      if (e.touches.length !== 1) { track = false; return; }
-      var t = e.target;
-      if (t.closest && t.closest('.rail, .media-strip, .lightbox')) { track = false; return; }
-      sx = e.touches[0].clientX; sy = e.touches[0].clientY; track = true;
+  /* ── Mobile carousel: sync the active tab + hash to the scroll position ──
+     Native scroll gives the smooth finger-following swipe; here we just read
+     which panel settled into view and update the rail and URL to match. */
+  if (stage) {
+    var syncRaf;
+    stage.addEventListener('scroll', function () {
+      if (!narrow.matches || suppressSync) return;
+      cancelAnimationFrame(syncRaf);
+      syncRaf = requestAnimationFrame(function () {
+        var w = stage.clientWidth || 1;
+        var idx = Math.max(0, Math.min(ids.length - 1, Math.round(stage.scrollLeft / w)));
+        var id = ids[idx];
+        if (id && id !== current) {
+          current = id;
+          setTabStates(id);
+          fitStage(id);
+          revealTab(id, true);
+          history.replaceState(null, '', '#' + id);
+        }
+      });
+    }, { passive: true });
+  }
+
+  /* Rearrange when crossing the mobile/desktop breakpoint so each mode is consistent. */
+  function onModeChange() {
+    if (!current) return;
+    if (narrow.matches) {
+      prepCarousel();
+      setTabStates(current);
+      requestAnimationFrame(function () { fitStage(current); scrollToPanel(current, false); });
+    } else {
+      if (stage) stage.style.height = ''; /* desktop uses natural height */
+      panelList.forEach(function (p) { if (p) p.hidden = (p.id !== 'panel-' + current); });
+      var cp = panelOf(current);
+      if (cp) hydrate(cp);
     }
-    function onEnd(e) {
-      if (!track) return;
-      track = false;
-      var t = e.changedTouches[0];
-      var dx = t.clientX - sx, dy = t.clientY - sy;
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        stepProject(dx < 0 ? 1 : -1); /* swipe left → next project */
-      }
-    }
-    ['.cine', '.showcase'].forEach(function (sel) {
-      var el = document.querySelector(sel);
-      if (!el) return;
-      el.addEventListener('touchstart', onStart, { passive: true });
-      el.addEventListener('touchend', onEnd, { passive: true });
-    });
-  })();
+  }
+  if (narrow.addEventListener) narrow.addEventListener('change', onModeChange);
+  else if (narrow.addListener) narrow.addListener(onModeChange);
+
+  /* Re-measure the active panel's height once media loads and when the width changes. */
+  window.addEventListener('load', function () { if (narrow.matches && current) fitStage(current); });
+  var fitRaf;
+  window.addEventListener('resize', function () {
+    if (!narrow.matches || !current) return;
+    cancelAnimationFrame(fitRaf);
+    fitRaf = requestAnimationFrame(function () { fitStage(current); scrollToPanel(current, false); });
+  });
 
   /* ── Contact form: validate, then POST to the Worker on codev.tacotruckgames.com
      (GitHub Pages has no backend). It stores the message and emails us. If the
