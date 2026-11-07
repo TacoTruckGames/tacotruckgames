@@ -37,6 +37,12 @@
     });
   }
 
+  /* Mirror the active project onto <html> so per-project ambient effects
+     (Stop Santa snow, Depths of Ruin ash) can key off it in CSS. */
+  function setActiveProject(id) {
+    document.documentElement.setAttribute('data-project', id);
+  }
+
   function revealTab(id, smooth) {
     var tab = document.getElementById('tab-' + id);
     if (narrow.matches && tab && tab.scrollIntoView) {
@@ -80,6 +86,7 @@
       prepCarousel();
       setTabStates(id);
       current = id;
+      setActiveProject(id);
       fitStage(id);
       scrollToPanel(id, opts.smooth !== false);
       revealTab(id, true);
@@ -108,6 +115,7 @@
         }
       });
       current = id;
+      setActiveProject(id);
     }
     if (opts.focus && tab) tab.focus({ preventScroll: true });
   }
@@ -164,6 +172,7 @@
         var id = ids[idx];
         if (id && id !== current) {
           current = id;
+          setActiveProject(id);
           setTabStates(id);
           fitStage(id);
           revealTab(id, true);

@@ -737,17 +737,9 @@ html[data-season="harvest"] #tab-crystaldig { --accent: #e0892e; --accent-ink: #
 
 .pill.harvest { background: #b45309; color: #fff; border-color: transparent; }
 
-/* ── Autumn Harvest: site-wide warm ambiance (whole page) ── */
-html[data-season="harvest"] body {
-  background:
-    linear-gradient(180deg, rgba(180,83,9,0.28) 0%, rgba(120,53,15,0.12) 32%, rgba(100,63,132,0) 60%),
-    var(--ttg-purple);
-  background-attachment: fixed;
-}
-
 /* Drifting leaves. Hidden unless the season script sets data-season="harvest". */
 .harvest-fx { display: none; }
-html[data-season="harvest"] .harvest-fx {
+html[data-season="harvest"][data-project="crystaldig"] .harvest-fx {
   display: block;
   position: fixed;
   inset: 0;
@@ -793,6 +785,88 @@ html[data-season="harvest"] .harvest-fx {
 }
 @media (prefers-reduced-motion: reduce) {
   html[data-season="harvest"] .harvest-fx { display: none; }
+}
+
+/* ── Per-project ambiance: Stop Santa snow, Depths of Ruin ash ──
+   A fixed overlay shown only while that project is selected (site.js mirrors the
+   active project onto <html data-project>). Each themed project has its own falling
+   effect (Crystal Dig leaves, Stop Santa snow, Depths of Ruin ash); every other
+   project — Meow Wars, CineDossier, Co-Development — has nothing falling. */
+.snow-fx, .ash-fx { display: none; }
+
+html[data-project="stopsanta"] .snow-fx,
+html[data-project="stopsantahd"] .snow-fx,
+html[data-project="depthsofruin"] .ash-fx {
+  display: block;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 40; /* above content, below the lightbox (100) */
+}
+
+.snow-fx span, .ash-fx span {
+  position: absolute;
+  top: -6vh;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Snow: soft white flakes */
+.snow-fx span {
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.85);
+  animation: snow-fall linear infinite;
+}
+
+/* Ash: warm embers with the odd grey fleck */
+.ash-fx span {
+  background: radial-gradient(circle at 50% 38%, #ffd9a0 0%, #e8863a 48%, #7a3a14 100%);
+  box-shadow: 0 0 7px rgba(232, 134, 58, 0.65);
+  animation: ash-fall linear infinite;
+}
+.ash-fx span:nth-child(3n) { background: #717171; box-shadow: none; }
+
+/* Shared sizing / lanes / timing for both effects (14 particles) */
+:is(.snow-fx, .ash-fx) span:nth-child(1)  { left: 5%;  width: 6px; height: 6px; animation-duration: 11s; animation-delay: -1s; }
+:is(.snow-fx, .ash-fx) span:nth-child(2)  { left: 12%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -6s; }
+:is(.snow-fx, .ash-fx) span:nth-child(3)  { left: 19%; width: 3px; height: 3px; animation-duration: 9s;  animation-delay: -3s; }
+:is(.snow-fx, .ash-fx) span:nth-child(4)  { left: 26%; width: 7px; height: 7px; animation-duration: 16s; animation-delay: -10s; }
+:is(.snow-fx, .ash-fx) span:nth-child(5)  { left: 33%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: -2s; }
+:is(.snow-fx, .ash-fx) span:nth-child(6)  { left: 41%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: -8s; }
+:is(.snow-fx, .ash-fx) span:nth-child(7)  { left: 48%; width: 6px; height: 6px; animation-duration: 10s; animation-delay: -5s; }
+:is(.snow-fx, .ash-fx) span:nth-child(8)  { left: 55%; width: 3px; height: 3px; animation-duration: 13s; animation-delay: -12s; }
+:is(.snow-fx, .ash-fx) span:nth-child(9)  { left: 62%; width: 7px; height: 7px; animation-duration: 17s; animation-delay: -4s; }
+:is(.snow-fx, .ash-fx) span:nth-child(10) { left: 69%; width: 5px; height: 5px; animation-duration: 11s; animation-delay: -9s; }
+:is(.snow-fx, .ash-fx) span:nth-child(11) { left: 77%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -1s; }
+:is(.snow-fx, .ash-fx) span:nth-child(12) { left: 84%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: -7s; }
+:is(.snow-fx, .ash-fx) span:nth-child(13) { left: 91%; width: 3px; height: 3px; animation-duration: 9s;  animation-delay: -11s; }
+:is(.snow-fx, .ash-fx) span:nth-child(14) { left: 97%; width: 5px; height: 5px; animation-duration: 15s; animation-delay: -3s; }
+
+@keyframes snow-fall {
+  0%   { transform: translate3d(0, 0, 0);          opacity: 0; }
+  10%  { opacity: 0.95; }
+  50%  { transform: translate3d(22px, 52vh, 0); }
+  90%  { opacity: 0.95; }
+  100% { transform: translate3d(-16px, 106vh, 0);  opacity: 0; }
+}
+
+@keyframes ash-fall {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg);        opacity: 0; }
+  12%  { opacity: 0.9; }
+  50%  { transform: translate3d(-20px, 52vh, 0) rotate(130deg); }
+  88%  { opacity: 0.9; }
+  100% { transform: translate3d(26px, 106vh, 0) rotate(260deg); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  :is(.snow-fx, .ash-fx) span:nth-child(4),
+  :is(.snow-fx, .ash-fx) span:nth-child(11) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow-fx, .ash-fx { display: none !important; }
 }
 
 /* ── Motion ── */

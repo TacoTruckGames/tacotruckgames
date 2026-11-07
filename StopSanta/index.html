@@ -424,6 +424,40 @@
   </style>
 </head>
 <body>
+  <!-- Snowfall ambiance -->
+  <div class="snow-fx" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <style>
+    .snow-fx { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+    .snow-fx span {
+      position: absolute; top: -6vh; border-radius: 50%; opacity: 0;
+      background: #fff; box-shadow: 0 0 6px rgba(255,255,255,0.85);
+      will-change: transform, opacity; animation: snow-fall linear infinite;
+    }
+    .snow-fx span:nth-child(1) { left: 5%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: -1s; }
+    .snow-fx span:nth-child(2) { left: 12%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -6s; }
+    .snow-fx span:nth-child(3) { left: 19%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: -3s; }
+    .snow-fx span:nth-child(4) { left: 26%; width: 7px; height: 7px; animation-duration: 16s; animation-delay: -10s; }
+    .snow-fx span:nth-child(5) { left: 33%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: -2s; }
+    .snow-fx span:nth-child(6) { left: 41%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: -8s; }
+    .snow-fx span:nth-child(7) { left: 48%; width: 6px; height: 6px; animation-duration: 10s; animation-delay: -5s; }
+    .snow-fx span:nth-child(8) { left: 55%; width: 3px; height: 3px; animation-duration: 13s; animation-delay: -12s; }
+    .snow-fx span:nth-child(9) { left: 62%; width: 7px; height: 7px; animation-duration: 17s; animation-delay: -4s; }
+    .snow-fx span:nth-child(10) { left: 69%; width: 5px; height: 5px; animation-duration: 11s; animation-delay: -9s; }
+    .snow-fx span:nth-child(11) { left: 77%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -1s; }
+    .snow-fx span:nth-child(12) { left: 84%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: -7s; }
+    .snow-fx span:nth-child(13) { left: 91%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: -11s; }
+    .snow-fx span:nth-child(14) { left: 97%; width: 5px; height: 5px; animation-duration: 15s; animation-delay: -3s; }
+    @keyframes snow-fall {
+      0%   { transform: translate3d(0,0,0);         opacity: 0; }
+      10%  { opacity: 0.95; }
+      50%  { transform: translate3d(22px,52vh,0); }
+      90%  { opacity: 0.95; }
+      100% { transform: translate3d(-16px,106vh,0); opacity: 0; }
+    }
+    @media (max-width: 480px) { .snow-fx span:nth-child(4), .snow-fx span:nth-child(11) { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .snow-fx { display: none; } }
+  </style>
+
 
   <!-- Hero -->
   <section class="hero">

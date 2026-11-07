@@ -648,6 +648,42 @@
   </style>
 </head>
 <body>
+  <!-- Falling ash / ember ambiance -->
+  <div class="ash-fx" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <style>
+    .ash-fx { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+    .ash-fx span {
+      position: absolute; top: -6vh; border-radius: 50%; opacity: 0;
+      background: radial-gradient(circle at 50% 38%, #ffd9a0 0%, #e8863a 48%, #7a3a14 100%);
+      box-shadow: 0 0 7px rgba(232,134,58,0.65);
+      will-change: transform, opacity; animation: ash-fall linear infinite;
+    }
+    .ash-fx span:nth-child(3n) { background: #717171; box-shadow: none; }
+    .ash-fx span:nth-child(1) { left: 5%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: -1s; }
+    .ash-fx span:nth-child(2) { left: 12%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -6s; }
+    .ash-fx span:nth-child(3) { left: 19%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: -3s; }
+    .ash-fx span:nth-child(4) { left: 26%; width: 7px; height: 7px; animation-duration: 16s; animation-delay: -10s; }
+    .ash-fx span:nth-child(5) { left: 33%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: -2s; }
+    .ash-fx span:nth-child(6) { left: 41%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: -8s; }
+    .ash-fx span:nth-child(7) { left: 48%; width: 6px; height: 6px; animation-duration: 10s; animation-delay: -5s; }
+    .ash-fx span:nth-child(8) { left: 55%; width: 3px; height: 3px; animation-duration: 13s; animation-delay: -12s; }
+    .ash-fx span:nth-child(9) { left: 62%; width: 7px; height: 7px; animation-duration: 17s; animation-delay: -4s; }
+    .ash-fx span:nth-child(10) { left: 69%; width: 5px; height: 5px; animation-duration: 11s; animation-delay: -9s; }
+    .ash-fx span:nth-child(11) { left: 77%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: -1s; }
+    .ash-fx span:nth-child(12) { left: 84%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: -7s; }
+    .ash-fx span:nth-child(13) { left: 91%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: -11s; }
+    .ash-fx span:nth-child(14) { left: 97%; width: 5px; height: 5px; animation-duration: 15s; animation-delay: -3s; }
+    @keyframes ash-fall {
+      0%   { transform: translate3d(0,0,0) rotate(0deg);          opacity: 0; }
+      12%  { opacity: 0.9; }
+      50%  { transform: translate3d(-20px,52vh,0) rotate(130deg); }
+      88%  { opacity: 0.9; }
+      100% { transform: translate3d(26px,106vh,0) rotate(260deg); opacity: 0; }
+    }
+    @media (max-width: 480px) { .ash-fx span:nth-child(4), .ash-fx span:nth-child(11) { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .ash-fx { display: none; } }
+  </style>
+
 
   <!-- Hero -->
   <section class="hero">
