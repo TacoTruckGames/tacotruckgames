@@ -1,0 +1,217 @@
+/*
+ * Crystal Dig — Autumn Harvest seasonal theme.
+ *
+ * Every rule is scoped to html[data-season="harvest"], which the inline script in
+ * index.html sets through November (visitor's local date). Outside that window, or
+ * with JavaScript off, nothing here applies and none of the images below are
+ * downloaded. Force it for testing with #harvest or #noseason on the URL.
+ *
+ * There is no harvest-specific logo, so the default hero logo stays; the harvest
+ * key art (social/seasons-2026) has its own title baked in, so the hero backdrop is
+ * positioned to its scenery side to avoid doubling it.
+ */
+
+html[data-season="harvest"] {
+  --cd-bg: #241710;
+  --cd-bg-alt: #2e1d10;
+  --cd-bg-deep: #37230f;
+  --cd-accent: #e8912e;
+  --cd-link: #ffcf8a;
+  --cd-badge: #b45309;
+  --hv-amber: #e8912e;
+  --hv-glow: rgba(230, 126, 34, 0.45);
+}
+
+/* ── Hero: autumn key art behind the logo ── */
+html[data-season="harvest"] .hero::before {
+  background:
+    linear-gradient(180deg, rgba(36, 23, 16, 0.3) 0%, rgba(36, 23, 16, 0.58) 55%, rgba(36, 23, 16, 0.94) 100%),
+    url("social/seasons-2026/harvest-card-1920x1080.jpg") 88% center / 165% auto no-repeat;
+  opacity: 1;
+}
+
+html[data-season="harvest"] .hero-logo {
+  filter: drop-shadow(0 4px 22px var(--hv-glow));
+}
+
+html[data-season="harvest"] .hero-subtitle { color: #f0d6a8; }
+html[data-season="harvest"] .hero-tagline { color: #f6ecdc; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); }
+
+@media (max-width: 700px) {
+  html[data-season="harvest"] .hero::before {
+    background:
+      linear-gradient(180deg, rgba(36, 23, 16, 0.22) 0%, rgba(36, 23, 16, 0.62) 50%, rgba(36, 23, 16, 0.95) 100%),
+      url("social/seasons-2026/harvest-card-1920x1080.jpg") 80% center / cover no-repeat;
+  }
+}
+
+/* ── Section backdrops: the game's Harvest scenes ── */
+html[data-season="harvest"] .screenshots {
+  background: linear-gradient(180deg, var(--cd-bg-alt) 0%, #1f1309 100%);
+}
+
+html[data-season="harvest"] .worlds::before {
+  background-image: url("social/seasons-2026/harvest-mainmenu-1080x1350.jpg");
+  opacity: 0.22;
+}
+
+html[data-season="harvest"] .bosses::before {
+  background-image: url("social/seasons-2026/harvest-seasonevent-1080x1350.jpg");
+  opacity: 0.22;
+}
+
+html[data-season="harvest"] .gems-section::before {
+  background-image: url("social/seasons-2026/harvest-square-1080x1080.jpg");
+  opacity: 0.16;
+}
+
+html[data-season="harvest"] .cta::before {
+  background:
+    linear-gradient(180deg, rgba(36, 23, 16, 0.85) 0%, rgba(36, 23, 16, 0.55) 100%),
+    url("social/seasons-2026/harvest-store-1080x1350.jpg") center 40% / cover no-repeat;
+  opacity: 1;
+}
+
+html[data-season="harvest"] .worlds > p,
+html[data-season="harvest"] .bosses > p,
+html[data-season="harvest"] .gems-section > p {
+  color: #ead9c2;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* Planet glow goes amber */
+html[data-season="harvest"] .world-card img {
+  filter: drop-shadow(0 4px 14px var(--hv-glow));
+}
+
+/* Cards pick up a warm edge */
+html[data-season="harvest"] .mode-card,
+html[data-season="harvest"] .feature-card,
+html[data-season="harvest"] .boss-card {
+  border-color: rgba(232, 145, 46, 0.24);
+}
+
+html[data-season="harvest"] .mode-card.classic::before {
+  background: linear-gradient(135deg, #5a2d0c 0%, #2a1206 100%);
+}
+
+html[data-season="harvest"] .mode-card.adventure::before {
+  background: linear-gradient(135deg, #6a3410 0%, #331807 100%);
+}
+
+html[data-season="harvest"] .boss-card { background: rgba(30, 16, 6, 0.6); }
+
+html[data-season="harvest"] .feature-card { background: rgba(232, 145, 46, 0.08); }
+html[data-season="harvest"] .feature-card:hover { background: rgba(232, 145, 46, 0.14); }
+
+html[data-season="harvest"] .carousel img[src$="shot-worldmap.webp"] {
+  order: -1;
+  box-shadow: 0 8px 28px var(--hv-glow);
+}
+
+/* ── Seasonal Events: Harvest takes the spotlight ── */
+html[data-season="harvest"] .seasons {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-season="harvest"] .seasons::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("social/seasons-2026/harvest-square-1080x1080.jpg") center / cover no-repeat;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+html[data-season="harvest"] .seasons-inner { position: relative; z-index: 1; }
+
+html[data-season="harvest"] .season-card.harvest {
+  border: 2px solid var(--cd-accent);
+  box-shadow: 0 0 22px var(--hv-glow);
+  transform: translateY(-2px);
+}
+
+html[data-season="harvest"] .season-card.harvest .season-when { color: #ffe2c2; font-weight: 600; }
+
+/* ── Harvest callout (mirrors the Halloween one) ── */
+.hv-callout {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(232, 145, 46, 0.45);
+  background: linear-gradient(135deg, rgba(180, 83, 9, 0.3), rgba(120, 53, 15, 0.3));
+}
+
+.hv-callout-art {
+  flex-shrink: 0;
+  width: 92px;
+  height: 92px;
+  border-radius: 12px;
+  background: url("social/seasons-2026/harvest-square-1080x1080.jpg") center / cover no-repeat;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hv-callout p { color: #f6ecdc; margin: 0; }
+.hv-callout strong { color: var(--cd-accent); }
+
+@media (max-width: 480px) {
+  .hv-callout { flex-direction: column; text-align: center; }
+  .hv-callout-art { width: 76px; height: 76px; }
+}
+
+/* ── Drifting leaves ── */
+html[data-season="harvest"] .harvest-fx {
+  display: block;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.harvest-fx span {
+  position: absolute;
+  top: -8vh;
+  line-height: 1;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hv-leaf-fall linear infinite;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.harvest-fx span::before { content: "\1F341"; }               /* maple leaf */
+.harvest-fx span:nth-child(2n)::before { content: "\1F342"; } /* fallen leaf */
+.harvest-fx span:nth-child(3n)::before { content: "\1F343"; } /* leaf in wind */
+
+.harvest-fx span:nth-child(1)  { left: 6%;  font-size: 22px; animation-duration: 15s; animation-delay: -2s; }
+.harvest-fx span:nth-child(2)  { left: 16%; font-size: 30px; animation-duration: 19s; animation-delay: -9s; }
+.harvest-fx span:nth-child(3)  { left: 27%; font-size: 20px; animation-duration: 13s; animation-delay: -5s; }
+.harvest-fx span:nth-child(4)  { left: 38%; font-size: 28px; animation-duration: 21s; animation-delay: -14s; }
+.harvest-fx span:nth-child(5)  { left: 49%; font-size: 24px; animation-duration: 17s; animation-delay: -1s; }
+.harvest-fx span:nth-child(6)  { left: 60%; font-size: 32px; animation-duration: 23s; animation-delay: -11s; }
+.harvest-fx span:nth-child(7)  { left: 70%; font-size: 21px; animation-duration: 14s; animation-delay: -7s; }
+.harvest-fx span:nth-child(8)  { left: 80%; font-size: 27px; animation-duration: 20s; animation-delay: -16s; }
+.harvest-fx span:nth-child(9)  { left: 89%; font-size: 23px; animation-duration: 18s; animation-delay: -4s; }
+.harvest-fx span:nth-child(10) { left: 96%; font-size: 29px; animation-duration: 22s; animation-delay: -12s; }
+
+@keyframes hv-leaf-fall {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg);          opacity: 0; }
+  8%   { opacity: 0.9; }
+  50%  { transform: translate3d(-42px, 55vh, 0) rotate(180deg); }
+  92%  { opacity: 0.9; }
+  100% { transform: translate3d(28px, 112vh, 0) rotate(360deg); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  .harvest-fx span:nth-child(3),
+  .harvest-fx span:nth-child(7) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-season="harvest"] .harvest-fx { display: none; }
+}

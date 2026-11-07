@@ -11,16 +11,19 @@
   <meta property="og:url" content="https://tacotruckgames.com/crystaldig/">
   <link rel="apple-touch-icon" href="images/icon.png">
   <script>
-    /* Seasonal theme switch. Halloween runs Sep 25 - Oct 31 on the visitor's local date.
-       Add #halloween or #noseason to the URL to force a state for testing.
-       All seasonal styling lives in halloween.css under html[data-season]. */
+    /* Seasonal theme switch. Halloween runs Sep 25 - Oct 31; Autumn Harvest runs through
+       November, on the visitor's local date. Add #halloween / #harvest / #noseason to the URL
+       to force a state for testing. Seasonal styling lives in halloween.css / harvest.css. */
     (function () {
       function pick() {
         var h = location.hash;
-        if (h === '#halloween') return 'halloween';
         if (h === '#noseason') return '';
+        if (h === '#halloween') return 'halloween';
+        if (h === '#harvest') return 'harvest';
         var d = new Date(), m = d.getMonth() + 1;
-        return (m === 9 && d.getDate() >= 25) || m === 10 ? 'halloween' : '';
+        if ((m === 9 && d.getDate() >= 25) || m === 10) return 'halloween';
+        if (m === 11) return 'harvest';
+        return '';
       }
       function apply() {
         var s = pick(), root = document.documentElement;
@@ -690,15 +693,20 @@
       .world-card img { width: 70px; height: 70px; }
     }
 
-    /* Seasonal swaps: only-halloween content is hidden unless the season script sets data-season. */
+    /* Seasonal swaps: .only-<season> content shows only in that season; .no-season hides
+       off-season content once any season is on; .no-halloween hides it only for Halloween. */
     html:not([data-season="halloween"]) .only-halloween { display: none; }
+    html:not([data-season="harvest"]) .only-harvest { display: none; }
     html[data-season="halloween"] .no-halloween { display: none; }
+    html[data-season] .no-season { display: none; }
   </style>
   <link rel="stylesheet" href="halloween.css">
+  <link rel="stylesheet" href="harvest.css">
 </head>
 <body>
 
   <div class="season-fx only-halloween" aria-hidden="true"><span></span><span></span><span></span><span></span><span class="pumpkin"></span><span class="pumpkin"></span><span class="pumpkin"></span></div>
+  <div class="harvest-fx only-harvest" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
   <!-- Hero -->
   <section class="hero">
@@ -930,7 +938,8 @@
   <section class="seasons" id="seasons">
     <div class="seasons-inner">
       <span class="soon-badge only-halloween">Live Now &middot; Halloween</span>
-      <span class="soon-badge no-halloween">Holiday Events</span>
+      <span class="soon-badge only-harvest">Live Now &middot; Autumn Harvest</span>
+      <span class="soon-badge no-season">Holiday Events</span>
       <h2>Seasonal Events</h2>
       <p class="seasons-intro">Crystal Dig now has limited-time seasonal events. Each season dresses the whole game in its own look &mdash; menus, worlds and gems &mdash; and comes with its own tokens and rewards.</p>
 
@@ -939,9 +948,14 @@
         <p><strong>The Halloween event is on now,</strong> through October 31: jack-o'-lantern mines, pumpkin tokens to collect and a spooky event track full of prizes. Update to the latest version to join.</p>
       </div>
 
+      <div class="hv-callout only-harvest">
+        <div class="hv-callout-art" aria-hidden="true"></div>
+        <p><strong>The Autumn Harvest event is on now,</strong> through November: a golden harvest makeover, pumpkin and leaf tokens to collect and a seasonal event track full of prizes. Update to the latest version to join.</p>
+      </div>
+
       <div class="season-grid">
         <div class="season-card halloween"><h3>Halloween</h3><div class="season-when">October<span class="only-halloween"> &middot; on now</span></div></div>
-        <div class="season-card harvest"><h3>Autumn Harvest</h3><div class="season-when">November</div></div>
+        <div class="season-card harvest"><h3>Autumn Harvest</h3><div class="season-when">November<span class="only-harvest"> &middot; on now</span></div></div>
         <div class="season-card winter"><h3>Winter Holidays</h3><div class="season-when">December</div></div>
         <div class="season-card newyear"><h3>New Year</h3><div class="season-when">Into January</div></div>
       </div>
