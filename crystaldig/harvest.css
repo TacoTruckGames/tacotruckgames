@@ -50,14 +50,17 @@ html[data-season="harvest"] .screenshots {
   background: linear-gradient(180deg, var(--cd-bg-alt) 0%, #1f1309 100%);
 }
 
+/* Scene art, not game-UI screenshots: the mainmenu / season-event captures
+   showed buttons and the HUD, which read as chrome behind the copy. */
 html[data-season="harvest"] .worlds::before {
-  background-image: url("social/seasons-2026/harvest-mainmenu-1080x1350.jpg");
+  background-image: url("social/seasons-2026/harvest-square-1080x1080.jpg");
   opacity: 0.22;
 }
 
 html[data-season="harvest"] .bosses::before {
-  background-image: url("social/seasons-2026/harvest-seasonevent-1080x1350.jpg");
-  opacity: 0.22;
+  background-image: url("social/seasons-2026/harvest-card-1920x1080.jpg");
+  background-position: 78% center;
+  opacity: 0.2;
 }
 
 html[data-season="harvest"] .gems-section::before {
