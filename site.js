@@ -162,7 +162,7 @@
      Native scroll gives the smooth finger-following swipe; here we just read
      which panel settled into view and update the rail and URL to match. */
   if (stage) {
-    var syncRaf;
+    var syncRaf, settleT;
     stage.addEventListener('scroll', function () {
       if (!narrow.matches || suppressSync) return;
       cancelAnimationFrame(syncRaf);
@@ -174,11 +174,19 @@
           current = id;
           setActiveProject(id);
           setTabStates(id);
-          fitStage(id);
           revealTab(id, true);
           history.replaceState(null, '', '#' + id);
+          /* Deliberately NOT fitStage(id) here: rewriting the scroll
+             container's own height mid-swipe aborts the native scroll-snap
+             and leaves it parked between panels. The height is fitted once
+             the swipe settles (below), so the snap lands cleanly first. */
         }
       });
+      clearTimeout(settleT);
+      settleT = setTimeout(function () {
+        if (!narrow.matches || suppressSync) return;
+        fitStage(current);
+      }, 130);
     }, { passive: true });
   }
 
