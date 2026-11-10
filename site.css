@@ -457,6 +457,12 @@ a { color: #ffd166; }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 2px 32px 28px;
+  /* Inset the snap area to match the 32px side padding. Without this,
+     mandatory snapping aligns the first tile to the scrollport's padding-box
+     edge on load and eats the left padding — the amount depends on tile
+     width, so wide (landscape) strips end up flush to the panel edge while
+     narrow (portrait) ones keep a sliver. This keeps the buffer consistent. */
+  scroll-padding-inline: 32px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.3) transparent;
 }
