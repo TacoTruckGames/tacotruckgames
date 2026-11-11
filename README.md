@@ -55,7 +55,7 @@ We focus on fun, quick-to-play games across mobile and PC.
 <tr>
 <td align="center" width="50%">
 
-<img src="StopSanta/images/StopSanta_Logo.png" alt="Stop Santa: Tower Defense" width="280"/><br/>
+<img src="StopSanta/images/logo.png" alt="Stop Santa: Tower Defense" width="280"/><br/>
 
 **Stop Santa: Tower Defense** (2017)<br/>
 <sub>Santa has gone rogue! Build holiday-themed towers, defend the North Pole, and stop his elf army across a frozen tundra.</sub><br/><br/>
