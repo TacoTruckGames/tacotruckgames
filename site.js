@@ -64,16 +64,21 @@
     if (p) stage.style.height = p.offsetHeight + 'px';
   }
 
-  var suppressSync = false, suppressT;
+  /* While a rail tap scrolls the carousel toward a panel, pendingTarget holds that
+     panel's id. The scroll-sync below ignores the panels the animation passes on the
+     way, so the active project can't flip back to the old one before it lands. */
+  var pendingTarget = null, suppressT;
   function scrollToPanel(id, smooth) {
     if (!stage) return;
     var i = ids.indexOf(id);
     if (i < 0) return;
     var behavior = (smooth && !reduce.matches) ? 'smooth' : 'auto';
-    suppressSync = true;
+    pendingTarget = id;
     clearTimeout(suppressT);
     stage.scrollTo({ left: Math.round(i * stage.clientWidth), behavior: behavior });
-    suppressT = setTimeout(function () { suppressSync = false; }, behavior === 'smooth' ? 520 : 60);
+    /* Fallback: release the lock if the scroll is interrupted and never arrives,
+       otherwise sync would stay frozen on a target we never reached. */
+    suppressT = setTimeout(function () { pendingTarget = null; }, behavior === 'smooth' ? 1200 : 80);
   }
 
   function select(id, opts) {
@@ -163,11 +168,20 @@
      which panel settled into view and update the rail and URL to match. */
   if (stage) {
     var syncRaf, settleT;
+    /* A finger on the carousel means the user is taking manual control, so drop any
+       pending tap-scroll lock right away and let the swipe sync normally. */
+    stage.addEventListener('touchstart', function () { pendingTarget = null; }, { passive: true });
     stage.addEventListener('scroll', function () {
-      if (!narrow.matches || suppressSync) return;
+      if (!narrow.matches) return;
       cancelAnimationFrame(syncRaf);
       syncRaf = requestAnimationFrame(function () {
         var w = stage.clientWidth || 1;
+        if (pendingTarget !== null) {
+          /* A tap-initiated scroll is still travelling toward its target. Ignore the
+             panels it crosses until it arrives, so the active project never flips back. */
+          if (Math.round(stage.scrollLeft / w) !== ids.indexOf(pendingTarget)) return;
+          pendingTarget = null;
+        }
         var idx = Math.max(0, Math.min(ids.length - 1, Math.round(stage.scrollLeft / w)));
         var id = ids[idx];
         if (id && id !== current) {
@@ -176,15 +190,14 @@
           setTabStates(id);
           revealTab(id, true);
           history.replaceState(null, '', '#' + id);
-          /* Deliberately NOT fitStage(id) here: rewriting the scroll
-             container's own height mid-swipe aborts the native scroll-snap
-             and leaves it parked between panels. The height is fitted once
-             the swipe settles (below), so the snap lands cleanly first. */
+          /* Deliberately NOT fitStage(id) here: rewriting the scroll container's own
+             height mid-swipe aborts the native scroll-snap and parks it between
+             panels. Height is fitted once the swipe settles (below). */
         }
       });
       clearTimeout(settleT);
       settleT = setTimeout(function () {
-        if (!narrow.matches || suppressSync) return;
+        if (!narrow.matches || pendingTarget !== null) return;
         fitStage(current);
       }, 130);
     }, { passive: true });
