@@ -53,7 +53,7 @@
 
   <!-- Cinematic header: the selected project's key art is the top of the page.
        site.js moves the active panel's .panel-art in here; the studio logo and tagline float over it. -->
-  <header class="cine" id="top" data-project="crystaldig">
+  <header class="cine" id="top" data-project="stopsantahd">
     <div class="cine-art" aria-hidden="true"></div>
     <div class="cine-text">
       <img class="cine-wordmark" src="images/ttg-logo-v2-bottom.png" alt="Taco Truck Games" width="893" height="215">
@@ -72,9 +72,16 @@
       <div class="lead">
       <p class="cine-tag cine-tag-lead">Indie studio.<br>Big-studio experience.</p>
       <nav class="rail" role="tablist" aria-label="Projects" aria-orientation="vertical">
+        <p class="rail-group">Coming Soon</p>
+
+        <a class="rail-item" role="tab" id="tab-stopsantahd" href="#stopsantahd" aria-controls="panel-stopsantahd" aria-selected="true" style="--accent:#7fd0ff; --accent-ink:#06223a;">
+          <img class="rail-icon" src="StopSantaHD/images/icon.png" alt="" width="40" height="40">
+          <span class="rail-text"><span class="rail-name">Stop Santa: Remastered</span><span class="rail-status">iOS &amp; Android</span></span>
+        </a>
+
         <p class="rail-group">Released Games</p>
 
-        <a class="rail-item" role="tab" id="tab-crystaldig" href="#crystaldig" aria-controls="panel-crystaldig" aria-selected="true" style="--accent:#f5a623; --accent-ink:#2a1700;">
+        <a class="rail-item" role="tab" id="tab-crystaldig" href="#crystaldig" aria-controls="panel-crystaldig" aria-selected="false" tabindex="-1" style="--accent:#f5a623; --accent-ink:#2a1700;">
           <img class="rail-icon" src="crystaldig/images/icon-128.png" alt="" width="40" height="40">
           <span class="rail-text"><span class="rail-name">Crystal Dig: Gem Miner</span><span class="rail-status no-season">Released 2026</span><span class="rail-status only-halloween">Halloween Event Live</span><span class="rail-status only-harvest">Harvest Event Live</span></span>
         </a>
@@ -97,11 +104,6 @@
         <a class="rail-item" role="tab" id="tab-depthsofruin" href="#depthsofruin" aria-controls="panel-depthsofruin" aria-selected="false" tabindex="-1" style="--accent:#e8863a; --accent-ink:#1a0b02;">
           <img class="rail-icon" src="depthsofruin/images/icon-rail-128.png" alt="" width="40" height="40">
           <span class="rail-text"><span class="rail-name">Depths of Ruin</span><span class="rail-status">Coming to Steam</span></span>
-        </a>
-
-        <a class="rail-item" role="tab" id="tab-stopsantahd" href="#stopsantahd" aria-controls="panel-stopsantahd" aria-selected="false" tabindex="-1" style="--accent:#7fd0ff; --accent-ink:#06223a;">
-          <img class="rail-icon" src="StopSantaHD/images/icon.png" alt="" width="40" height="40">
-          <span class="rail-text"><span class="rail-name">Stop Santa: Remastered</span><span class="rail-status">Coming Soon</span></span>
         </a>
 
         <p class="rail-group">Other Products &amp; Services</p>
@@ -128,14 +130,46 @@
 
       <div class="stage">
 
-        <!-- Crystal Dig (default; its media uses real src so it is in the first paint) -->
-        <article class="panel" id="panel-crystaldig" role="tabpanel" aria-labelledby="tab-crystaldig" data-project="crystaldig" style="--accent:#f5a623; --accent-ink:#2a1700; --art-pos:left center;">
+        <!-- Stop Santa: Remastered (default; its media uses real src so it is in the first paint) -->
+        <article class="panel" id="panel-stopsantahd" role="tabpanel" aria-labelledby="tab-stopsantahd" data-project="stopsantahd" style="--accent:#7fd0ff; --accent-ink:#06223a; --art-pos:center 35%;">
           <div class="panel-art">
-            <img class="no-season" src="crystaldig/images/background.png" alt="" style="object-position: center 30%">
-            <img class="only-halloween" src="crystaldig/images/halloween/hero-wide.webp" alt="">
-            <img class="only-harvest" src="crystaldig/social/seasons-2026/harvest-card-1920x1080.jpg" alt="" style="object-position: center 30%">
-            <img class="panel-logo center vcenter xxl no-season" src="crystaldig/images/logo-480.webp" alt="Crystal Dig: Gem Miner">
-            <img class="panel-logo center vcenter xxl only-halloween" src="crystaldig/images/halloween/logo.webp" alt="Crystal Dig: Gem Miner, Halloween edition">
+            <img src="StopSantaHD/images/hero.jpg" alt="">
+            <img class="panel-logo big" src="StopSantaHD/images/logo-480.webp" alt="Stop Santa: Remastered">
+          </div>
+          <div class="panel-body">
+            <div class="panel-head">
+              <div class="panel-head-text">
+                <p class="panel-sub">Holiday Tower Defense, Rebuilt</p>
+                <div class="pills">
+                  <span class="pill status">Coming Soon</span>
+                  <span class="pill plat soon">iOS Soon</span><span class="pill plat soon">Android Soon</span>
+                </div>
+              </div>
+              <a class="btn ghost panel-visit" href="StopSantaHD/index.html">Visit project page</a>
+            </div>
+            <p class="panel-pitch">Stop Santa, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever. Universal on iPhone, iPad and the all-new iPhone Duo.</p>
+            <ul class="facts"><li>60 levels</li><li>6 regions</li><li>18 enemies</li><li>6 bosses</li><li>iPhone, iPad &amp; Duo</li><li>No ads</li></ul>
+            <div class="actions">
+              <a class="badge" href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895" target="_blank" rel="noopener"><img src="images/badge_apple.png" alt="Download on the App Store"></a>
+              <a class="badge" href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta" target="_blank" rel="noopener"><img src="images/badge_google.png" alt="Get it on Google Play"></a>
+            </div>
+          </div>
+          <div class="media-strip" aria-label="Stop Santa: Remastered screenshots">
+            <button class="media" type="button"><img src="StopSantaHD/images/screenshot-01.jpg" alt="Stop Santa: Remastered gameplay"></button>
+            <button class="media" type="button"><img src="StopSantaHD/images/screenshot-02.jpg" alt="Stop Santa: Remastered region"></button>
+            <button class="media" type="button"><img src="StopSantaHD/images/screenshot-03.jpg" alt="Stop Santa: Remastered towers"></button>
+            <button class="media" type="button"><img src="StopSantaHD/images/screenshot-04.jpg" alt="Stop Santa: Remastered boss"></button>
+          </div>
+        </article>
+
+        <!-- Crystal Dig -->
+        <article class="panel" id="panel-crystaldig" role="tabpanel" aria-labelledby="tab-crystaldig" data-project="crystaldig" hidden style="--accent:#f5a623; --accent-ink:#2a1700; --art-pos:left center;">
+          <div class="panel-art">
+            <img class="no-season" data-src="crystaldig/images/background.png" alt="" style="object-position: center 30%">
+            <img class="only-halloween" data-src="crystaldig/images/halloween/hero-wide.webp" alt="">
+            <img class="only-harvest" data-src="crystaldig/social/seasons-2026/harvest-card-1920x1080.jpg" alt="" style="object-position: center 30%">
+            <img class="panel-logo center vcenter xxl no-season" data-src="crystaldig/images/logo-480.webp" alt="Crystal Dig: Gem Miner">
+            <img class="panel-logo center vcenter xxl only-halloween" data-src="crystaldig/images/halloween/logo.webp" alt="Crystal Dig: Gem Miner, Halloween edition">
           </div>
           <div class="panel-body">
             <div class="panel-head">
@@ -159,12 +193,12 @@
             </div>
           </div>
           <div class="media-strip" aria-label="Crystal Dig trailer and screenshots">
-            <button class="media video" type="button" data-video="crystaldig/images/trailer.mp4" data-poster="crystaldig/images/trailer-poster.webp" aria-label="Play the Crystal Dig trailer"><img src="crystaldig/images/trailer-poster.webp" alt=""><span class="play"></span></button>
-            <button class="media" type="button"><img src="crystaldig/images/shot-classic.webp" alt="Classic mode board"></button>
-            <button class="media" type="button"><img src="crystaldig/images/shot-gems-miranda.webp" alt="Adventure mode: clearing lines and collecting gems on Miranda"></button>
-            <button class="media" type="button"><img src="crystaldig/images/shot-worldmap.webp" alt="World map: choose a planet"></button>
-            <button class="media" type="button"><img src="crystaldig/images/shot-boss-magmaheart.webp" alt="Boss battle against Magma Heart"></button>
-            <button class="media" type="button"><img src="crystaldig/images/shot-season-track.webp" alt="Seasonal event reward track"></button>
+            <button class="media video" type="button" data-video="crystaldig/images/trailer.mp4" data-poster="crystaldig/images/trailer-poster.webp" aria-label="Play the Crystal Dig trailer"><img data-src="crystaldig/images/trailer-poster.webp" alt=""><span class="play"></span></button>
+            <button class="media" type="button"><img data-src="crystaldig/images/shot-classic.webp" alt="Classic mode board"></button>
+            <button class="media" type="button"><img data-src="crystaldig/images/shot-gems-miranda.webp" alt="Adventure mode: clearing lines and collecting gems on Miranda"></button>
+            <button class="media" type="button"><img data-src="crystaldig/images/shot-worldmap.webp" alt="World map: choose a planet"></button>
+            <button class="media" type="button"><img data-src="crystaldig/images/shot-boss-magmaheart.webp" alt="Boss battle against Magma Heart"></button>
+            <button class="media" type="button"><img data-src="crystaldig/images/shot-season-track.webp" alt="Seasonal event reward track"></button>
           </div>
         </article>
 
@@ -257,34 +291,6 @@
             <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-02.jpg" alt="Depths of Ruin realm"></button>
             <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-03.jpg" alt="Depths of Ruin boss"></button>
             <button class="media" type="button"><img data-src="depthsofruin/images/screenshot-04.jpg" alt="Depths of Ruin hero select"></button>
-          </div>
-        </article>
-
-        <!-- Stop Santa: Remastered -->
-        <article class="panel" id="panel-stopsantahd" role="tabpanel" aria-labelledby="tab-stopsantahd" data-project="stopsantahd" hidden style="--accent:#7fd0ff; --accent-ink:#06223a; --art-pos:center 35%;">
-          <div class="panel-art">
-            <img data-src="StopSantaHD/images/hero.jpg" alt="">
-            <img class="panel-logo big" data-src="StopSantaHD/images/logo-480.webp" alt="Stop Santa: Remastered">
-          </div>
-          <div class="panel-body">
-            <div class="panel-head">
-              <div class="panel-head-text">
-                <p class="panel-sub">Holiday Tower Defense, Rebuilt</p>
-                <div class="pills">
-                  <span class="pill status">Coming Soon</span>
-                  <span class="pill plat soon">iOS Soon</span><span class="pill plat soon">Android Soon</span>
-                </div>
-              </div>
-              <a class="btn ghost panel-visit" href="StopSantaHD/index.html">Visit project page</a>
-            </div>
-            <p class="panel-pitch">Stop Santa, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever.</p>
-            <ul class="facts"><li>60 levels</li><li>6 regions</li><li>18 enemies</li><li>6 bosses</li><li>iPhone, iPad &amp; Duo</li><li>No ads</li></ul>
-          </div>
-          <div class="media-strip" aria-label="Stop Santa: Remastered screenshots">
-            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-01.jpg" alt="Stop Santa: Remastered gameplay"></button>
-            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-02.jpg" alt="Stop Santa: Remastered region"></button>
-            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-03.jpg" alt="Stop Santa: Remastered towers"></button>
-            <button class="media" type="button"><img data-src="StopSantaHD/images/screenshot-04.jpg" alt="Stop Santa: Remastered boss"></button>
           </div>
         </article>
 
