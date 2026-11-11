@@ -64,21 +64,12 @@
     if (p) stage.style.height = p.offsetHeight + 'px';
   }
 
-  /* While a rail tap scrolls the carousel toward a panel, pendingTarget holds that
-     panel's id. The scroll-sync below ignores the panels the animation passes on the
-     way, so the active project can't flip back to the old one before it lands. */
-  var pendingTarget = null, suppressT;
   function scrollToPanel(id, smooth) {
     if (!stage) return;
     var i = ids.indexOf(id);
     if (i < 0) return;
     var behavior = (smooth && !reduce.matches) ? 'smooth' : 'auto';
-    pendingTarget = id;
-    clearTimeout(suppressT);
     stage.scrollTo({ left: Math.round(i * stage.clientWidth), behavior: behavior });
-    /* Fallback: release the lock if the scroll is interrupted and never arrives,
-       otherwise sync would stay frozen on a target we never reached. */
-    suppressT = setTimeout(function () { pendingTarget = null; }, behavior === 'smooth' ? 1200 : 80);
   }
 
   function select(id, opts) {
@@ -163,25 +154,21 @@
     requestAnimationFrame(function () { fitStage(current); scrollToPanel(current, false); });
   }
 
-  /* ── Mobile carousel: sync the active tab + hash to the scroll position ──
-     Native scroll gives the smooth finger-following swipe; here we just read
-     which panel settled into view and update the rail and URL to match. */
+  /* ── Mobile carousel: sync the rail + hash to the SETTLED panel ──
+     We update the active rail item only once the carousel comes to rest, never
+     mid-swipe. Reading the position continuously while scrolling made the active
+     rail item flip back and forth between neighbours as the swipe crossed the
+     midpoint. Debouncing to the settle means the rail switches exactly once, when
+     the swipe lands, and the per-panel height is fitted at that same moment
+     (changing the scroll container's height any earlier aborts the native snap). */
   if (stage) {
-    var syncRaf, settleT;
-    /* A finger on the carousel means the user is taking manual control, so drop any
-       pending tap-scroll lock right away and let the swipe sync normally. */
-    stage.addEventListener('touchstart', function () { pendingTarget = null; }, { passive: true });
+    var settleT;
     stage.addEventListener('scroll', function () {
       if (!narrow.matches) return;
-      cancelAnimationFrame(syncRaf);
-      syncRaf = requestAnimationFrame(function () {
+      clearTimeout(settleT);
+      settleT = setTimeout(function () {
+        if (!narrow.matches) return;
         var w = stage.clientWidth || 1;
-        if (pendingTarget !== null) {
-          /* A tap-initiated scroll is still travelling toward its target. Ignore the
-             panels it crosses until it arrives, so the active project never flips back. */
-          if (Math.round(stage.scrollLeft / w) !== ids.indexOf(pendingTarget)) return;
-          pendingTarget = null;
-        }
         var idx = Math.max(0, Math.min(ids.length - 1, Math.round(stage.scrollLeft / w)));
         var id = ids[idx];
         if (id && id !== current) {
@@ -190,16 +177,9 @@
           setTabStates(id);
           revealTab(id, true);
           history.replaceState(null, '', '#' + id);
-          /* Deliberately NOT fitStage(id) here: rewriting the scroll container's own
-             height mid-swipe aborts the native scroll-snap and parks it between
-             panels. Height is fitted once the swipe settles (below). */
         }
-      });
-      clearTimeout(settleT);
-      settleT = setTimeout(function () {
-        if (!narrow.matches || pendingTarget !== null) return;
         fitStage(current);
-      }, 130);
+      }, 120);
     }, { passive: true });
   }
 
