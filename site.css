@@ -800,7 +800,6 @@ html[data-season="harvest"][data-project="crystaldig"] .harvest-fx {
    project — Meow Wars, CineDossier, Co-Development — has nothing falling. */
 .snow-fx, .ash-fx { display: none; }
 
-html[data-project="stopsanta"] .snow-fx,
 html[data-project="stopsantahd"] .snow-fx,
 html[data-project="depthsofruin"] .ash-fx {
   display: block;

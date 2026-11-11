@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stop Santa: Remastered - Holiday Tower Defense, Coming Soon to iOS and Android</title>
-  <meta name="description" content="Stop Santa is back, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever. Coming soon to iOS and Android.">
+  <meta name="description" content="Stop Santa is back, rebuilt from the ground up: 60 levels across six regions, 18 enemies, six bosses, three free abilities and a story in 36 panels. The North Pole is free. No ads, ever. A universal build for iPhone and iPad. Coming soon to iOS and Android.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Stop Santa: Remastered">
   <meta property="og:description" content="Every year he comes down out of the dark with that sack. This year the road is a killing field. Holiday tower defense, remastered. Coming soon to iOS and Android.">
@@ -209,6 +209,31 @@
       color: var(--muted);
       font-size: 0.98em;
       text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    }
+
+    /* Dual device support: one universal build for iPhone and iPad. */
+    .devices {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 0.82em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ice-2);
+      background: rgba(11,20,38,0.45);
+      border: 1px solid rgba(127,208,255,0.3);
+    }
+    .devices::before {
+      content: "";
+      width: 15px; height: 15px;
+      background: var(--ice-2);
+      -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="4" width="13" height="10" rx="1.5" fill="black"/><rect x="16" y="7" width="6" height="13" rx="1.5" fill="black"/></svg>') center / contain no-repeat;
+      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="4" width="13" height="10" rx="1.5" fill="black"/><rect x="16" y="7" width="6" height="13" rx="1.5" fill="black"/></svg>') center / contain no-repeat;
     }
 
     /* ── Screenshots carousel ── */
@@ -756,6 +781,7 @@
         </div>
       </div>
       <p class="hero-note">A new engine, 60 levels, 18 enemies, six bosses. The North Pole is free. No ads, ever.</p>
+      <p class="devices">Universal &mdash; one download for iPhone and iPad</p>
     </div>
   </section>
 
@@ -977,7 +1003,7 @@
   <!-- CTA -->
   <section class="cta">
     <p class="display">Stop Santa.</p>
-    <p class="sub">Coming soon as a free update to Stop Santa on iOS and Android.</p>
+    <p class="sub">Coming soon as a free update to Stop Santa on iOS and Android &mdash; universal on iPhone and iPad.</p>
     <div class="cta-row">
       <span class="coming">Coming soon</span>
       <div class="store-badges">
