@@ -275,7 +275,8 @@
     .carousel::-webkit-scrollbar-track { background: transparent; }
     .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
-    .carousel img {
+    .carousel img,
+    .carousel video {
       flex-shrink: 0;
       width: 520px;
       height: auto;
@@ -287,6 +288,7 @@
       -webkit-user-drag: none;
       user-drag: none;
     }
+    .carousel video { aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
 
     .carousel img:hover { transform: scale(1.02); }
 
@@ -725,7 +727,7 @@
       .hero-head { align-self: center; margin-left: 0; }
       .hero-tagline { font-size: 1.15em; }
       .carousel { padding: 8px 20px 20px; gap: 14px; }
-      .carousel img { width: 320px; }
+      .carousel img, .carousel video { width: 320px; }
       .feature-grid, .story-grid, .pair-row, .family-row { grid-template-columns: 1fr; }
       .thennow, .regions, .towers, .bosses, .features, .story { padding: 60px 0; }
       .cta .display { font-size: 2em; }
@@ -734,7 +736,7 @@
     @media (max-width: 480px) {
       .region-grid, .boss-grid { grid-template-columns: 1fr; }
       .remastered { letter-spacing: 0.3em; font-size: 0.95em; }
-      .carousel img { width: 280px; }
+      .carousel img, .carousel video { width: 280px; }
       .store-badge img { height: 46px; }
     }
   </style>
@@ -804,6 +806,9 @@
     <span class="kicker">On the road</span>
     <h2>Screenshots</h2>
     <div class="carousel">
+      <video controls preload="none" playsinline poster="images/stop-santa-trailer-poster.jpg" aria-label="Stop Santa remaster trailer">
+        <source src="images/stop-santa-trailer.mp4" type="video/mp4">
+      </video>
       <img src="images/screenshot-01.jpg" alt="Towers lining the snowy North Pole road as Santa and his elves advance">
       <img src="images/screenshot-02.jpg" alt="Holding the road against a horde of zombie elves and penguins">
       <img src="images/screenshot-03.jpg" alt="Candy Cane Forest, one of six new regions across sixty levels">
@@ -1007,17 +1012,6 @@
         <div class="panel"><img src="images/story-3.jpg" alt=""><p>Stop Santa.</p></div>
         <div class="panel"><img src="images/story-4.jpg" alt=""><p>He will come back with worse. He always does.</p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- Trailer -->
-  <section class="trailer">
-    <span class="kicker">Watch</span>
-    <h2>Trailer</h2>
-    <div class="video-wrapper">
-      <video controls preload="none" playsinline poster="images/stop-santa-trailer-poster.jpg">
-        <source src="images/stop-santa-trailer.mp4" type="video/mp4">
-      </video>
     </div>
   </section>
 
