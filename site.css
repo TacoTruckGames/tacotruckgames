@@ -419,6 +419,9 @@ a { color: #ffd166; }
 
 .facts li + li::before { content: "·"; margin: 0 10px; color: var(--accent); }
 
+/* "Released {Year}" line, below the pitch and facts (year no longer a top pill). */
+.released { color: var(--muted); font-size: 0.8em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin: -10px 0 18px; }
+
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
 .badge { display: inline-block; line-height: 0; border-radius: 8px; }
