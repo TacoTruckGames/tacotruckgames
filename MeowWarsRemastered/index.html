@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meow Wars: Remastered - Card Battle, Rebuilt for Mobile</title>
+  <meta name="description" content="Meow Wars is being rebuilt from the ground up for mobile as a roguelite card battler: pick a commander, draft a deck across a mission map, and duel other players online. Coming soon to iOS and Android.">
+  <meta name="keywords" content="meow wars, remastered, card battle, roguelite, deckbuilder, cats, mobile, ios, android, taco truck games, indie">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meow Wars: Remastered">
+  <meta property="og:description" content="Card battle, rebuilt for mobile as a roguelite deckbuilder. Pick a commander, run the mission map, duel online. Coming soon to iOS and Android.">
+  <meta property="og:image" content="https://tacotruckgames.com/MeowWarsRemastered/images/og.jpg">
+  <meta property="og:url" content="https://tacotruckgames.com/MeowWarsRemastered/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meow Wars: Remastered">
+  <meta name="twitter:description" content="Card battle, rebuilt for mobile as a roguelite deckbuilder. Coming soon to iOS and Android.">
+  <meta name="twitter:image" content="https://tacotruckgames.com/MeowWarsRemastered/images/og.jpg">
+
+  <link rel="icon" href="images/icon-128.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* The game's own tokens (UITheme): inked paper, olive, navy, beret red, mustard. */
+    :root {
+      --paper: #F2E8D0;
+      --paper-shade: #E2D5B5;
+      --paper-deep: #D3C29A;
+      --card: #FBF4E2;
+      --ink: #23201C;
+      --ink-soft: #575249;
+      --olive: #6B7A3A;
+      --olive-ink: #505C2C;
+      --navy: #2F4A6B;
+      --red: #C23B2E;
+      --red-ink: #A53227;
+      --mustard: #E0A526;
+      --khaki: #B9A06A;
+      --shadow: rgba(35, 32, 28, 0.88);
+      --maxw: 1120px;
+      --stroke: 3px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: "Balsamiq Sans", "Comic Neue", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      background: var(--paper) url("images/paper.png") repeat;
+      background-size: 384px;
+    }
+    img { max-width: 100%; }
+    a { color: var(--red-ink); }
+    h1, h2, h3, p { margin: 0; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* An inked paper panel: the fill and edge are a separate layer run through
+       a wobble filter, so the line looks drawn and the text stays sharp. */
+    .ink { position: relative; isolation: isolate; }
+    .ink::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: var(--fill, var(--card));
+      border: var(--stroke) solid var(--ink);
+      border-radius: var(--radius, 14px);
+      box-shadow: 5px 6px 0 var(--shadow);
+      filter: url(#wobble);
+    }
+    .tape { position: absolute; width: 124px; height: auto; top: -22px; pointer-events: none; z-index: 2; }
+    .tape.l { left: 26px; transform: rotate(-7deg); }
+    .tape.r { right: 26px; transform: rotate(6deg) scaleX(-1); }
+    .tape.c { left: 50%; margin-left: -62px; transform: rotate(-3deg); }
+
+    /* Buttons: the game's Fight! button. */
+    .btn {
+      --fill: var(--olive);
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 56px; padding: 10px 28px;
+      font: 700 1.15rem/1.1 "Balsamiq Sans", sans-serif; color: #fff; text-decoration: none;
+      text-shadow: 0 2px 0 var(--ink);
+      transition: transform 0.1s;
+    }
+    .btn.ink::before { border-radius: 12px; transition: box-shadow 0.1s; }
+    .btn:hover { transform: translate(-1px, -1px); }
+    .btn:active { transform: translate(3px, 4px); }
+    .btn:active::before { box-shadow: 1px 1px 0 var(--shadow); }
+    .btn.navy { --fill: var(--navy); }
+    .btn.paper { --fill: var(--paper); color: var(--ink); text-shadow: none; }
+    .btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: 4px; border-radius: 12px; }
+
+    /* Stamps: VICTORY!, UNLOCKED! */
+    .stamp {
+      display: inline-block; padding: 6px 18px 4px;
+      font-weight: 700; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--red); border: 4px double var(--red); border-radius: 6px;
+      background: rgba(251, 244, 226, 0.92);
+      transform: rotate(-3deg); filter: url(#wobble);
+    }
+    .stamp.olive { color: var(--olive-ink); border-color: var(--olive-ink); }
+
+    /* Ribbon headings: the turn banner. */
+    .ribbon {
+      display: flex; align-items: center; justify-content: center;
+      width: min(100%, 560px); aspect-ratio: 559 / 160; margin: 0 auto;
+      background: url("images/ribbon.png") center / 100% 100% no-repeat;
+      padding: 0 15% 3.2%;
+      font-size: clamp(1.05rem, 4.2vw, 1.8rem); font-weight: 700; color: #fff; text-align: center; line-height: 1;
+      text-shadow: 0 3px 0 var(--ink), 2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 -2px 0 var(--ink);
+    }
+    .ribbon.red { background-image: url("images/ribbon-red.png"); }
+    .ribbon.navy { background-image: url("images/ribbon-navy.png"); }
+    .ribbon.mustard { background-image: url("images/ribbon-mustard.png"); }
+    .lead { text-align: center; max-width: 60ch; margin: 10px auto 34px; color: var(--ink-soft); font-size: 1.08rem; }
+
+    /* Top bar */
+    .topbar { display: flex; align-items: center; gap: 12px; max-width: var(--maxw); margin: 0 auto; padding: 12px 20px; }
+    .topbar img { width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--ink); box-shadow: 2px 3px 0 var(--shadow); }
+    .topbar .brand { font-weight: 700; }
+    .topbar .back { margin-left: auto; font-weight: 700; text-decoration: none; color: var(--navy); }
+    .topbar .back:hover { color: var(--red-ink); }
+
+    /* Hero: the loading-screen key art, then the briefing card pinned over its foot. */
+    .hero-art {
+      display: block; width: 100%; height: clamp(260px, 52vw, 640px); object-fit: cover; object-position: 50% 30%;
+      border-top: var(--stroke) solid var(--ink); border-bottom: var(--stroke) solid var(--ink);
+    }
+    .brief { --fill: var(--paper); max-width: 760px; margin: -70px auto 0; padding: 34px 28px 30px; text-align: center; }
+    .brief .stamp { margin-bottom: 14px; }
+    .brief h1 { font-size: clamp(1.9rem, 6vw, 3rem); line-height: 1.05; }
+    .brief h1 span { color: var(--red); }
+    .brief p { margin: 12px auto 22px; max-width: 46ch; font-size: 1.15rem; color: var(--ink-soft); }
+    .actions { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+
+    /* HUD chips: the enemy panel's cells. */
+    .chips { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; list-style: none; padding: 0; margin: 40px auto 0; }
+    .chip { --fill: var(--paper); --radius: 12px; display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px 12px; font-weight: 700; }
+    .chip::before { box-shadow: 3px 4px 0 var(--shadow); }
+    .chip b { font-size: 1.5rem; line-height: 1; color: var(--red); }
+    .chip img { width: 30px; height: 30px; object-fit: contain; }
+
+    section { padding: 64px 0 8px; }
+
+    /* How a fight works */
+    .fight { display: grid; grid-template-columns: 1.35fr 1fr; gap: 34px; align-items: center; }
+    .frame { --fill: #fff; --radius: 8px; display: block; padding: 10px; margin: 0; }
+    .frame > img:not(.tape) { display: block; width: 100%; height: auto; border-radius: 3px; border: 2px solid var(--ink); }
+    .frame.tilt { transform: rotate(-1deg); }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; counter-reset: step; }
+    .steps li { --fill: var(--card); padding: 16px 18px 16px 70px; counter-increment: step; }
+    .steps li::after {
+      content: counter(step); position: absolute; left: 16px; top: 16px; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.3rem; color: #fff; text-shadow: 0 2px 0 var(--ink);
+      background: var(--mustard); border: var(--stroke) solid var(--ink); border-radius: 50%;
+    }
+    .steps h3 { font-size: 1.2rem; }
+    .steps p { color: var(--ink-soft); }
+
+    /* Commanders: laid out like the cards. */
+    .roster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px 22px; }
+    .cmd { --fill: var(--card); --radius: 12px; padding: 12px 12px 16px; text-align: center; transition: transform 0.15s; }
+    .cmd:nth-child(odd) { transform: rotate(-0.8deg); }
+    .cmd:nth-child(even) { transform: rotate(0.7deg); }
+    .cmd:hover { transform: rotate(0) translateY(-6px); }
+    .cmd .art { height: 230px; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--paper-shade); }
+    .cmd .art img { display: block; width: 100%; height: 150%; object-fit: cover; object-position: 50% 0; }
+    .cmd .name {
+      margin: -18px -22px 6px; aspect-ratio: 559 / 130; position: relative;
+      background: url("images/ribbon.png") center / 100% 100% no-repeat;
+      display: flex; align-items: center; justify-content: center; padding: 0 16% 3%;
+      font-weight: 700; font-size: 1.02rem; line-height: 1; color: #fff;
+      text-shadow: 0 2px 0 var(--ink), 1px 0 0 var(--ink), -1px 0 0 var(--ink);
+    }
+    .cmd.boss .name { background-image: url("images/ribbon-red.png"); }
+    .cmd .power { font-weight: 700; color: var(--navy); }
+    .cmd .power img { width: 24px; height: 24px; vertical-align: -5px; margin-right: 4px; }
+    .cmd p { font-size: 0.93rem; color: var(--ink-soft); line-height: 1.35; }
+    .cmd .hp {
+      position: absolute; top: 4px; right: 4px; z-index: 1; min-width: 44px; padding: 2px 8px;
+      font-weight: 700; color: #fff; text-shadow: 0 2px 0 var(--ink);
+      background: var(--red); border: var(--stroke) solid var(--ink); border-radius: 999px;
+    }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 26px; }
+    .shot { margin: 0; }
+    .shot button { display: block; width: 100%; padding: 8px; border: 0; background: none; cursor: zoom-in; font: inherit; color: inherit; --fill: #fff; --radius: 8px; transition: transform 0.15s; }
+    .shot:nth-child(3n+1) button { transform: rotate(-1.2deg); }
+    .shot:nth-child(3n+2) button { transform: rotate(0.8deg); }
+    .shot:nth-child(3n) button { transform: rotate(-0.4deg); }
+    .shot button:hover, .shot button:focus-visible { transform: rotate(0) translateY(-5px); outline: none; }
+    .shot button:focus-visible::before { border-color: var(--mustard); }
+    .shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 2px solid var(--ink); border-radius: 3px; }
+    .shot figcaption { text-align: center; margin-top: 10px; font-weight: 700; }
+
+    /* Features: the run summary sheet. */
+    .sheet { --fill: var(--paper); max-width: 920px; margin: 0 auto; padding: 44px 30px 30px; }
+    .sheet ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 34px; }
+    .sheet li { display: flex; gap: 12px; align-items: flex-start; padding-bottom: 16px; border-bottom: 2px dashed var(--khaki); }
+    .sheet li img { flex: 0 0 34px; width: 34px; height: 34px; object-fit: contain; margin-top: 2px; }
+    .sheet h3 { font-size: 1.15rem; }
+    .sheet p { color: var(--ink-soft); font-size: 0.98rem; }
+
+    /* Call to action on the menu's rooftop */
+    .cta {
+      margin-top: 72px; padding: 80px 0 90px; text-align: center;
+      background: var(--navy) url("images/rooftop.jpg") center 60% / cover no-repeat;
+      border-top: var(--stroke) solid var(--ink); border-bottom: var(--stroke) solid var(--ink);
+    }
+    .cta .card { --fill: var(--paper); max-width: 640px; margin: 0 auto; padding: 40px 26px 30px; }
+    .cta h2 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.1; }
+    .cta p { margin: 10px auto 24px; max-width: 46ch; color: var(--ink-soft); }
+
+    footer { text-align: center; padding: 26px 20px 44px; color: var(--ink-soft); }
+    footer a { color: var(--navy); font-weight: 700; }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(35, 32, 28, 0.92); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 50; }
+    .lightbox.open { display: flex; }
+    .lightbox figure { margin: 0; max-width: min(1400px, 100%); }
+    .lightbox img { display: block; max-width: 100%; max-height: 82vh; border: 6px solid #fff; outline: var(--stroke) solid var(--ink); border-radius: 4px; }
+    .lightbox figcaption { color: var(--paper); text-align: center; margin-top: 12px; font-weight: 700; }
+    .lightbox button {
+      position: absolute; width: 52px; height: 52px; border-radius: 50%; cursor: pointer;
+      font: 700 1.6rem/1 "Balsamiq Sans", sans-serif; color: var(--ink);
+      background: var(--paper); border: var(--stroke) solid var(--ink); box-shadow: 3px 4px 0 #000;
+    }
+    .lightbox .close { top: 14px; right: 14px; }
+    .lightbox .prev { left: 14px; top: 50%; margin-top: -26px; }
+    .lightbox .next { right: 14px; top: 50%; margin-top: -26px; }
+
+    @media (max-width: 900px) {
+      .fight { grid-template-columns: 1fr; }
+      .roster { grid-template-columns: repeat(2, 1fr); }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .gallery { grid-template-columns: 1fr; }
+      .sheet ul { grid-template-columns: 1fr; }
+      .roster { gap: 30px 16px; }
+      .cmd .art { height: 170px; }
+      .cmd .name { font-size: 0.82rem; margin: -14px -16px 6px; }
+      .brief { margin-top: -40px; padding: 30px 18px 24px; }
+      .tape.r { display: none; }
+      section { padding-top: 48px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .cmd, .shot button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- The hand-inked wobble used on every panel edge. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <div class="topbar">
+    <img src="images/icon.png" alt="">
+    <span class="brand">Meow Wars: Remastered</span>
+    <a class="back" href="https://tacotruckgames.com/">&larr; Taco Truck Games</a>
+  </div>
+
+  <header>
+    <img class="hero-art" src="images/key-art.jpg" alt="The eight Meow Wars commanders charging down a grassy hill at sunrise, under the Meow Wars logo">
+    <div class="wrap">
+      <div class="brief ink">
+        <img class="tape l" src="images/tape-1.png" alt="">
+        <img class="tape r" src="images/tape-2.png" alt="">
+        <span class="stamp">Coming soon &middot; iOS &amp; Android</span>
+        <h1><span>Meow Wars</span> Remastered</h1>
+        <p>The cat card battle, redrawn in ink and rebuilt for mobile as a roguelite deckbuilder.</p>
+        <div class="actions">
+          <a class="btn ink" href="#screens">See the game</a>
+          <a class="btn ink paper" href="https://store.steampowered.com/app/762110/Meow_Wars_Card_Battle/" target="_blank" rel="noopener">Play the original on Steam</a>
+        </div>
+      </div>
+
+      <ul class="chips" aria-label="The game in numbers">
+        <li class="chip ink"><img src="images/paw.png" alt=""><b>8</b> commanders</li>
+        <li class="chip ink"><img src="images/fish.png" alt=""><b>43</b> cards</li>
+        <li class="chip ink"><b>16</b> cat toys</li>
+        <li class="chip ink"><b>13</b> fights a run</li>
+        <li class="chip ink"><b>11</b> languages</li>
+      </ul>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2 class="ribbon">How a fight works</h2>
+      <p class="lead">Three lanes, a hand of cats and tricks, and one big button.</p>
+      <div class="fight">
+        <figure class="frame ink tilt">
+          <img class="tape c" src="images/tape-1.png" alt="">
+          <img src="images/shot-battle-forecast.jpg" alt="A fight on High Ground: Agent Alfie's cats face Major Mittens' cats across three lanes, with tags on the hearts showing the health each cat will be left with" loading="lazy" width="1600" height="900">
+        </figure>
+        <ol class="steps">
+          <li class="ink"><h3>Play your cats</h3><p>Spend goldfish to drop cats into three lanes and play tricks like Hairball and Catnip.</p></li>
+          <li class="ink"><h3>Read the board</h3><p>Every heart shows the health it will have left, so you know the result before you commit.</p></li>
+          <li class="ink"><h3>Press Fight!</h3><p>Each cat hits what stands across from it. An empty lane means the hit lands on the commander.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="ribbon red">Choose your commander</h2>
+      <p class="lead">The original cast, redrawn. Each one brings a starter deck and a power that costs one goldfish.</p>
+      <div class="roster">
+        <article class="cmd ink"><span class="hp" title="Health">25</span><div class="art"><img src="images/cmd-alfie.webp" alt="Agent Alfie, a black cat in a fedora and trench coat holding a water pistol" loading="lazy"></div><h3 class="name">Agent Alfie</h3><div class="power"><img src="images/fish.png" alt="">Cover Fire</div><p>1 damage to any cat.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">22</span><div class="art"><img src="images/cmd-luna.webp" alt="Lt. Luna, a white cat in an olive officer's uniform" loading="lazy"></div><h3 class="name">Lt. Luna</h3><div class="power"><img src="images/fish.png" alt="">Rally</div><p>Move one of your cats to another lane.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">28</span><div class="art"><img src="images/cmd-mittens.webp" alt="Major Mittens, a grey cat in a red beret and jumpsuit carrying a litter scoop" loading="lazy"></div><h3 class="name">Major Mittens</h3><div class="power"><img src="images/fish.png" alt="">Gamble</div><p>One of your cats gets +0 to +3 attack this turn.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">22</span><div class="art"><img src="images/cmd-princess.webp" alt="Private Princess, an orange and white cat with an eyepatch and a blue cap" loading="lazy"></div><h3 class="name">Private Princess</h3><div class="power"><img src="images/fish.png" alt="">Catnip Garden</div><p>Heal one of your cats by 2.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">22</span><div class="art"><img src="images/cmd-oscar.webp" alt="Special Ops Oscar, an orange cat in a helmet and headset with tactical gear" loading="lazy"></div><h3 class="name">Special Ops Oscar</h3><div class="power"><img src="images/fish.png" alt="">Soak</div><p>Daze an enemy cat.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">28</span><div class="art"><img src="images/cmd-cuddles.webp" alt="Captain Cuddles, a black cat in a peaked cap and dark coat" loading="lazy"></div><h3 class="name">Captain Cuddles</h3><div class="power"><img src="images/fish.png" alt="">Mimicry</div><p>Add a Copy Cat to your hand.</p></article>
+        <article class="cmd ink"><span class="hp" title="Health">28</span><div class="art"><img src="images/cmd-snowball.webp" alt="Sgt. Snowball, a grey cat in a teal winter parka and goggles" loading="lazy"></div><h3 class="name">Sgt. Snowball</h3><div class="power"><img src="images/fish.png" alt="">Dig In</div><p>Give one of your cats Guard.</p></article>
+        <article class="cmd ink boss"><span class="hp" title="Health">28</span><div class="art"><img src="images/cmd-catrat.webp" alt="Commander Catrat, a rat in a long coat holding a wedge of cheese" loading="lazy"></div><h3 class="name">Commander Catrat</h3><div class="power"><img src="images/fish.png" alt="">Hoard</div><p>Draw a card.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <h2 class="ribbon navy">From the new build</h2>
+      <p class="lead">Captured straight from the game. Tap a picture to enlarge it.</p>
+      <div class="gallery">
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-battle-tropics.jpg"><img src="images/shot-battle-tropics-sm.jpg" alt="Lt. Luna against Captain Cuddles in the Tropics; a Catnip token is held over one of her cats" loading="lazy" width="800" height="450"></button><figcaption>Hold a trick over a cat to see what it does</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-map.jpg"><img src="images/shot-map-sm.jpg" alt="The mission map: an island with a path of fights, and a panel for the next fight against Captain Cuddles" loading="lazy" width="800" height="450"></button><figcaption>Thirteen fights across the island</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-commander-select.jpg"><img src="images/shot-commander-select-sm.jpg" alt="Choose Your Commander: Agent Alfie, Lt. Luna and Major Mittens with their powers and starter decks" loading="lazy" width="800" height="450"></button><figcaption>Pick a commander and a starter deck</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-card-reward.jpg"><img src="images/shot-card-reward-sm.jpg" alt="Choose a Card: Major Mittens, Water Gunner or Cardboard Box" loading="lazy" width="800" height="450"></button><figcaption>Draft a card after every win</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-battle-lair.jpg"><img src="images/shot-battle-lair-sm.jpg" alt="Sgt. Snowball fights Commander Catrat in the rat's lair" loading="lazy" width="800" height="450"></button><figcaption>Seven bosses, each with a power of their own</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-toy-reward.jpg"><img src="images/shot-toy-reward-sm.jpg" alt="Choose a Cat Toy: Fish Bowl, Yarn Stash or Scratching Board" loading="lazy" width="800" height="450"></button><figcaption>Cat toys bend the rules for the whole run</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-collection.jpg"><img src="images/shot-collection-sm.jpg" alt="A page of the card collection showing the gold hero cards" loading="lazy" width="800" height="450"></button><figcaption>Hero cards for every commander</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-battle-city.jpg"><img src="images/shot-battle-city-sm.jpg" alt="Private Princess places a Recruit in Meowtropolis; the card shows the attack it would have in that lane" loading="lazy" width="800" height="450"></button><figcaption>Each stage has a rule that changes the lanes</figcaption></figure>
+        <figure class="shot"><button type="button" class="ink" data-full="images/shot-run-complete.jpg"><img src="images/shot-run-complete-sm.jpg" alt="Run Complete: the summary sheet with bosses beaten, cards collected and commanders unlocked" loading="lazy" width="800" height="450"></button><figcaption>Finish a run to unlock more of the cast</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sheet ink">
+        <img class="tape l" src="images/tape-2.png" alt="">
+        <img class="tape r" src="images/tape-1.png" alt="">
+        <h2 class="ribbon mustard">Mission briefing</h2>
+        <p class="lead">Same cats, new game.</p>
+        <ul>
+          <li><img src="images/paw.png" alt=""><div><h3>Roguelite runs</h3><p>Fight your way across the island: scouts, bosses, and a rest stop where you heal or train a card.</p></div></li>
+          <li><img src="images/fish.png" alt=""><div><h3>Deckbuilding</h3><p>Start with ten cards. Add one after every fight and collect cat toys that last the whole run.</p></div></li>
+          <li><img src="images/paw.png" alt=""><div><h3>Online versus</h3><p>Create a room and duel a friend in real time, or jump into a Quick Battle against any boss.</p></div></li>
+          <li><img src="images/fish.png" alt=""><div><h3>Hand-inked look</h3><p>Every card, commander and menu redrawn in marker and ink on paper.</p></div></li>
+          <li><img src="images/paw.png" alt=""><div><h3>Achievements and leaderboards</h3><p>33 achievements to earn, plus leaderboards on Game Center and Play Games.</p></div></li>
+          <li><img src="images/fish.png" alt=""><div><h3>Made for phones and tablets</h3><p>Built for touch from the first screen, in 11 languages.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="card ink">
+        <img class="tape c" src="images/tape-1.png" alt="">
+        <span class="stamp olive">In development</span>
+        <h2 style="margin-top:14px">Coming soon to iOS &amp; Android</h2>
+        <p>We'll announce the launch on Taco Truck Games. The original Meow Wars is still on Steam.</p>
+        <div class="actions">
+          <a class="btn ink" href="https://tacotruckgames.com/#meowwarsremastered">Follow the mission</a>
+          <a class="btn ink navy" href="https://store.steampowered.com/app/762110/Meow_Wars_Card_Battle/" target="_blank" rel="noopener">Original on Steam</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; Taco Truck Games &middot; <a href="https://tacotruckgames.com/">tacotruckgames.com</a>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot">
+    <button class="close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="prev" id="lbPrev" aria-label="Previous screenshot">&larr;</button>
+    <button class="next" id="lbNext" aria-label="Next screenshot">&rarr;</button>
+    <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+  </div>
+
+  <script>
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var img = document.getElementById('lbImg');
+      var cap = document.getElementById('lbCap');
+      var shots = Array.prototype.slice.call(document.querySelectorAll('.gallery .shot'));
+      var at = -1, lastFocus = null;
+      function show(i) {
+        at = (i + shots.length) % shots.length;
+        var b = shots[at].querySelector('button');
+        var t = b.querySelector('img');
+        img.src = b.getAttribute('data-full');
+        img.alt = t ? t.alt : '';
+        cap.textContent = shots[at].querySelector('figcaption').textContent;
+      }
+      function open(i) { lastFocus = document.activeElement; show(i); lb.classList.add('open'); document.getElementById('lbClose').focus(); }
+      function close() { lb.classList.remove('open'); img.src = ''; if (lastFocus) { try { lastFocus.focus(); } catch (e) {} } }
+      shots.forEach(function (s, i) { s.querySelector('button').addEventListener('click', function () { open(i); }); });
+      document.getElementById('lbClose').addEventListener('click', close);
+      document.getElementById('lbPrev').addEventListener('click', function () { show(at - 1); });
+      document.getElementById('lbNext').addEventListener('click', function () { show(at + 1); });
+      lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(at - 1);
+        else if (e.key === 'ArrowRight') show(at + 1);
+      });
+    })();
+  </script>
+</body>
+</html>
