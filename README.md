@@ -26,16 +26,33 @@ We focus on fun, quick-to-play games across mobile and PC.
 <tr>
 <td align="center" width="50%">
 
+<img src="StopSanta/images/logo.png" alt="Stop Santa: Tower Defense" width="280"/><br/>
+
+**Stop Santa: Tower Defense** (2017)<br/>
+<sub>Santa has gone rogue! Build holiday-themed towers, defend the North Pole, and stop his elf army across a frozen tundra.</sub><br/><br/>
+
+<a href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" height="28"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a>
+<a href="https://store.steampowered.com/app/746410/Stop_Santa__Tower_Defense/"><img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" height="28"/></a><br/><br/>
+
+**[→ Project page](https://tacotruckgames.com/StopSanta/)**
+
+</td>
+<td align="center" width="50%">
+
 <img src="crystaldig/images/logo.png" alt="Crystal Dig: Gem Miner" width="280"/><br/>
 
 **Crystal Dig: Gem Miner** (2026)<br/>
 <sub>Free block puzzle adventure — place blocks, clear rows and columns, and collect gems. Endless Classic mode with leaderboards, plus 400 handcrafted Adventure levels across 8 worlds (Earth to Triton) and 40 boss battles. Limited-time seasonal events: Halloween, Autumn Harvest, Winter Holidays and New Year.</sub><br/><br/>
 
 <a href="https://apps.apple.com/us/app/crystal-dig-gem-miner/id6758684744"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" height="28"/></a>
-<a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.CrystalDig"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.CrystalDig"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a><br/><br/>
 
+**[→ Project page](https://tacotruckgames.com/crystaldig/)**
 
 </td>
+</tr>
+<tr>
 <td align="center" width="50%">
 
 <img src="MeowWars/images/MeowWars_Logo.png" alt="Meow Wars: Card Battle" width="280"/><br/>
@@ -43,34 +60,21 @@ We focus on fun, quick-to-play games across mobile and PC.
 **Meow Wars: Card Battle** (2018)<br/>
 <sub>Strategic card battle game featuring adorable cats. Battle through a campaign, challenge friends to PVP duels, and free Claw Mountain!</sub><br/><br/>
 
-<a href="https://store.steampowered.com/app/762110/Meow_Wars_Card_Battle/"><img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" height="28"/></a>
-<a href="https://apps.apple.com/us/app/meow-wars/id1353622193"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" height="28"/></a>
-<a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.MeowWars"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a>
+<a href="https://store.steampowered.com/app/762110/Meow_Wars_Card_Battle/"><img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" height="28"/></a><br/><br/>
 
-
-</td>
-</tr>
-<tr>
-<td align="center" width="50%">
-
-<img src="StopSanta/images/logo.png" alt="Stop Santa: Tower Defense" width="280"/><br/>
-
-**Stop Santa: Tower Defense** (2017)<br/>
-<sub>Santa has gone rogue! Build holiday-themed towers, defend the North Pole, and stop his elf army across a frozen tundra.</sub><br/><br/>
-
-<a href="https://store.steampowered.com/app/746410/Stop_Santa__Tower_Defense/"><img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" height="28"/></a>
-<a href="https://apps.apple.com/us/app/stop-santa-tower-defense/id1323572895"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" height="28"/></a>
-<a href="https://play.google.com/store/apps/details?id=com.TacoTruckGames.StopSanta"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" height="28"/></a>
-
+**[→ Project page](https://tacotruckgames.com/MeowWars/)**
 
 </td>
 <td align="center" width="50%">
 
-<br/><br/><br/>
+<img src="depthsofruin/images/logo.png" alt="Depths of Ruin" width="280"/><br/>
 
-### More games coming soon...
+**Depths of Ruin** (In Production)<br/>
+<sub>The dead have stopped keeping their bargain. Descend through eight realms of the dead as one of four heroes, take the blessings of three gods, and kill the lord at the bottom of each.</sub><br/><br/>
 
-<br/><br/><br/>
+<img src="https://img.shields.io/badge/Steam-Coming_Soon-000000?style=for-the-badge&logo=steam&logoColor=white" height="28"/><br/><br/>
+
+**[→ Project page](https://tacotruckgames.com/depthsofruin/)**
 
 </td>
 </tr>
