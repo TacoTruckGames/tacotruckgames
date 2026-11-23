@@ -366,8 +366,8 @@
     }
 
     .region-card {
-      position: relative;
-      aspect-ratio: 16 / 10;
+      display: flex;
+      flex-direction: column;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -378,7 +378,14 @@
 
     .region-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,0.65); }
 
-    .region-card img.bg {
+    /* The painting, with the region's boss standing in front of it. */
+    .region-art {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .region-art img.bg {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -389,21 +396,41 @@
 
     .region-card:hover img.bg { transform: scale(1.06); }
 
-    .region-card::after {
+    .region-art::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6,10,20,0.95) 0%, rgba(6,10,20,0.5) 45%, rgba(6,10,20,0.02) 100%);
+      background: linear-gradient(to top, rgba(11,20,38,1) 0%, rgba(11,20,38,0.55) 30%, rgba(11,20,38,0) 62%);
     }
 
-    .region-body {
+    .region-art img.boss {
       position: absolute;
-      inset: 0;
+      right: 10px;
+      bottom: 0;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 16px 18px 16px;
+      height: 80%;
+      width: auto;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.75));
+      transition: transform 0.3s;
+      transform-origin: 50% 100%;
+    }
+
+    .region-card:hover img.boss { transform: scale(1.05); }
+
+    .region-title {
+      position: absolute;
+      left: 16px;
+      right: 46%;
+      bottom: 10px;
+      z-index: 2;
+    }
+
+    .region-title h3 {
+      font-size: 1.3em;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
     }
 
     .region-tag {
@@ -437,18 +464,88 @@
       text-shadow: 0 1px 6px rgba(0,0,0,0.8);
     }
 
-    .region-body h3 {
-      font-size: 1.3em;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3px;
+    .region-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 12px 16px 16px;
     }
 
-    .region-body p {
+    .region-body .quote {
       font-size: 0.9em;
       line-height: 1.45;
       color: #d6e2f5;
       font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .region-boss {
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 1em;
+      color: var(--red-2);
+      margin-bottom: 12px;
+    }
+
+    .region-boss span, .roster-label {
+      display: block;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .roster-label { margin-top: auto; margin-bottom: 6px; }
+
+    .roster {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .roster li {
+      position: relative;
+      text-align: center;
+      padding: 6px 2px 5px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      font-family: "Fredoka", sans-serif;
+      font-weight: 500;
+      font-size: 0.66rem;
+      line-height: 1.2;
+      color: var(--ice-2);
+    }
+
+    .roster li img {
+      display: block;
+      width: 100%;
+      max-width: 54px;
+      height: 54px;
+      margin: 0 auto 3px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.6));
+    }
+
+    .roster li.new { border-color: rgba(242,201,76,0.6); background: rgba(242,201,76,0.08); color: var(--gold); }
+
+    .roster li.new::before {
+      content: "New";
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 6px;
+      border-radius: 999px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0b1426;
+      background: var(--gold);
     }
 
     /* ── Towers ── */
@@ -526,53 +623,6 @@
       color: var(--dim);
     }
 
-    /* ── Bosses ── */
-    .bosses {
-      padding: 80px 0;
-      background: var(--band);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .boss-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .boss-card {
-      text-align: center;
-      padding: 18px 16px 20px;
-      border-radius: 16px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
-      border: 1px solid var(--line);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .boss-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(0,0,0,0.6); }
-
-    .boss-card img {
-      width: 100%;
-      max-width: 250px;
-      height: 250px;
-      object-fit: contain;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.7));
-    }
-
-    .boss-card h3 { font-size: 1.25em; color: var(--red-2); margin-bottom: 2px; }
-
-    .boss-card .region {
-      font-family: "Fredoka", sans-serif;
-      font-size: 0.74em;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 8px;
-    }
-
-    .boss-card p { font-size: 0.92em; color: #d6e2f5; font-style: italic; line-height: 1.45; }
-
     /* ── Features ── */
     .features { padding: 80px 0; overflow: hidden; }
 
@@ -634,7 +684,7 @@
 
     .story-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
@@ -652,7 +702,7 @@
       padding: 16px 20px 18px;
       font-family: "Fredoka", sans-serif;
       font-weight: 500;
-      font-size: 1.08em;
+      font-size: 1.02em;
       line-height: 1.5;
       color: var(--text);
       text-align: center;
@@ -671,7 +721,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url("images/story-4.jpg") center / cover no-repeat;
+      background: url("images/story-2.jpg") center / cover no-repeat;
       opacity: 0.4;
       z-index: -2;
     }
@@ -717,7 +767,8 @@
 
     /* ── Responsive ── */
     @media (max-width: 1000px) {
-      .region-grid, .boss-grid, .feature-grid, .pair-row, .family-row { grid-template-columns: repeat(2, 1fr); }
+      .region-grid, .feature-grid, .pair-row, .family-row { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; }
     }
 
     @media (max-width: 700px) {
@@ -729,12 +780,15 @@
       .carousel { padding: 8px 20px 20px; gap: 14px; }
       .carousel img, .carousel video { width: 320px; }
       .feature-grid, .story-grid, .pair-row, .family-row { grid-template-columns: 1fr; }
-      .thennow, .regions, .towers, .bosses, .features, .story { padding: 60px 0; }
+      .thennow, .regions, .towers, .features, .story { padding: 60px 0; }
       .cta .display { font-size: 2em; }
     }
 
+    @media (max-width: 640px) {
+      .region-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 480px) {
-      .region-grid, .boss-grid { grid-template-columns: 1fr; }
       .remastered { letter-spacing: 0.3em; font-size: 0.95em; }
       .carousel img, .carousel video { width: 280px; }
       .store-badge img { height: 46px; }
@@ -854,34 +908,88 @@
       <p class="lead">Ten levels a region, each with its own road, its own enemies and a boss at the end of it. The North Pole is free; the rest come as level packs, permanent unlocks only.</p>
       <div class="region-grid">
         <div class="region-card">
-          <img class="bg" src="images/region-north_pole.jpg" alt="">
-          <span class="region-num">1</span><span class="region-tag free">Free</span>
-          <div class="region-body"><h3>The North Pole</h3><p>Every year he comes down out of the dark with that sack.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-north_pole.jpg" alt="">
+            <span class="region-num">1</span><span class="region-tag free">Free</span>
+            <div class="region-title"><h3>The North Pole</h3></div>
+            <img class="boss" src="images/boss-santa-sm.png" alt="Santa">
+          </div>
+          <div class="region-body">
+            <p class="quote">The elves stopped making toys and started building weapons.</p>
+            <p class="region-boss"><span>Boss</span>Santa</p>
+            <span class="roster-label">On the road</span>
+            <ul class="roster"><li><img src="images/enemy-evil_elf1.png" alt="" loading="lazy">Evil Elf</li><li><img src="images/enemy-zombie_elf_girl1.png" alt="" loading="lazy">Zombie Elf</li><li><img src="images/enemy-zombie_santa1.png" alt="" loading="lazy">Zombie Santa</li><li><img src="images/enemy-penguin1.png" alt="" loading="lazy">Battle Penguin</li><li><img src="images/enemy-evil_elf2.png" alt="" loading="lazy">Armoured Elf</li></ul>
+          </div>
         </div>
         <div class="region-card">
-          <img class="bg" src="images/region-glacier_pass.jpg" alt="">
-          <span class="region-num">2</span><span class="region-tag">Level pack</span>
-          <div class="region-body"><h3>Glacier Pass</h3><p>Something up there has been waiting a long time for company.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-glacier_pass.jpg" alt="">
+            <span class="region-num">2</span><span class="region-tag">Level pack</span>
+            <div class="region-title"><h3>Glacier Pass</h3></div>
+            <img class="boss" src="images/boss-glacier_warden-sm.png" alt="The Glacier Warden">
+          </div>
+          <div class="region-body">
+            <p class="quote">Frozen in the wall above them, a giant opens its eyes.</p>
+            <p class="region-boss"><span>Boss</span>The Glacier Warden</p>
+            <span class="roster-label">On the road</span>
+            <ul class="roster"><li class="new"><img src="images/enemy-frost_imp.png" alt="" loading="lazy">Frost Imp</li><li><img src="images/enemy-evil_elf2.png" alt="" loading="lazy">Armoured Elf</li><li><img src="images/enemy-zombie_elf_girl2.png" alt="" loading="lazy">Zombie Elf</li><li><img src="images/enemy-zombie_santa1.png" alt="" loading="lazy">Zombie Santa</li><li><img src="images/enemy-penguin1.png" alt="" loading="lazy">Battle Penguin</li></ul>
+          </div>
         </div>
         <div class="region-card">
-          <img class="bg" src="images/region-candy_forest.jpg" alt="">
-          <span class="region-num">3</span><span class="region-tag">Level pack</span>
-          <div class="region-body"><h3>Candy Cane Forest</h3><p>Everything here is sweet, and none of it is friendly.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-candy_forest.jpg" alt="">
+            <span class="region-num">3</span><span class="region-tag">Level pack</span>
+            <div class="region-title"><h3>Candy Cane Forest</h3></div>
+            <img class="boss" src="images/boss-gingerbread_king-sm.png" alt="The Gingerbread King">
+          </div>
+          <div class="region-body">
+            <p class="quote">The elves have been busy here. They are building golems out of gumdrops.</p>
+            <p class="region-boss"><span>Boss</span>The Gingerbread King</p>
+            <span class="roster-label">On the road</span>
+            <ul class="roster"><li class="new"><img src="images/enemy-gumdrop_golem.png" alt="" loading="lazy">Gumdrop Golem</li><li><img src="images/enemy-evil_elf2.png" alt="" loading="lazy">Armoured Elf</li><li><img src="images/enemy-zombie_elf_girl2.png" alt="" loading="lazy">Zombie Elf</li><li><img src="images/enemy-zombie_santa2.png" alt="" loading="lazy">Frozen Santa</li><li><img src="images/enemy-penguin2.png" alt="" loading="lazy">Battle Penguin</li></ul>
+          </div>
         </div>
         <div class="region-card">
-          <img class="bg" src="images/region-frozen_reaches.jpg" alt="">
-          <span class="region-num">4</span><span class="region-tag">Level pack</span>
-          <div class="region-body"><h3>The Frozen Reaches</h3><p>They come across the open ground, and they do not hurry.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-frozen_reaches.jpg" alt="">
+            <span class="region-num">4</span><span class="region-tag">Level pack</span>
+            <div class="region-title"><h3>The Frozen Reaches</h3></div>
+            <img class="boss" src="images/boss-krampus-sm.png" alt="Krampus">
+          </div>
+          <div class="region-body">
+            <p class="quote">The elves have woken the yetis, and the yetis are angry.</p>
+            <p class="region-boss"><span>Boss</span>Krampus</p>
+            <span class="roster-label">On the road</span>
+            <ul class="roster"><li class="new"><img src="images/enemy-tundra_brute.png" alt="" loading="lazy">Yeti</li><li><img src="images/enemy-evil_elf2.png" alt="" loading="lazy">Armoured Elf</li><li><img src="images/enemy-zombie_elf_girl2.png" alt="" loading="lazy">Zombie Elf</li><li><img src="images/enemy-zombie_santa2.png" alt="" loading="lazy">Frozen Santa</li><li><img src="images/enemy-penguin1.png" alt="" loading="lazy">Battle Penguin</li></ul>
+          </div>
         </div>
         <div class="region-card">
-          <img class="bg" src="images/region-toy_workshop.jpg" alt="">
-          <span class="region-num">5</span><span class="region-tag">Level pack</span>
-          <div class="region-body"><h3>The Toy Workshop</h3><p>This is where all of them were made. End it here.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-toy_workshop.jpg" alt="">
+            <span class="region-num">5</span><span class="region-tag">Level pack</span>
+            <div class="region-title"><h3>The Toy Workshop</h3></div>
+            <img class="boss" src="images/boss-nutcracker-sm.png" alt="The Nutcracker">
+          </div>
+          <div class="region-body">
+            <p class="quote">Inside, the elves aren&rsquo;t making toys. They are building an army.</p>
+            <p class="region-boss"><span>Boss</span>The Nutcracker</p>
+            <span class="roster-label">On the road</span>
+            <ul class="roster"><li class="new"><img src="images/enemy-tin_soldier.png" alt="" loading="lazy">Tin Soldier</li><li><img src="images/enemy-frost_imp.png" alt="" loading="lazy">Frost Imp</li><li><img src="images/enemy-tundra_brute.png" alt="" loading="lazy">Yeti</li><li><img src="images/enemy-gumdrop_golem.png" alt="" loading="lazy">Gumdrop Golem</li><li><img src="images/enemy-zombie_santa2.png" alt="" loading="lazy">Frozen Santa</li></ul>
+          </div>
         </div>
         <div class="region-card">
-          <img class="bg" src="images/region-north_pole_outskirts.jpg" alt="">
-          <span class="region-num">6</span><span class="region-tag">Level pack</span>
-          <div class="region-body"><h3>The Long Night</h3><p>One long night. Everything you have already killed, again.</p></div>
+          <div class="region-art">
+            <img class="bg" src="images/region-north_pole_outskirts.jpg" alt="">
+            <span class="region-num">6</span><span class="region-tag">Level pack</span>
+            <div class="region-title"><h3>The Long Night</h3></div>
+            <img class="boss" src="images/boss-mega_santa-sm.png" alt="Mega Santa">
+          </div>
+          <div class="region-body">
+            <p class="quote">Everything you have beaten marches with him, patched up and angry.</p>
+            <p class="region-boss"><span>Boss</span>Mega Santa</p>
+            <span class="roster-label">Every boss, again</span>
+            <ul class="roster"><li><img src="images/boss-santa-sm.png" alt="" loading="lazy">Santa</li><li><img src="images/boss-glacier_warden-sm.png" alt="" loading="lazy">Glacier Warden</li><li><img src="images/boss-gingerbread_king-sm.png" alt="" loading="lazy">Gingerbread King</li><li><img src="images/boss-krampus-sm.png" alt="" loading="lazy">Krampus</li><li><img src="images/boss-nutcracker-sm.png" alt="" loading="lazy">Nutcracker</li></ul>
+          </div>
         </div>
       </div>
     </div>
@@ -925,47 +1033,6 @@
     </div>
   </section>
 
-  <!-- Bosses -->
-  <section class="bosses">
-    <div class="wrap">
-      <span class="kicker">Six bosses</span>
-      <h2>What Comes Down the Road</h2>
-      <p class="lead">One at the end of every region, and the big man himself at the end of it all.</p>
-      <div class="boss-grid">
-        <div class="boss-card">
-          <img src="images/boss-santa.png" alt="Santa">
-          <h3>Santa</h3><p class="region">The North Pole</p>
-          <p>The sack falls. The big man goes down with it.</p>
-        </div>
-        <div class="boss-card">
-          <img src="images/boss-glacier_warden.png" alt="The Glacier Warden">
-          <h3>The Glacier Warden</h3><p class="region">Glacier Pass</p>
-          <p>A crown of ice, and cracks that glow cold from within.</p>
-        </div>
-        <div class="boss-card">
-          <img src="images/boss-gingerbread_king.png" alt="The Gingerbread King">
-          <h3>The Gingerbread King</h3><p class="region">Candy Cane Forest</p>
-          <p>Baked from cookie crust, armoured in icing. Do not eat anything.</p>
-        </div>
-        <div class="boss-card">
-          <img src="images/boss-krampus.png" alt="Krampus">
-          <h3>Krampus</h3><p class="region">The Frozen Reaches</p>
-          <p>Horns, chains and a long tongue. He does not hurry either.</p>
-        </div>
-        <div class="boss-card">
-          <img src="images/boss-nutcracker.png" alt="The Nutcracker">
-          <h3>The Nutcracker</h3><p class="region">The Toy Workshop</p>
-          <p>A hinged wooden jaw the size of a door. This is where they were made.</p>
-        </div>
-        <div class="boss-card">
-          <img src="images/boss-mega_santa.png" alt="Mega Santa">
-          <h3>Mega Santa</h3><p class="region">The Long Night</p>
-          <p>He will come back with worse. He always does.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Features -->
   <section class="features">
     <div class="wrap">
@@ -979,7 +1046,7 @@
         </div>
         <div class="feature-card">
           <img src="images/icon-heart.png" alt="">
-          <div><h3>18 enemies, six bosses</h3><p>Frost imps, tundra brutes, gumdrop golems and tin soldiers join the elves, penguins and zombie Santas.</p></div>
+          <div><h3>18 enemies, six bosses</h3><p>Frost imps, yetis, gumdrop golems and tin soldiers join the elves, penguins and zombie Santas.</p></div>
         </div>
         <div class="feature-card">
           <img src="images/icon-blizzard.png" alt="">
@@ -1007,10 +1074,9 @@
       <span class="kicker">The North Pole</span>
       <h2>How It Starts</h2>
       <div class="story-grid">
-        <div class="panel"><img src="images/story-1.jpg" alt=""><p>Every year he comes down out of the dark with that sack.</p></div>
-        <div class="panel"><img src="images/story-2.jpg" alt=""><p>This year we are ready, and the road is a killing field.</p></div>
-        <div class="panel"><img src="images/story-3.jpg" alt=""><p>Stop Santa.</p></div>
-        <div class="panel"><img src="images/story-4.jpg" alt=""><p>He will come back with worse. He always does.</p></div>
+        <div class="panel"><img src="images/story-1.jpg" alt="Elves spill out of Santa's workshop carrying candy-cane spears" loading="lazy"><p>Something went wrong at the North Pole this year. The elves stopped making toys and started building weapons.</p></div>
+        <div class="panel"><img src="images/story-2.jpg" alt="A giant Santa looms behind a column of elves marching down a snowy road" loading="lazy"><p>Now a giant creature who looks like Santa is leading them south, and every village on the road is in the way.</p></div>
+        <div class="panel"><img src="images/story-3.jpg" alt="Build pads beside the road at the edge of a village, a red glow on the horizon" loading="lazy"><p>Hold the road. Stop Santa.</p></div>
       </div>
     </div>
   </section>
