@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="images/ttg-logo-v2.png" alt="Taco Truck Games" width="360"/>
+<img src="images/ttg-logo-v2-badge.png" alt="Taco Truck Games" width="400"/>
 
 ### Indie studio. Big-studio experience.
 
