@@ -215,6 +215,3 @@ html[data-season="harvest"] .harvest-fx {
   .harvest-fx span:nth-child(7) { display: none; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html[data-season="harvest"] .harvest-fx { display: none; }
-}

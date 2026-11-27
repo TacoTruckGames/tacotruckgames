@@ -796,15 +796,13 @@ html[data-season="harvest"][data-project="crystaldig"] .harvest-fx {
   .harvest-fx span:nth-child(3),
   .harvest-fx span:nth-child(7) { display: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-  html[data-season="harvest"] .harvest-fx { display: none; }
-}
 
 /* ── Per-project ambiance: Stop Santa snow, Depths of Ruin ash ──
    A fixed overlay shown only while that project is selected (site.js mirrors the
    active project onto <html data-project>). Each themed project has its own falling
    effect (Crystal Dig leaves, Stop Santa snow, Depths of Ruin ash); every other
-   project — Meow Wars, CineDossier, Co-Development — has nothing falling. */
+   project — Meow Wars, CineDossier, Co-Development — has nothing falling.
+   Shown even with Reduce Motion on: the drift is slow, sparse, and non-interactive. */
 .snow-fx, .ash-fx { display: none; }
 
 html[data-project="stopsanta"] .snow-fx,
@@ -877,9 +875,6 @@ html[data-project="depthsofruin"] .ash-fx {
   :is(.snow-fx, .ash-fx) span:nth-child(11) { display: none; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .snow-fx, .ash-fx { display: none !important; }
-}
 
 /* ── Motion ── */
 @media (prefers-reduced-motion: reduce) {
